@@ -1,0 +1,25 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import { getCollection, getEntry, render } from 'astro:content';
+
+export async function getStaticPaths() {
+  const posts = await getCollection('blog');
+  return posts.map((post) => ({
+    params: { id: post.id },
+  }));
+}
+
+const { id } = Astro.params;
+const post = await getEntry('blog', id);
+if (!post) {
+  throw new Error(`Post not found: ${id}`);
+}
+const { Content } = await render(post);
+---
+
+<Layout title={post.data.title} description={post.data.description}>
+  <p><a href="/blog">&larr; Back to blog</a></p>
+  <h1>{post.data.title}</h1>
+  <p>{post.data.pubDate.toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' })}</p>
+  <Content />
+</Layout>

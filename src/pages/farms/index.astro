@@ -1,0 +1,24 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import { getCollection } from 'astro:content';
+
+const farms = (await getCollection('farms')).sort((a, b) =>
+  a.data.name.localeCompare(b.data.name)
+);
+---
+
+<Layout title="Farms & CSAs" description="Directory of farms and CSA programs around Ann Arbor, Chelsea, Dexter, Saline, and Manchester.">
+  <h1>Farms &amp; CSAs</h1>
+  <p>Farms and CSA programs across Washtenaw County and nearby towns.</p>
+
+  {farms.map((farm) => (
+    <div class="card">
+      <h3><a href={`/farms/${farm.id}`}>{farm.data.name}</a> &mdash; {farm.data.town}</h3>
+      <p>{farm.data.summary}</p>
+      <div>
+        {farm.data.csa && <span class="tag">CSA</span>}
+        {farm.data.products.map((p) => <span class="tag">{p}</span>)}
+      </div>
+    </div>
+  ))}
+</Layout>

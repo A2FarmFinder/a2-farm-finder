@@ -1,0 +1,105 @@
+---
+interface Props {
+  title: string;
+  description?: string;
+}
+
+const { title, description = 'Find farms, CSAs, and farmers markets around Ann Arbor, Chelsea, Dexter, Saline, and Manchester.' } = Astro.props;
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="description" content={description} />
+    <meta name="generator" content={Astro.generator} />
+    <title>{title} | A2 Farm Finder</title>
+  </head>
+  <body>
+    <header class="site-header">
+      <a class="brand" href="/">A2 Farm Finder</a>
+      <nav>
+        <a href="/farms">Farms &amp; CSAs</a>
+        <a href="/markets">Farmers Markets</a>
+        <a href="/blog">Blog</a>
+        <a href="/about">About</a>
+      </nav>
+    </header>
+    <main>
+      <slot />
+    </main>
+    <footer class="site-footer">
+      <p>A2 Farm Finder &mdash; a directory of farms, CSAs, and farmers markets in Washtenaw County.</p>
+      <p><a href="/about">About</a> &middot; <a href="/privacy">Privacy Policy</a></p>
+    </footer>
+    <style>
+      :root {
+        color-scheme: light;
+        font-family: system-ui, sans-serif;
+      }
+      body {
+        margin: 0;
+        line-height: 1.6;
+        color: #1f2a1f;
+        background: #fbfaf5;
+      }
+      .site-header {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding: 1rem 1.5rem;
+        background: #2f5233;
+        color: #fff;
+        flex-wrap: wrap;
+        gap: 0.75rem;
+      }
+      .site-header .brand {
+        font-weight: 700;
+        font-size: 1.25rem;
+        color: #fff;
+        text-decoration: none;
+      }
+      .site-header nav a {
+        color: #fff;
+        margin-left: 1.25rem;
+        text-decoration: none;
+        font-weight: 500;
+      }
+      .site-header nav a:hover {
+        text-decoration: underline;
+      }
+      main {
+        max-width: 960px;
+        margin: 0 auto;
+        padding: 1.5rem;
+      }
+      .site-footer {
+        text-align: center;
+        padding: 1.5rem;
+        color: #6b7a6b;
+        font-size: 0.9rem;
+      }
+      .card {
+        border: 1px solid #e0ddd0;
+        border-radius: 8px;
+        padding: 1rem 1.25rem;
+        margin-bottom: 1rem;
+        background: #fff;
+      }
+      .card h3 {
+        margin-top: 0;
+      }
+      .tag {
+        display: inline-block;
+        background: #e7f0e3;
+        color: #2f5233;
+        border-radius: 999px;
+        padding: 0.15rem 0.6rem;
+        font-size: 0.8rem;
+        margin: 0 0.25rem 0.25rem 0;
+      }
+    </style>
+  </body>
+</html>

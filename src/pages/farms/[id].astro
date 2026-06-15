@@ -1,0 +1,38 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import { getCollection, getEntry, render } from 'astro:content';
+
+export async function getStaticPaths() {
+  const farms = await getCollection('farms');
+  return farms.map((farm) => ({
+    params: { id: farm.id },
+  }));
+}
+
+const { id } = Astro.params;
+const farm = await getEntry('farms', id);
+if (!farm) {
+  throw new Error(`Farm not found: ${id}`);
+}
+const { Content } = await render(farm);
+---
+
+<Layout title={farm.data.name} description={farm.data.summary}>
+  <p><a href="/farms">&larr; Back to all farms</a></p>
+  <h1>{farm.data.name}</h1>
+  <p><strong>{farm.data.town}</strong></p>
+  <div>
+    {farm.data.csa && <span class="tag">CSA</span>}
+    {farm.data.products.map((p) => <span class="tag">{p}</span>)}
+  </div>
+
+  <Content />
+
+  <ul>
+    {farm.data.address && <li><strong>Address:</strong> {farm.data.address}</li>}
+    {farm.data.season && <li><strong>Season:</strong> {farm.data.season}</li>}
+    {farm.data.website && (
+      <li><strong>Website:</strong> <a href={farm.data.website} target="_blank" rel="noopener noreferrer">{farm.data.website}</a></li>
+    )}
+  </ul>
+</Layout>

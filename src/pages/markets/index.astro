@@ -1,0 +1,28 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import { getCollection } from 'astro:content';
+
+const markets = (await getCollection('markets')).sort((a, b) =>
+  a.data.name.localeCompare(b.data.name)
+);
+---
+
+<Layout title="Farmers Markets" description="Farmers market schedules around Ann Arbor, Chelsea, and Saline.">
+  <h1>Farmers Markets</h1>
+  <p>Weekly farmers market schedules around Washtenaw County.</p>
+
+  {markets.map((market) => (
+    <div class="card">
+      <h3>{market.data.name} &mdash; {market.data.town}</h3>
+      <p>{market.data.summary}</p>
+      <ul>
+        <li><strong>Schedule:</strong> {market.data.schedule}</li>
+        <li><strong>Season:</strong> {market.data.season}</li>
+        <li><strong>Address:</strong> {market.data.address}</li>
+        {market.data.website && (
+          <li><strong>Website:</strong> <a href={market.data.website} target="_blank" rel="noopener noreferrer">{market.data.website}</a></li>
+        )}
+      </ul>
+    </div>
+  ))}
+</Layout>
