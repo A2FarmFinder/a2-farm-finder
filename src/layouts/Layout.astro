@@ -15,11 +15,16 @@ const { title, description = 'Find farms, CSAs, and farmers markets around Ann A
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="description" content={description} />
     <meta name="generator" content={Astro.generator} />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,600;9..144,700&family=Figtree:wght@400;500;600;700&display=swap" rel="stylesheet" />
     <title>{title} | A2 Farm Finder</title>
   </head>
   <body>
     <header class="site-header">
-      <a class="brand" href="/">A2 Farm Finder</a>
+      <a class="brand" href="/">
+        <span class="brand-mark">🌱</span> A2 Farm Finder
+      </a>
       <nav>
         <a href="/farms">Farms &amp; CSAs</a>
         <a href="/markets">Farmers Markets</a>
@@ -31,74 +36,264 @@ const { title, description = 'Find farms, CSAs, and farmers markets around Ann A
       <slot />
     </main>
     <footer class="site-footer">
-      <p>A2 Farm Finder &mdash; a directory of farms, CSAs, and farmers markets in Washtenaw County.</p>
-      <p><a href="/about">About</a> &middot; <a href="/privacy">Privacy Policy</a></p>
+      <div class="footer-inner">
+        <p class="footer-brand"><span class="brand-mark">🌱</span> A2 Farm Finder</p>
+        <p>A directory of farms, CSAs, and farmers markets across Washtenaw County.</p>
+        <p class="footer-links"><a href="/about">About</a> &middot; <a href="/privacy">Privacy Policy</a></p>
+      </div>
     </footer>
     <style is:global>
       :root {
         color-scheme: light;
-        font-family: system-ui, sans-serif;
+        --green-dark: #2f5233;
+        --green-mid: #4a7c4e;
+        --green-pale: #e7f0e3;
+        --gold: #e0a458;
+        --gold-dark: #c8853a;
+        --cream: #fbfaf5;
+        --ink: #2a2e22;
+        --muted: #6b7a6b;
+        --border: #e6e2d4;
+        font-family: 'Figtree', system-ui, sans-serif;
+      }
+      * {
+        box-sizing: border-box;
       }
       body {
         margin: 0;
-        line-height: 1.6;
-        color: #1f2a1f;
-        background: #fbfaf5;
+        line-height: 1.65;
+        color: var(--ink);
+        background: var(--cream);
+      }
+      h1, h2, h3 {
+        font-family: 'Fraunces', Georgia, serif;
+        line-height: 1.2;
+        letter-spacing: -0.01em;
+      }
+      a {
+        color: var(--green-dark);
       }
       .site-header {
         display: flex;
         align-items: center;
         justify-content: space-between;
         padding: 1rem 1.5rem;
-        background: #2f5233;
+        background: var(--green-dark);
         color: #fff;
         flex-wrap: wrap;
         gap: 0.75rem;
+        position: sticky;
+        top: 0;
+        z-index: 10;
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
       }
       .site-header .brand {
+        font-family: 'Fraunces', Georgia, serif;
         font-weight: 700;
-        font-size: 1.25rem;
+        font-size: 1.35rem;
         color: #fff;
         text-decoration: none;
+        display: flex;
+        align-items: center;
+        gap: 0.4rem;
+      }
+      .brand-mark {
+        font-size: 1.2em;
+      }
+      .site-header nav {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 0.25rem;
       }
       .site-header nav a {
-        color: #fff;
-        margin-left: 1.25rem;
+        color: #f1f5ef;
         text-decoration: none;
         font-weight: 500;
+        padding: 0.4rem 0.75rem;
+        border-radius: 999px;
+        transition: background 0.15s ease;
       }
       .site-header nav a:hover {
-        text-decoration: underline;
+        background: rgba(255, 255, 255, 0.12);
       }
       main {
-        max-width: 960px;
+        max-width: 1024px;
         margin: 0 auto;
-        padding: 1.5rem;
+        padding: 2rem 1.5rem 3rem;
       }
       .site-footer {
+        background: var(--green-dark);
+        color: #dfeadf;
+        margin-top: 2rem;
+      }
+      .footer-inner {
+        max-width: 1024px;
+        margin: 0 auto;
+        padding: 2rem 1.5rem;
         text-align: center;
-        padding: 1.5rem;
-        color: #6b7a6b;
+      }
+      .footer-brand {
+        font-family: 'Fraunces', Georgia, serif;
+        font-weight: 700;
+        font-size: 1.1rem;
+        color: #fff;
+        margin-bottom: 0.5rem;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 0.4rem;
+      }
+      .footer-links a, .site-footer a {
+        color: #fff;
+      }
+      .footer-links {
+        margin-top: 0.75rem;
         font-size: 0.9rem;
       }
+
+      /* Grid + cards */
+      .grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+        gap: 1.25rem;
+        margin-top: 1.5rem;
+      }
       .card {
-        border: 1px solid #e0ddd0;
-        border-radius: 8px;
-        padding: 1rem 1.25rem;
-        margin-bottom: 1rem;
+        border: 1px solid var(--border);
+        border-radius: 14px;
+        padding: 1.25rem 1.5rem;
         background: #fff;
+        box-shadow: 0 1px 2px rgba(47, 82, 51, 0.04);
+        transition: transform 0.15s ease, box-shadow 0.15s ease;
+      }
+      a.card {
+        display: block;
+        text-decoration: none;
+        color: inherit;
+      }
+      a.card:hover, .card.hoverable:hover {
+        transform: translateY(-3px);
+        box-shadow: 0 8px 20px rgba(47, 82, 51, 0.12);
+        border-color: var(--green-mid);
       }
       .card h3 {
         margin-top: 0;
+        margin-bottom: 0.4rem;
+        font-size: 1.2rem;
+      }
+      .card .town {
+        color: var(--muted);
+        font-size: 0.9rem;
+        margin: 0 0 0.5rem;
+      }
+      .card .icon {
+        font-size: 1.6rem;
+        margin-bottom: 0.5rem;
+        display: inline-block;
       }
       .tag {
         display: inline-block;
-        background: #e7f0e3;
-        color: #2f5233;
+        background: var(--green-pale);
+        color: var(--green-dark);
         border-radius: 999px;
-        padding: 0.15rem 0.6rem;
+        padding: 0.2rem 0.7rem;
         font-size: 0.8rem;
-        margin: 0 0.25rem 0.25rem 0;
+        font-weight: 500;
+        margin: 0 0.3rem 0.3rem 0;
+      }
+      .tag.gold {
+        background: #fbe9d2;
+        color: var(--gold-dark);
+      }
+
+      /* Hero */
+      .hero {
+        background: linear-gradient(135deg, var(--green-dark), var(--green-mid));
+        color: #fff;
+        border-radius: 18px;
+        padding: 3rem 2rem;
+        margin-bottom: 2rem;
+        position: relative;
+        overflow: hidden;
+      }
+      .hero h1 {
+        margin: 0 0 0.75rem;
+        font-size: clamp(2rem, 5vw, 3rem);
+        color: #fff;
+      }
+      .hero p {
+        max-width: 38rem;
+        font-size: 1.1rem;
+        color: #eaf3e8;
+      }
+      .hero .hero-actions {
+        margin-top: 1.5rem;
+        display: flex;
+        gap: 0.75rem;
+        flex-wrap: wrap;
+      }
+      .btn {
+        display: inline-block;
+        padding: 0.6rem 1.25rem;
+        border-radius: 999px;
+        font-weight: 600;
+        text-decoration: none;
+        transition: transform 0.1s ease, box-shadow 0.1s ease;
+      }
+      .btn-primary {
+        background: var(--gold);
+        color: var(--green-dark);
+      }
+      .btn-secondary {
+        background: rgba(255, 255, 255, 0.12);
+        color: #fff;
+        border: 1px solid rgba(255, 255, 255, 0.4);
+      }
+      .btn:hover {
+        transform: translateY(-1px);
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+      }
+      .hero-illustration {
+        position: absolute;
+        right: -2rem;
+        bottom: -2rem;
+        width: 220px;
+        opacity: 0.9;
+        pointer-events: none;
+      }
+
+      /* Section heading with accent rule */
+      .section-heading {
+        display: flex;
+        align-items: baseline;
+        justify-content: space-between;
+        margin-top: 2.5rem;
+        margin-bottom: 0;
+        flex-wrap: wrap;
+        gap: 0.5rem;
+      }
+      .section-heading h2 {
+        margin: 0;
+        font-size: 1.6rem;
+      }
+      .section-heading a {
+        font-weight: 600;
+        text-decoration: none;
+        white-space: nowrap;
+      }
+      .section-heading a:hover {
+        text-decoration: underline;
+      }
+
+      /* Page intro */
+      .page-intro h1 {
+        font-size: clamp(1.8rem, 4vw, 2.6rem);
+        margin-bottom: 0.5rem;
+      }
+      .page-intro p {
+        color: var(--muted);
+        font-size: 1.05rem;
+        max-width: 42rem;
       }
     </style>
   </body>

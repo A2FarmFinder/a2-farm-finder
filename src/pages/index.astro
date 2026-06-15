@@ -1,6 +1,7 @@
 ---
 import Layout from '../layouts/Layout.astro';
 import { getCollection } from 'astro:content';
+import { farmIcon } from '../lib/icons';
 
 const farms = await getCollection('farms');
 const markets = await getCollection('markets');
@@ -10,24 +11,68 @@ const posts = (await getCollection('blog')).sort(
 ---
 
 <Layout title="Home">
-  <h1>Find local farms, CSAs &amp; farmers markets near Ann Arbor</h1>
-  <p>
-    A directory of farms, CSA programs, and farmers markets across
-    Washtenaw County &mdash; Ann Arbor, Chelsea, Dexter, Saline, Manchester,
-    and beyond.
-  </p>
-
-  <h2>Latest posts</h2>
-  {posts.slice(0, 3).map((post) => (
-    <div class="card">
-      <h3><a href={`/blog/${post.id}`}>{post.data.title}</a></h3>
-      <p>{post.data.description}</p>
+  <section class="hero">
+    <h1>Find local farms, CSAs &amp; farmers markets near Ann Arbor</h1>
+    <p>
+      A directory of farms, CSA programs, and farmers markets across
+      Washtenaw County &mdash; Ann Arbor, Chelsea, Dexter, Saline,
+      Manchester, and beyond.
+    </p>
+    <div class="hero-actions">
+      <a class="btn btn-primary" href="/farms">Browse farms &amp; CSAs</a>
+      <a class="btn btn-secondary" href="/markets">Find a farmers market</a>
     </div>
-  ))}
+    <svg class="hero-illustration" viewBox="0 0 200 160" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+      <circle cx="160" cy="40" r="28" fill="#f6d186" opacity="0.9" />
+      <path d="M0 130 Q 50 100 100 125 T 200 110 V160 H0 Z" fill="#3f6b43" opacity="0.7" />
+      <path d="M0 145 Q 60 120 120 140 T 200 130 V160 H0 Z" fill="#2f5233" />
+      <rect x="40" y="95" width="36" height="30" fill="#fff" opacity="0.95" />
+      <polygon points="36,95 80,95 58,75" fill="#c8853a" />
+      <rect x="53" y="108" width="10" height="17" fill="#2f5233" />
+    </svg>
+  </section>
 
-  <h2>Browse</h2>
-  <p>
-    <a href="/farms">{farms.length} farms &amp; CSAs</a> &middot;
-    <a href="/markets">{markets.length} farmers markets</a>
-  </p>
+  <div class="section-heading">
+    <h2>Latest from the blog</h2>
+    <a href="/blog">All posts &rarr;</a>
+  </div>
+  <div class="grid">
+    {posts.slice(0, 3).map((post) => (
+      <a class="card" href={`/blog/${post.id}`}>
+        <span class="icon">📰</span>
+        <h3>{post.data.title}</h3>
+        <p>{post.data.description}</p>
+      </a>
+    ))}
+  </div>
+
+  <div class="section-heading">
+    <h2>Farms &amp; CSAs</h2>
+    <a href="/farms">View all {farms.length} &rarr;</a>
+  </div>
+  <div class="grid">
+    {farms.slice(0, 3).map((farm) => (
+      <a class="card" href={`/farms/${farm.id}`}>
+        <span class="icon">{farmIcon(farm.data.products)}</span>
+        <h3>{farm.data.name}</h3>
+        <p class="town">{farm.data.town}</p>
+        <p>{farm.data.summary}</p>
+      </a>
+    ))}
+  </div>
+
+  <div class="section-heading">
+    <h2>Farmers Markets</h2>
+    <a href="/markets">View all {markets.length} &rarr;</a>
+  </div>
+  <div class="grid">
+    {markets.map((market) => (
+      <a class="card" href="/markets">
+        <span class="icon">🧺</span>
+        <h3>{market.data.name}</h3>
+        <p class="town">{market.data.town}</p>
+        <p>{market.data.summary}</p>
+      </a>
+    ))}
+  </div>
 </Layout>

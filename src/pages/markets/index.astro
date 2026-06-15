@@ -8,21 +8,27 @@ const markets = (await getCollection('markets')).sort((a, b) =>
 ---
 
 <Layout title="Farmers Markets" description="Farmers market schedules around Ann Arbor, Chelsea, and Saline.">
-  <h1>Farmers Markets</h1>
-  <p>Weekly farmers market schedules around Washtenaw County.</p>
+  <div class="page-intro">
+    <h1>Farmers Markets</h1>
+    <p>Weekly farmers market schedules around Washtenaw County.</p>
+  </div>
 
-  {markets.map((market) => (
-    <div class="card">
-      <h3>{market.data.name} &mdash; {market.data.town}</h3>
-      <p>{market.data.summary}</p>
-      <ul>
-        <li><strong>Schedule:</strong> {market.data.schedule}</li>
-        <li><strong>Season:</strong> {market.data.season}</li>
-        <li><strong>Address:</strong> {market.data.address}</li>
-        {market.data.website && (
-          <li><strong>Website:</strong> <a href={market.data.website} target="_blank" rel="noopener noreferrer">{market.data.website}</a></li>
-        )}
-      </ul>
-    </div>
-  ))}
+  <div class="grid">
+    {markets.map((market) => (
+      <div class="card hoverable">
+        <span class="icon">🧺</span>
+        <h3>{market.data.name}</h3>
+        <p class="town">{market.data.town}</p>
+        <p>{market.data.summary}</p>
+        <ul>
+          <li><strong>Schedule:</strong> {market.data.schedule}</li>
+          <li><strong>Season:</strong> {market.data.season}</li>
+          <li><strong>Address:</strong> {market.data.address}</li>
+          {market.data.website && (
+            <li><strong>Website:</strong> <a href={market.data.website} target="_blank" rel="noopener noreferrer">Visit site</a></li>
+          )}
+        </ul>
+      </div>
+    ))}
+  </div>
 </Layout>

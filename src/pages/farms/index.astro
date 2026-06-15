@@ -1,6 +1,7 @@
 ---
 import Layout from '../../layouts/Layout.astro';
 import { getCollection } from 'astro:content';
+import { farmIcon } from '../../lib/icons';
 
 const farms = (await getCollection('farms')).sort((a, b) =>
   a.data.name.localeCompare(b.data.name)
@@ -8,17 +9,23 @@ const farms = (await getCollection('farms')).sort((a, b) =>
 ---
 
 <Layout title="Farms & CSAs" description="Directory of farms and CSA programs around Ann Arbor, Chelsea, Dexter, Saline, and Manchester.">
-  <h1>Farms &amp; CSAs</h1>
-  <p>Farms and CSA programs across Washtenaw County and nearby towns.</p>
+  <div class="page-intro">
+    <h1>Farms &amp; CSAs</h1>
+    <p>Farms and CSA programs across Washtenaw County and nearby towns.</p>
+  </div>
 
-  {farms.map((farm) => (
-    <div class="card">
-      <h3><a href={`/farms/${farm.id}`}>{farm.data.name}</a> &mdash; {farm.data.town}</h3>
-      <p>{farm.data.summary}</p>
-      <div>
-        {farm.data.csa && <span class="tag">CSA</span>}
-        {farm.data.products.map((p) => <span class="tag">{p}</span>)}
-      </div>
-    </div>
-  ))}
+  <div class="grid">
+    {farms.map((farm) => (
+      <a class="card" href={`/farms/${farm.id}`}>
+        <span class="icon">{farmIcon(farm.data.products)}</span>
+        <h3>{farm.data.name}</h3>
+        <p class="town">{farm.data.town}</p>
+        <p>{farm.data.summary}</p>
+        <div>
+          {farm.data.csa && <span class="tag gold">CSA</span>}
+          {farm.data.products.map((p) => <span class="tag">{p}</span>)}
+        </div>
+      </a>
+    ))}
+  </div>
 </Layout>

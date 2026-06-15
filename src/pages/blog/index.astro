@@ -8,13 +8,19 @@ const posts = (await getCollection('blog')).sort(
 ---
 
 <Layout title="Blog" description="Seasonal guides and tips for buying local around Ann Arbor.">
-  <h1>Blog</h1>
+  <div class="page-intro">
+    <h1>Blog</h1>
+    <p>Seasonal guides and tips for buying local around Washtenaw County.</p>
+  </div>
 
-  {posts.map((post) => (
-    <div class="card">
-      <h3><a href={`/blog/${post.id}`}>{post.data.title}</a></h3>
-      <p>{post.data.pubDate.toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' })}</p>
-      <p>{post.data.description}</p>
-    </div>
-  ))}
+  <div class="grid">
+    {posts.map((post) => (
+      <a class="card" href={`/blog/${post.id}`}>
+        <span class="icon">📰</span>
+        <h3>{post.data.title}</h3>
+        <p class="town">{post.data.pubDate.toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' })}</p>
+        <p>{post.data.description}</p>
+      </a>
+    ))}
+  </div>
 </Layout>
