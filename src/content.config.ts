@@ -12,6 +12,8 @@ const farms = defineCollection({
     address: z.string().optional(),
     season: z.string().optional(),
     summary: z.string(),
+    featured: z.boolean().default(false),
+    featuredUntil: z.coerce.date().optional(),
   }),
 });
 
@@ -37,4 +39,17 @@ const blog = defineCollection({
   }),
 });
 
-export const collections = { farms, markets, blog };
+const recipes = defineCollection({
+  loader: glob({ pattern: '**/*.md', base: './src/content/recipes' }),
+  schema: z.object({
+    title: z.string(),
+    description: z.string(),
+    pubDate: z.coerce.date(),
+    produce: z.array(z.string()),
+    season: z.string(),
+    prepTime: z.string().optional(),
+    servings: z.string().optional(),
+  }),
+});
+
+export const collections = { farms, markets, blog, recipes };

@@ -1,0 +1,37 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import { getCollection, getEntry, render } from 'astro:content';
+
+export async function getStaticPaths() {
+  const recipes = await getCollection('recipes');
+  return recipes.map((recipe) => ({ params: { id: recipe.id } }));
+}
+
+const { id } = Astro.params;
+const recipe = await getEntry('recipes', id);
+if (!recipe) throw new Error(`Recipe not found: ${id}`);
+const { Content } = await render(recipe);
+---
+
+<Layout title={recipe.data.title} description={recipe.data.description}>
+  <p><a href="/recipes">&larr; Back to recipes</a></p>
+  <div class="page-intro">
+    <h1>{recipe.data.title}</h1>
+    <p style="display: flex; gap: 1rem; flex-wrap: wrap; align-items: center;">
+      <span>{recipe.data.pubDate.toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' })}</span>
+      {recipe.data.prepTime && <span>⏱ {recipe.data.prepTime}</span>}
+      {recipe.data.servings && <span>🍽 {recipe.data.servings}</span>}
+    </p>
+    <div style="display: flex; flex-wrap: wrap; gap: 0.3rem; margin-top: 0.5rem;">
+      {recipe.data.produce.map((item: string) => (
+        <span class="tag">{item}</span>
+      ))}
+    </div>
+  </div>
+  <div class="card">
+    <Content />
+  </div>
+  <p style="margin-top: 1.5rem; font-size: 0.95rem; color: var(--muted);">
+    Find these ingredients at your local <a href="/markets">farmers market</a> or from a <a href="/farms">Washtenaw County farm</a>.
+  </p>
+</Layout>

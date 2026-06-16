@@ -1,0 +1,36 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import { getCollection } from 'astro:content';
+
+const recipes = (await getCollection('recipes')).sort(
+  (a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf()
+);
+---
+
+<Layout title="Recipes" description="Seasonal recipes using fresh produce from Washtenaw County farms and farmers markets.">
+  <div class="page-intro">
+    <h1>Seasonal Recipes</h1>
+    <p>Simple recipes built around what's fresh at your local farm or farmers market right now.</p>
+  </div>
+
+  <div class="grid">
+    {recipes.map((recipe) => (
+      <a href={`/recipes/${recipe.id}`} class="card hoverable">
+        <span class="icon">🍳</span>
+        <h3>{recipe.data.title}</h3>
+        <p class="town">{recipe.data.season}</p>
+        <p>{recipe.data.description}</p>
+        <div style="margin-top: 0.75rem; display: flex; flex-wrap: wrap; gap: 0.3rem;">
+          {recipe.data.produce.map((item: string) => (
+            <span class="tag">{item}</span>
+          ))}
+        </div>
+        <p style="font-size: 0.85rem; color: var(--muted); margin: 0.75rem 0 0;">
+          {recipe.data.pubDate.toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' })}
+          {recipe.data.prepTime && <span> &middot; {recipe.data.prepTime}</span>}
+          {recipe.data.servings && <span> &middot; {recipe.data.servings}</span>}
+        </p>
+      </a>
+    ))}
+  </div>
+</Layout>
