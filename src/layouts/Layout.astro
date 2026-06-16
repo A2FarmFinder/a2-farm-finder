@@ -18,6 +18,7 @@ const { title, description = 'Find farms, CSAs, and farmers markets around Ann A
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,600;9..144,700&family=Figtree:wght@400;500;600;700&display=swap" rel="stylesheet" />
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-2359822306567746" crossorigin="anonymous"></script>
     <title>{title} | A2 Farm Finder</title>
   </head>
   <body>
@@ -204,6 +205,24 @@ const { title, description = 'Find farms, CSAs, and farmers markets around Ann A
       .tag.gold {
         background: #fbe9d2;
         color: var(--gold-dark);
+      }
+      .card.featured {
+        border-color: var(--gold);
+        background: linear-gradient(180deg, #fffaf0, #ffffff);
+        position: relative;
+      }
+      .sponsored-badge {
+        position: absolute;
+        top: 0.9rem;
+        right: 1rem;
+        background: var(--gold);
+        color: var(--green-dark);
+        font-size: 0.7rem;
+        font-weight: 700;
+        text-transform: uppercase;
+        letter-spacing: 0.04em;
+        padding: 0.2rem 0.6rem;
+        border-radius: 999px;
       }
 
       /* Hero */
