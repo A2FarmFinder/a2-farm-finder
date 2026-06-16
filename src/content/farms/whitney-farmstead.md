@@ -24,9 +24,31 @@ Owners Malaika and Matthew Haarklou practice regenerative ranching using
 organic practices, heritage breeds, perennial forages, and rotational grazing
 — even employing a draft horse named Buster for farm operations.
 
-Products include 100% grass-fed beef and lamb, pastured pork and chicken, and
-wood-fired maple syrup made traditionally each spring. Availability is
-seasonal and communicated through their newsletter — sign up on their website
-to stay informed on inventory, farmstand locations, and farm events.
+Products include 100% grass-fed beef and lamb, mutton, pastured pork and
+chicken, and wood-fired maple syrup made traditionally each spring. Stock
+varies by season — sign up for their newsletter to stay informed on
+inventory, farmstand locations, and farm events.
+
+**Pricing:**
+
+Grass-Fed Beef:
+- Budget cuts (ground, chuck, bones, heart, liver, tongue, suet): $10/lb
+- Value cuts (stew, cheek): $12/lb
+- Brisket: $15/lb
+- Mid-range (flank, skirt, sirloin): $22/lb
+- T-Bone, Porterhouse: $25/lb
+- New York Strip: $35/lb
+- Premium steaks (tenderloin, Delmonico): $38/lb
+
+Grass-Fed Lamb:
+- Ground, shank, leg, shoulder, organ meats: $20/lb
+- Chops: $38/lb
+- Suet, bones: $15/lb
+
+Mutton:
+- Ground, leg, shoulder, stew: $18/lb
+- Frenched rack: $32/lb
+- Organ meats: $15/lb
+- Suet, bones: $10/lb
 
 **Contact:** whitneyfarmstead.mi@gmail.com
