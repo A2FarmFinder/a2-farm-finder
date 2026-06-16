@@ -5,7 +5,7 @@ products:
   - Grass-Fed Beef
 csa: false
 website: https://www.baselinefarm.com
-address: "Dexter, MI 48130"
+address: "7861 Strawberry Lake Rd, Dexter, MI 48130"
 season: "Year-round by order"
 summary: >
   200-acre grass-fed beef operation raising heritage cattle breeds (White
