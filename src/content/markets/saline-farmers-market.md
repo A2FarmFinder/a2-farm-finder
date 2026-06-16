@@ -1,9 +1,9 @@
 ---
 name: Saline Farmers Market
 town: Saline
-address: "Outdoor (May-Oct): 100 S Ann Arbor St, Lot #4; Winter (Nov-Apr): Liberty School, 7265 Ann Arbor-Saline Rd, Saline, MI 48176"
-schedule: "Outdoor: Saturdays 8am-12pm (May 2 - Oct 31). Winter: Saturdays 9am-1pm (Nov - Apr)."
-season: "Year-round (outdoor May-Oct, indoor winter market Nov-Apr)"
+address: "Outdoor: 100 S Ann Arbor St, Parking Lot #4, Saline, MI 48176; Indoor: Liberty School, 7265 N Ann Arbor St, Saline, MI 48176"
+schedule: "Outdoor: Saturdays 8am-noon (May - Nov 8). Indoor: Saturdays 9am-1pm (Nov 15 - April)."
+season: "Year-round (outdoor May-Nov 8, indoor Nov 15-April)"
 website: https://www.salinemi.gov/departments/farmers_market/index.php
 summary: >
   Year-round market with an outdoor season (May-October) downtown and an
