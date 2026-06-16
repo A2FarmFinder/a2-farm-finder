@@ -28,15 +28,28 @@ sunflowers, and pumpkins. The remaining land serves as pollinator habitat
 with wetlands and an apiary producing hundreds of gallons of raw honey
 each year.
 
-CSA shares are available across five seasons — Spring, Summer, Fall,
-Thanksgiving, and Holiday — making it one of the most flexible CSA programs
-in Washtenaw County. Each box includes a variety of salad greens, cooking
-greens (kale, chard, bok choy), root crops (potatoes, carrots, onions), and
-seasonal items like tomatoes, corn, squash, peppers, and eggplant.
+CSA shares are available across five seasons, making it one of the most
+flexible CSA programs in Washtenaw County. All farm pickup at 475 N Fletcher
+Rd, Dexter (self-serve 8am–8pm). Payment via PayPal, Venmo (@jacobsfreshfarm),
+check, or card at farm.
 
-Their year-round farmstand is open daily 8am-6pm. You can also find Jacob's
-produce at the Chelsea Farmers Market (Saturdays 8am-1pm, Wednesdays 1-5pm)
-and at Argus Farm Stop in Ann Arbor.
+**Spring CSA** (5 weeks, April 2–30):
+- Farm pickup: $125
+- Home delivery (Chelsea, Dexter, Pinckney, west Ann Arbor): $150
+- Box includes greens, root vegetables, microgreens, and herbs. Delivery Thursdays.
 
-**Pricing:** Contact the farm directly for current CSA pricing and availability.
+**Summer CSA** (22 weeks, June 24–November 18):
+- Full Share (serves 2–3, weekly): $799
+- Half Share (serves 1–2, biweekly): $419
+- 8–10 seasonal produce items per week plus specialty items
+
+**Thanksgiving CSA Box** (pickup November 25):
+- $75 per box
+- Includes pie pumpkins, honey nut squash, butternut squash, spinach, potatoes, cabbage, carrots, kale, and fresh herbs
+
+**Holiday CSA:** Contact farm for details.
+
+Their year-round farmstand is open daily 8am–6pm. Also at Chelsea Farmers
+Market (Saturdays 8am–1pm, Wednesdays 1–5pm) and Argus Farm Stop in Ann Arbor.
+
 **Contact:** jacobsfreshfarm@gmail.com | 517-250-1222
