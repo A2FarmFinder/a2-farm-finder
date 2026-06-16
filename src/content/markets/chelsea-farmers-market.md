@@ -1,7 +1,7 @@
 ---
 name: Chelsea Farmers Market
 town: Chelsea
-address: "Saturdays: Palmer Commons, 304 S Main St; Wednesdays: Chelsea State Bank, 1010 S Main St, Chelsea, MI 48118"
+address: "304 S Main St, Chelsea, MI 48118 (Sat); 1010 S Main St, Chelsea, MI 48118 (Wed)"
 schedule: "Saturdays 8am-1pm and Wednesdays 10am-3pm, May - October"
 season: "May - October (opens early May)"
 website: https://chelseamich.com/directory-business_dir/listing/farmers-market/
