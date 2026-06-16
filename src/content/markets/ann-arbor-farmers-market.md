@@ -2,7 +2,7 @@
 name: Ann Arbor Farmers Market
 town: Ann Arbor
 address: 315 Detroit St, Ann Arbor, MI 48104
-schedule: "May-Dec: Wed & Sat, 7am-3pm (plus Wed evenings 4-8pm, June-Oct). Jan-Apr: Sat only, 8am-3pm."
+schedule: "Saturdays year-round: Jan-Apr 8am-3pm, May-Dec 7am-3pm. Wednesdays May 6-Dec 23: 7am-3pm."
 season: "Year-round"
 website: https://www.a2gov.org/parks-and-recreation/parks-and-places/ann-arbor-farmers-market/
 summary: >
