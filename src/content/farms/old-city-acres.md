@@ -19,10 +19,21 @@ summary: >
 
 Old City Acres has been connecting local families with Michigan-grown produce
 since 2013. Their Flex-CSA model lets members order what they want when they
-want it — no locked-in weekly box — with free pickup and home delivery options
-across Ypsilanti, Ann Arbor, Belleville, and Romulus.
+want it — no locked-in weekly box. Food credits never expire and roll over
+year to year. Free pickup and home delivery available across Ypsilanti,
+Ann Arbor, Belleville, and Romulus.
+
+**Flex-CSA Membership Options:**
+- **Sampler** — $75
+- **Beginner/Student Share** — $150
+- **Standard Share** — $350 (includes $10 bonus credits)
+- **Family Share** — $500 (includes $15 bonus credits)
+- **Large Share** — $750 (includes $30 bonus credits)
+
+Standard, Family, and Large shares can be split into 3 monthly payments.
+Student and senior memberships also available — contact for details.
 
 The year-round farm stand is located at 741 Emerick St in Ypsilanti (in the
 B Cubed Bakery parking lot) and is open Thursday 12–6pm, Friday 9am–6pm,
-Saturday 9am–2pm, and Sunday 9am–12pm. Online ordering is available through
+Saturday 9am–2pm, and Sunday 9am–12pm. Online ordering available through
 their website.
