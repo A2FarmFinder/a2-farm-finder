@@ -5,12 +5,38 @@ import { getCollection } from 'astro:content';
 const markets = (await getCollection('markets')).sort((a, b) =>
   a.data.name.localeCompare(b.data.name)
 );
+
+function mapsUrl(address: string) {
+  return `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(address)}`;
+}
 ---
 
-<Layout title="Farmers Markets" description="Farmers market schedules around Ann Arbor, Chelsea, and Saline.">
+<Layout title="Farmers Markets" description="Farmers market schedules around Ann Arbor, Chelsea, Saline, and Dexter, Michigan.">
   <div class="page-intro">
     <h1>Farmers Markets</h1>
     <p>Weekly farmers market schedules around Washtenaw County.</p>
+  </div>
+
+  <!-- What's in season now -->
+  <div class="card" style="margin-bottom: 2rem; border-left: 4px solid var(--gold);">
+    <h2 style="margin-top: 0;">🌿 What's at the Market in June</h2>
+    <p>June is one of the best months to visit — early summer crops are coming in fast. Look for:</p>
+    <p><strong>Vegetables:</strong> Asparagus (late June), spinach, lettuce, arugula, radishes, peas, scallions, kale, chard, herbs, and the first zucchini.</p>
+    <p><strong>Fruits:</strong> Strawberries are at peak season — don't miss them, they go fast.</p>
+    <p><strong>Also look for:</strong> Transplants and seedlings if you're still planting your garden, cut flowers, fresh eggs, honey, and baked goods year-round.</p>
+    <p style="margin-bottom: 0;"><em>Tip: arrive early — the best vendors sell out by 10am on Saturdays.</em></p>
+  </div>
+
+  <!-- First-timer tips -->
+  <div class="card" style="margin-bottom: 2rem; background: var(--green-dark); color: #fff;">
+    <h2 style="margin-top: 0; color: var(--gold);">First Time at a Farmers Market?</h2>
+    <ul style="margin-bottom: 0; color: #fff;">
+      <li><strong style="color: var(--gold);">Arrive early.</strong> The best produce goes to early shoppers — aim for opening time.</li>
+      <li><strong style="color: var(--gold);">Bring cash.</strong> Most vendors accept cards but cash is faster and always works.</li>
+      <li><strong style="color: var(--gold);">Bring your own bags.</strong> You'll buy more than you expect.</li>
+      <li><strong style="color: var(--gold);">Talk to the farmers.</strong> Ask what's freshest, how to cook something unfamiliar, or when they expect a crop to come in.</li>
+      <li><strong style="color: var(--gold);">SNAP/EBT accepted.</strong> All four Washtenaw County markets accept SNAP/Bridge cards. Ann Arbor and Saline also participate in <strong style="color: var(--gold);">Double Up Food Bucks</strong> — spend $10 in SNAP and get $10 more free for fresh produce.</li>
+    </ul>
   </div>
 
   <div class="grid">
@@ -25,9 +51,12 @@ const markets = (await getCollection('markets')).sort((a, b) =>
           <li><strong>Season:</strong> {market.data.season}</li>
           <li><strong>Address:</strong> {market.data.address}</li>
         </ul>
-        {market.data.website && (
-          <a href={market.data.website} target="_blank" rel="noopener noreferrer" style="margin-top: 0.75rem; display: inline-block; padding: 0.5rem 1.1rem; border-radius: 999px; font-weight: 600; text-decoration: none; background: var(--green-dark); color: #fff; font-size: 0.9rem;">Visit Market Website →</a>
-        )}
+        <div style="display: flex; gap: 0.5rem; flex-wrap: wrap; margin-top: 0.75rem;">
+          {market.data.website && (
+            <a href={market.data.website} target="_blank" rel="noopener noreferrer" style="padding: 0.5rem 1.1rem; border-radius: 999px; font-weight: 600; text-decoration: none; background: var(--green-dark); color: #fff; font-size: 0.9rem;">Visit Website →</a>
+          )}
+          <a href={mapsUrl(market.data.address)} target="_blank" rel="noopener noreferrer" style="padding: 0.5rem 1.1rem; border-radius: 999px; font-weight: 600; text-decoration: none; background: var(--gold); color: var(--green-dark); font-size: 0.9rem;">Get Directions →</a>
+        </div>
       </div>
     ))}
   </div>
