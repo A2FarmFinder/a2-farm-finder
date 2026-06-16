@@ -3,9 +3,12 @@ name: Kapnick Orchards
 town: Britton
 products:
   - Apples
-  - Honey
   - Cider
+  - Fruits & Vegetables
   - Bakery
+  - Jam & Jellies
+  - Honey
+  - Fruit Baskets
 csa: false
 website: https://kapnickorchards.com
 address: 4245 N Rogers Hwy, Britton, MI 49229
