@@ -10,23 +10,28 @@ products:
 csa: true
 website: https://www.slowfarmorganic.com
 address: "3 miles north of Ann Arbor, MI"
-season: "CSA June-August (12 weeks); weekend farmstand during season"
+season: "CSA: Early Summer (Jun 29), Late Summer/Fall (Aug 24), or combo through Oct 12. Farmstand Saturdays 9am-3pm."
 summary: >
   Woman-owned USDA certified organic farm 3 miles north of Ann Arbor growing
-  heirloom vegetables, flowers, and herbs. Offers a 12-week flexible CSA
-  starting in June, u-pick, and a self-serve on-site farmstand. Accepts
-  SNAP/EBT.
+  heirloom vegetables, flowers, and herbs. Saturday farmstand pickup, flexible
+  CSA seasons from June through October, and SNAP/EBT accepted.
 ---
 
 Slow Farm Organic is a USDA certified organic, woman-owned farm just 3 miles
 north of Ann Arbor practicing no-till, biodiverse growing of heirloom
-vegetables, flowers, and herbs. The farm features a self-serve on-site
-farmstand and u-pick operation, and accepts SNAP/EBT making local organic
-produce accessible to all.
+vegetables, flowers, and herbs. Accepts SNAP/EBT (paid at pickup).
 
-For the 2026 season, the farm is offering a 12-week Flexible CSA starting in
-June through Dogstar Farm, which has taken over farm management while
-maintaining all organic growing practices. The weekend farmstand is also
-available during the season.
+CSA members pick up a grocery bag of certified organic seasonal produce every
+Saturday 9am–3pm at the farmstand. Friends may pick up on your behalf if you
+can't make it, and unclaimed bags are donated to food rescue partners.
+
+**2026 CSA Pricing:**
+- **Early Summer** (8 weeks, starts June 29): $275
+- **Late Summer/Fall** (8 weeks, starts August 24): $275
+- **Combo — Early + Late** (16 weeks, June 29–October 12): $500 (save $50)
+- **Full 24-week season**: $700 — currently closed
+
+**Prepaid Membership Card** (January–April only): 10% bonus value added —
+effectively a 10% discount on all farmstand purchases.
 
 **Contact:** slowfarmorganic@gmail.com
