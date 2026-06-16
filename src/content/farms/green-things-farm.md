@@ -10,12 +10,12 @@ products:
 csa: true
 website: https://www.greenthingsfarm.com
 address: "3825 Nixon Rd, Ann Arbor, MI 48105"
-season: "Farm stand open March through early December, 7 days a week (hours vary). Markets May-December."
+season: "Farm stand open March through early December, 7 days a week (hours vary). CSA seasons: Spring, Summer, Fall (Sep 9-Dec 17). Markets May-December."
 summary: >
   Majority women-owned certified organic farm collective on 100+ acres in Ann
-  Arbor growing produce, flowers, seedlings, and beef. Farm stand open
-  March-December daily, plus memberships, Salad Club punch cards, and
-  vendors at Ann Arbor Farmers Market and Argus Farm Stop.
+  Arbor. Buffet-style CSA memberships, Salad Club punch cards, U-Pick Flower
+  CSA, and daily farm stand March-December. Sliding scale pricing. Vendors at
+  Ann Arbor Farmers Market and Argus Farm Stop.
 ---
 
 Green Things Farm Collective (GTFC) is a majority women-owned organic farm
@@ -29,5 +29,14 @@ vary; credit cards only). You can also find their produce at the Ann Arbor
 Farmers Market on Wednesdays and Saturdays (May-December) and at Argus Farm
 Stop year-round.
 
-Membership options for 2026 include a Salad Club Punch Card and Supporter
-Share — check their website for current pricing and availability.
+**2026 Membership Options:**
+- **Fall CSA** (Sep 9–Dec 17) — Small: from $285 | Medium: from $431 | Large: from $638
+- **Salad Club Punch Card** — $130 (10 discounted greens punches, valid through mid-December)
+- **U-Pick Flower CSA** — $140 (Jul 13–Sep 4, weekly bouquet harvesting)
+- **Gift Certificates** — from $25
+
+Spring CSA, Summer CSA, and Supporter Share ($1,588) are sold out for 2026.
+All memberships use sliding scale pricing — members earning above Ann Arbor's
+median household income ($73K) are encouraged to pay higher rates; lower
+rates available for those earning below median, carrying debt, supporting
+dependents, or identifying as BIPOC.
