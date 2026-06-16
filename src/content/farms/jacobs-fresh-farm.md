@@ -30,8 +30,13 @@ each year.
 
 CSA shares are available across five seasons — Spring, Summer, Fall,
 Thanksgiving, and Holiday — making it one of the most flexible CSA programs
-in Washtenaw County. Their year-round farmstand is open daily 8am-6pm.
-You can also find Jacob's produce at the Chelsea Farmers Market (Saturdays
-8am-1pm, Wednesdays 1-5pm) and at Argus Farm Stop in Ann Arbor.
+in Washtenaw County. Each box includes a variety of salad greens, cooking
+greens (kale, chard, bok choy), root crops (potatoes, carrots, onions), and
+seasonal items like tomatoes, corn, squash, peppers, and eggplant.
 
+Their year-round farmstand is open daily 8am-6pm. You can also find Jacob's
+produce at the Chelsea Farmers Market (Saturdays 8am-1pm, Wednesdays 1-5pm)
+and at Argus Farm Stop in Ann Arbor.
+
+**Pricing:** Contact the farm directly for current CSA pricing and availability.
 **Contact:** jacobsfreshfarm@gmail.com | 517-250-1222
