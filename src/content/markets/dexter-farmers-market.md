@@ -4,6 +4,7 @@ town: Dexter
 address: "3233 Alpine St, Dexter, MI 48130"
 schedule: "Saturdays 8am-1pm (May-October) and Tuesdays 11am-3pm (June-September)"
 season: "May - October"
+website: https://www.dextermi.gov/community/farmers_market.php
 summary: >
   Covered downtown market celebrating its 20th year in 2026, with fresh local
   produce, food, and crafts. Accepts SNAP/Bridge cards, PEBT, Double Up Food

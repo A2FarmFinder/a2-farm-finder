@@ -24,10 +24,10 @@ const markets = (await getCollection('markets')).sort((a, b) =>
           <li><strong>Schedule:</strong> {market.data.schedule}</li>
           <li><strong>Season:</strong> {market.data.season}</li>
           <li><strong>Address:</strong> {market.data.address}</li>
-          {market.data.website && (
-            <li><strong>Website:</strong> <a href={market.data.website} target="_blank" rel="noopener noreferrer">Visit site</a></li>
-          )}
         </ul>
+        {market.data.website && (
+          <a href={market.data.website} target="_blank" rel="noopener noreferrer" class="btn btn-secondary" style="margin-top: 0.75rem; display: inline-block;">Visit Market Website →</a>
+        )}
       </div>
     ))}
   </div>
