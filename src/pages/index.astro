@@ -8,6 +8,25 @@ const markets = await getCollection('markets');
 const posts = (await getCollection('blog')).sort(
   (a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf()
 );
+
+const month = new Date().getMonth(); // 0-indexed
+const monthNames = ['January','February','March','April','May','June','July','August','September','October','November','December'];
+const seasonalProduce: Record<number, string[]> = {
+  0:  ['Storage squash', 'Root vegetables', 'Greenhouse herbs', 'Dried beans', 'Storage apples'],
+  1:  ['Storage carrots', 'Beets', 'Potatoes', 'Greenhouse greens', 'Onions'],
+  2:  ['Greenhouse lettuce', 'Spinach', 'Herbs', 'Maple syrup', 'Eggs'],
+  3:  ['Asparagus', 'Rhubarb', 'Spinach', 'Radishes', 'Greenhouse tomatoes'],
+  4:  ['Asparagus', 'Rhubarb', 'Peas', 'Lettuce', 'Radishes', 'Spinach', 'Herbs'],
+  5:  ['Strawberries', 'Asparagus', 'Peas', 'Kale', 'Chard', 'Herbs', 'Scallions', 'Radishes'],
+  6:  ['Blueberries', 'Zucchini', 'Green Beans', 'Beets', 'Cucumbers', 'Early Tomatoes', 'Basil', 'Corn'],
+  7:  ['Tomatoes', 'Sweet Corn', 'Peaches', 'Peppers', 'Eggplant', 'Melons', 'Basil', 'Beans'],
+  8:  ['Apples', 'Winter Squash', 'Late Tomatoes', 'Peppers', 'Sweet Potatoes', 'Garlic'],
+  9:  ['Apples', 'Winter Squash', 'Sweet Potatoes', 'Beets', 'Carrots', 'Kale'],
+  10: ['Root vegetables', 'Winter Squash', 'Storage Apples', 'Kale', 'Brussels Sprouts'],
+  11: ['Storage Squash', 'Root Vegetables', 'Greenhouse Herbs', 'Dried Beans'],
+};
+const produce = seasonalProduce[month] ?? [];
+const monthName = monthNames[month];
 ---
 
 <Layout title="Home">
@@ -22,21 +41,25 @@ const posts = (await getCollection('blog')).sort(
       <a class="btn btn-primary" href="/farms">Browse farms &amp; CSAs</a>
       <a class="btn btn-secondary" href="/markets">Find a farmers market</a>
     </div>
-    <svg class="hero-illustration" viewBox="0 0 200 160" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-      <circle cx="160" cy="40" r="28" fill="#f6d186" opacity="0.9" />
-      <path d="M0 130 Q 50 100 100 125 T 200 110 V160 H0 Z" fill="#3f6b43" opacity="0.7" />
-      <path d="M0 145 Q 60 120 120 140 T 200 130 V160 H0 Z" fill="#2f5233" />
-      <rect x="40" y="95" width="36" height="30" fill="#fff" opacity="0.95" />
-      <polygon points="36,95 80,95 58,75" fill="#c8853a" />
-      <rect x="53" y="108" width="10" height="17" fill="#2f5233" />
-    </svg>
   </section>
 
-  <div class="section-heading">
+  <!-- What's in season this month -->
+  {produce.length > 0 && (
+    <div class="seasonal-strip fade-in">
+      <span class="strip-label">🌿 In season this {monthName}:</span>
+      <div class="strip-items">
+        {produce.map((item) => (
+          <a href="/markets" class="strip-pill">{item}</a>
+        ))}
+      </div>
+    </div>
+  )}
+
+  <div class="section-heading fade-in">
     <h2>Latest from the blog</h2>
     <a href="/blog">All posts &rarr;</a>
   </div>
-  <div class="grid">
+  <div class="grid fade-in">
     {posts.slice(0, 3).map((post) => (
       <a class="card" href={`/blog/${post.id}`}>
         <span class="icon">📰</span>
@@ -46,11 +69,11 @@ const posts = (await getCollection('blog')).sort(
     ))}
   </div>
 
-  <div class="section-heading">
+  <div class="section-heading fade-in">
     <h2>Farms &amp; CSAs</h2>
     <a href="/farms">View all {farms.length} &rarr;</a>
   </div>
-  <div class="grid">
+  <div class="grid fade-in">
     {farms.slice(0, 3).map((farm) => (
       <a class="card" href={`/farms/${farm.id}`}>
         <span class="icon">{farmIcon(farm.data.products)}</span>
@@ -61,11 +84,11 @@ const posts = (await getCollection('blog')).sort(
     ))}
   </div>
 
-  <div class="section-heading">
+  <div class="section-heading fade-in">
     <h2>Farmers Markets</h2>
     <a href="/markets">View all {markets.length} &rarr;</a>
   </div>
-  <div class="grid">
+  <div class="grid fade-in">
     {markets.map((market) => (
       <a class="card" href="/markets">
         <span class="icon">🧺</span>
