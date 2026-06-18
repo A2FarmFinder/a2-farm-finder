@@ -450,6 +450,56 @@ const { title, description = 'Find farms, CSAs, and farmers markets around Ann A
         transition: opacity 0.6s ease, transform 0.6s ease;
       }
       .fade-in.visible { opacity: 1; transform: translateY(0); }
+
+      /* ── Mobile ── */
+      @media (max-width: 600px) {
+        /* Compact header nav */
+        .site-header {
+          padding: 0.75rem 1rem;
+          gap: 0.5rem;
+        }
+        .site-header .brand { font-size: 1.1rem; }
+        .site-header nav { gap: 0.15rem; }
+        .site-header nav a {
+          font-size: 0.78rem;
+          padding: 0.3rem 0.55rem;
+        }
+
+        /* Smaller hero on mobile */
+        .hero {
+          border-radius: 14px;
+          padding: 2.5rem 1.25rem 0;
+          min-height: 320px;
+        }
+        .hero h1 { font-size: 1.9rem; max-width: 100%; }
+        .hero p { font-size: 1rem; }
+        .hero .hero-actions { margin-top: 1.25rem; }
+        .btn { padding: 0.65rem 1.1rem; font-size: 0.9rem; }
+
+        /* Stats bar 2x2 grid on mobile */
+        .stats-bar {
+          display: grid;
+          grid-template-columns: 1fr 1fr;
+          gap: 0.75rem 0;
+          padding: 1.25rem 1rem;
+          border-radius: 0 0 12px 12px;
+        }
+        .stats-divider { display: none; }
+        .stat-num { font-size: 1.3rem; }
+        .stat-label { font-size: 0.7rem; }
+
+        /* Seasonal strip compact */
+        .seasonal-strip { padding: 0.75rem 1rem; gap: 0.5rem; }
+
+        /* Section bands flush on mobile */
+        .section-band { margin: 0 -1rem; padding: 1.75rem 1rem 2rem; }
+        .wave-divider { margin: 0 -1rem; }
+
+        /* Cards single column */
+        .grid { grid-template-columns: 1fr; gap: 1rem; }
+
+        main { padding: 1.5rem 1rem 2rem; }
+      }
     </style>
   </body>
 </html>
