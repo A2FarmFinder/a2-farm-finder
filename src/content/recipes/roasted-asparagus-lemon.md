@@ -1,7 +1,7 @@
 ---
 title: "Roasted Asparagus with Lemon and Garlic"
 description: "The easiest thing you can do with fresh asparagus — a hot oven, good olive oil, lemon, and ten minutes."
-pubDate: 2026-06-10
+pubDate: 2026-06-09
 produce:
   - Asparagus
   - Garlic

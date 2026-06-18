@@ -1,7 +1,7 @@
 ---
 title: "What's in Season in June Around Ann Arbor"
 description: "A look at what local farms are harvesting in June and where to find it at area farmers markets."
-pubDate: 2026-05-29
+pubDate: 2026-05-28
 ---
 
 June is the start of the real harvest season in southeast Michigan. Here's

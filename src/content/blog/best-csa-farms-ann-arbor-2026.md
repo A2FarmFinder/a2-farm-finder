@@ -1,7 +1,7 @@
 ---
 title: "Best CSA Farms Near Ann Arbor in 2026"
 description: "A guide to the top Community Supported Agriculture farms near Ann Arbor, Michigan — what each offers, what they cost, and how to sign up before spots fill."
-pubDate: 2026-06-02
+pubDate: 2026-06-01
 ---
 
 If you've been thinking about joining a CSA this season, the Ann Arbor area has some of the strongest options in Michigan. Here's a breakdown of the best farms offering CSA shares in and around Washtenaw County in 2026 — and how to lock in your spot before they sell out.

@@ -1,7 +1,7 @@
 ---
 title: "What Is Biodynamic Farming? Michigan's Only Example Is Right Near Ann Arbor"
 description: "Biodynamic farming goes beyond organic — and one of Michigan's only biodynamic farms has been operating just outside Ann Arbor since 1988."
-pubDate: 2026-06-16
+pubDate: 2026-06-15
 ---
 
 You've probably heard of organic farming. But biodynamic farming is a step beyond — and one of the only farms in Michigan practicing it continuously has been doing so just outside Ann Arbor for nearly four decades.
