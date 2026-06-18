@@ -1,7 +1,7 @@
 ---
 title: "Fresh Herb Compound Butter"
 description: "An easy way to use a big bunch of market herbs — mix them into butter and freeze it for weeks of flavor."
-pubDate: 2026-06-27
+pubDate: 2026-06-17
 produce:
   - Herbs
   - Garlic

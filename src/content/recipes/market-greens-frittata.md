@@ -1,7 +1,7 @@
 ---
 title: "Farmers Market Greens Frittata"
 description: "A flexible egg dish that works with whatever greens and herbs you picked up at the market this week."
-pubDate: 2026-06-24
+pubDate: 2026-06-13
 produce:
   - Eggs
   - Kale

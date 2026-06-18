@@ -1,7 +1,7 @@
 ---
 title: "Strawberry Spinach Salad with Honey Balsamic Dressing"
 description: "A simple early-summer salad that makes the most of peak Michigan strawberries and tender local spinach."
-pubDate: 2026-06-17
+pubDate: 2026-06-06
 produce:
   - Strawberries
   - Spinach
