@@ -1,7 +1,7 @@
 ---
 title: "Ann Arbor Farmers Market Guide: What to Know Before You Go"
 description: "Everything you need to know about shopping at the Ann Arbor Farmers Market and other Washtenaw County markets — hours, parking, what to buy, and when to go."
-pubDate: 2026-06-16
+pubDate: 2026-06-05
 ---
 
 The Ann Arbor Farmers Market is one of the oldest and most beloved in Michigan, drawing locals every Wednesday and Saturday from May through December. If you've never been — or want to get more out of your visits — here's what to know.

@@ -1,7 +1,7 @@
 ---
 title: "Where to Buy Fresh Local Strawberries Near Ann Arbor"
 description: "Michigan strawberry season is short — usually just two to three weeks in June. Here's where to find the best local strawberries in Washtenaw County before they're gone."
-pubDate: 2026-06-20
+pubDate: 2026-06-18
 ---
 
 Michigan strawberry season is one of the most fleeting things in local food. It lasts maybe two to three weeks — usually the second half of June — and then it's over until next year. The strawberries you find at local farms and farmers markets during that window are nothing like what you get from a grocery store. They're smaller, softer, deeper red, and intensely sweet. Worth planning around.

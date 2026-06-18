@@ -1,7 +1,7 @@
 ---
 title: "U-Pick Farms Near Ann Arbor: Apples, Berries, and More"
 description: "The best u-pick farms within an hour of Ann Arbor for apples, raspberries, blueberries, and more — with hours, addresses, and what to pick when."
-pubDate: 2026-06-17
+pubDate: 2026-06-09
 ---
 
 U-pick farms are one of the best day trips you can take from Ann Arbor. Within 30–45 minutes of the city, you can pick your own apples, raspberries, blueberries, and more — often for less than grocery store prices and far more fun than any grocery run. Here are the top options near Washtenaw County.

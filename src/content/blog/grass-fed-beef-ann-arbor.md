@@ -1,7 +1,7 @@
 ---
 title: "Where to Buy Grass-Fed Beef Near Ann Arbor"
 description: "Looking for locally raised, grass-fed beef near Ann Arbor? Here's where to buy whole, half, and quarter shares directly from Washtenaw County farms."
-pubDate: 2026-06-18
+pubDate: 2026-06-12
 ---
 
 Finding high-quality grass-fed beef locally isn't as hard as it used to be around Ann Arbor — but it does require knowing where to look. Unlike grocery store beef, locally raised beef is usually sold in bulk shares (whole, half, or quarter animal) directly from the farm, which means lower cost per pound and full traceability.

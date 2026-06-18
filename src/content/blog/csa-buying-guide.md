@@ -1,7 +1,7 @@
 ---
 title: "A First-Timer's Guide to Joining a CSA Near Ann Arbor"
 description: "What a CSA share actually is, what it costs, and how to pick one that fits your household near Ann Arbor."
-pubDate: 2026-02-01
+pubDate: 2026-05-26
 ---
 
 A Community Supported Agriculture (CSA) share is a way to pay a local farm
