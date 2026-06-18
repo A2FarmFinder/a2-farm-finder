@@ -27,6 +27,8 @@ Several Washtenaw County farms grow strawberries as part of their CSA shares or 
 
 **[Kapnick Orchards](/farms/kapnick-orchards)** in Britton runs a u-pick operation that includes strawberries when in season. Worth checking their website or calling ahead to confirm availability before making the drive.
 
+**[Jacob's Fresh Farm](/farms/jacobs-fresh-farm)** in Dexter is a great local option — check their website or CSA listings for strawberry availability during the season.
+
 **[Wasem Fruit Farm](/farms/wasem-fruit-farm)** in Milan has been growing fruit in Washtenaw County for over a century and typically offers strawberries for pick-your-own and pre-picked during the season.
 
 ## How to Store Them
