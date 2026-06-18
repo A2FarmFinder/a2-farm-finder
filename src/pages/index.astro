@@ -9,41 +9,108 @@ const posts = (await getCollection('blog')).sort(
   (a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf()
 );
 
-const month = new Date().getMonth(); // 0-indexed
+const month = new Date().getMonth();
 const monthNames = ['January','February','March','April','May','June','July','August','September','October','November','December'];
 const seasonalProduce: Record<number, string[]> = {
-  0:  ['Storage squash', 'Root vegetables', 'Greenhouse herbs', 'Dried beans', 'Storage apples'],
-  1:  ['Storage carrots', 'Beets', 'Potatoes', 'Greenhouse greens', 'Onions'],
-  2:  ['Greenhouse lettuce', 'Spinach', 'Herbs', 'Maple syrup', 'Eggs'],
-  3:  ['Asparagus', 'Rhubarb', 'Spinach', 'Radishes', 'Greenhouse tomatoes'],
-  4:  ['Asparagus', 'Rhubarb', 'Peas', 'Lettuce', 'Radishes', 'Spinach', 'Herbs'],
+  0:  ['Storage Squash', 'Root Vegetables', 'Greenhouse Herbs', 'Storage Apples'],
+  1:  ['Storage Carrots', 'Beets', 'Potatoes', 'Greenhouse Greens'],
+  2:  ['Greenhouse Lettuce', 'Spinach', 'Herbs', 'Maple Syrup'],
+  3:  ['Asparagus', 'Rhubarb', 'Spinach', 'Radishes'],
+  4:  ['Asparagus', 'Rhubarb', 'Peas', 'Lettuce', 'Herbs'],
   5:  ['Strawberries', 'Asparagus', 'Peas', 'Kale', 'Chard', 'Herbs', 'Scallions', 'Radishes'],
-  6:  ['Blueberries', 'Zucchini', 'Green Beans', 'Beets', 'Cucumbers', 'Early Tomatoes', 'Basil', 'Corn'],
-  7:  ['Tomatoes', 'Sweet Corn', 'Peaches', 'Peppers', 'Eggplant', 'Melons', 'Basil', 'Beans'],
-  8:  ['Apples', 'Winter Squash', 'Late Tomatoes', 'Peppers', 'Sweet Potatoes', 'Garlic'],
+  6:  ['Blueberries', 'Zucchini', 'Green Beans', 'Cucumbers', 'Early Tomatoes', 'Basil', 'Corn'],
+  7:  ['Tomatoes', 'Sweet Corn', 'Peaches', 'Peppers', 'Eggplant', 'Melons', 'Basil'],
+  8:  ['Apples', 'Winter Squash', 'Late Tomatoes', 'Peppers', 'Sweet Potatoes'],
   9:  ['Apples', 'Winter Squash', 'Sweet Potatoes', 'Beets', 'Carrots', 'Kale'],
-  10: ['Root vegetables', 'Winter Squash', 'Storage Apples', 'Kale', 'Brussels Sprouts'],
-  11: ['Storage Squash', 'Root Vegetables', 'Greenhouse Herbs', 'Dried Beans'],
+  10: ['Root Vegetables', 'Winter Squash', 'Storage Apples', 'Kale'],
+  11: ['Storage Squash', 'Root Vegetables', 'Greenhouse Herbs'],
 };
 const produce = seasonalProduce[month] ?? [];
 const monthName = monthNames[month];
 ---
 
 <Layout title="Home">
+
+  <!-- [1] Hero with farm landscape SVG -->
   <section class="hero">
-    <h1>Find local farms, CSAs &amp; farmers markets near Ann Arbor</h1>
-    <p>
-      A directory of farms, CSA programs, and farmers markets across
-      Washtenaw County &mdash; Ann Arbor, Chelsea, Dexter, Saline,
-      Manchester, and beyond.
-    </p>
-    <div class="hero-actions">
-      <a class="btn btn-primary" href="/farms">Browse farms &amp; CSAs</a>
-      <a class="btn btn-secondary" href="/markets">Find a farmers market</a>
+    <div class="hero-content">
+      <h1>Find local farms, CSAs &amp; farmers markets near Ann Arbor</h1>
+      <p>A directory of farms, CSA programs, and farmers markets across Washtenaw County — Ann Arbor, Chelsea, Dexter, Saline, Manchester, and beyond.</p>
+      <div class="hero-actions">
+        <a class="btn btn-primary" href="/farms">Browse farms &amp; CSAs</a>
+        <a class="btn btn-secondary" href="/markets">Find a farmers market</a>
+      </div>
+    </div>
+    <!-- Farm landscape illustration -->
+    <div class="hero-landscape" aria-hidden="true">
+      <svg viewBox="0 0 1200 160" preserveAspectRatio="xMidYMax slice" xmlns="http://www.w3.org/2000/svg">
+        <!-- Far hills -->
+        <path d="M0,95 C180,60 380,82 580,68 C780,54 980,76 1200,70 L1200,160 L0,160 Z" fill="rgba(255,255,255,0.04)"/>
+        <!-- Mid hills -->
+        <path d="M0,112 C200,88 420,106 620,96 C820,86 1020,100 1200,94 L1200,160 L0,160 Z" fill="rgba(255,255,255,0.07)"/>
+        <!-- Left tree cluster -->
+        <ellipse cx="155" cy="108" rx="24" ry="30" fill="rgba(255,255,255,0.07)"/>
+        <ellipse cx="182" cy="104" rx="19" ry="25" fill="rgba(255,255,255,0.09)"/>
+        <ellipse cx="130" cy="113" rx="16" ry="21" fill="rgba(255,255,255,0.06)"/>
+        <rect x="153" y="128" width="5" height="18" fill="rgba(255,255,255,0.06)"/>
+        <!-- Fence -->
+        <rect x="280" y="122" width="3" height="16" rx="1" fill="rgba(255,255,255,0.12)"/>
+        <rect x="296" y="122" width="3" height="16" rx="1" fill="rgba(255,255,255,0.12)"/>
+        <rect x="312" y="122" width="3" height="16" rx="1" fill="rgba(255,255,255,0.12)"/>
+        <rect x="328" y="122" width="3" height="16" rx="1" fill="rgba(255,255,255,0.12)"/>
+        <rect x="344" y="122" width="3" height="16" rx="1" fill="rgba(255,255,255,0.12)"/>
+        <rect x="360" y="122" width="3" height="16" rx="1" fill="rgba(255,255,255,0.12)"/>
+        <line x1="280" y1="126" x2="363" y2="126" stroke="rgba(255,255,255,0.12)" stroke-width="2"/>
+        <line x1="280" y1="132" x2="363" y2="132" stroke="rgba(255,255,255,0.12)" stroke-width="2"/>
+        <!-- Barn -->
+        <rect x="810" y="90" width="58" height="44" rx="2" fill="rgba(255,255,255,0.10)"/>
+        <polygon points="804,90 874,90 839,68" fill="rgba(255,255,255,0.13)"/>
+        <!-- Barn door -->
+        <rect x="829" y="108" width="15" height="26" rx="1" fill="rgba(0,0,0,0.1)"/>
+        <!-- Barn window -->
+        <rect x="816" y="98" width="10" height="9" rx="1" fill="rgba(255,255,255,0.15)"/>
+        <rect x="848" y="98" width="10" height="9" rx="1" fill="rgba(255,255,255,0.15)"/>
+        <!-- Silo -->
+        <rect x="872" y="99" width="17" height="35" rx="3" fill="rgba(255,255,255,0.09)"/>
+        <ellipse cx="880" cy="99" rx="8.5" ry="5" fill="rgba(255,255,255,0.12)"/>
+        <!-- Right trees -->
+        <ellipse cx="940" cy="110" rx="18" ry="24" fill="rgba(255,255,255,0.07)"/>
+        <ellipse cx="962" cy="106" rx="14" ry="19" fill="rgba(255,255,255,0.09)"/>
+        <rect x="938" y="126" width="4" height="16" fill="rgba(255,255,255,0.06)"/>
+        <!-- Crop rows suggestion -->
+        <path d="M430,138 C480,135 530,138 580,135" stroke="rgba(255,255,255,0.08)" stroke-width="2.5" fill="none" stroke-linecap="round"/>
+        <path d="M430,145 C480,142 530,145 580,142" stroke="rgba(255,255,255,0.08)" stroke-width="2.5" fill="none" stroke-linecap="round"/>
+        <path d="M430,152 C480,149 530,152 580,149" stroke="rgba(255,255,255,0.07)" stroke-width="2" fill="none" stroke-linecap="round"/>
+        <!-- Foreground ground -->
+        <path d="M0,140 C150,132 350,143 550,136 C750,129 950,140 1200,134 L1200,160 L0,160 Z" fill="rgba(0,0,0,0.12)"/>
+      </svg>
     </div>
   </section>
 
-  <!-- What's in season this month -->
+  <!-- [4] Stats bar -->
+  <div class="stats-bar fade-in">
+    <div class="stat">
+      <span class="stat-num">{farms.length}</span>
+      <span class="stat-label">Local Farms</span>
+    </div>
+    <div class="stats-divider">|</div>
+    <div class="stat">
+      <span class="stat-num">{markets.length}</span>
+      <span class="stat-label">Farmers Markets</span>
+    </div>
+    <div class="stats-divider">|</div>
+    <div class="stat">
+      <span class="stat-num">2×</span>
+      <span class="stat-label">Blog Per Week</span>
+    </div>
+    <div class="stats-divider">|</div>
+    <div class="stat">
+      <span class="stat-num">4×</span>
+      <span class="stat-label">Recipes Per Week</span>
+    </div>
+  </div>
+
+  <!-- Seasonal strip -->
   {produce.length > 0 && (
     <div class="seasonal-strip fade-in">
       <span class="strip-label">🌿 In season this {monthName}:</span>
@@ -55,47 +122,78 @@ const monthName = monthNames[month];
     </div>
   )}
 
-  <div class="section-heading fade-in">
-    <h2>Latest from the blog</h2>
-    <a href="/blog">All posts &rarr;</a>
-  </div>
-  <div class="grid fade-in">
-    {posts.slice(0, 3).map((post) => (
-      <a class="card" href={`/blog/${post.id}`}>
-        <span class="icon">📰</span>
-        <h3>{post.data.title}</h3>
-        <p>{post.data.description}</p>
-      </a>
-    ))}
+  <!-- [2] Wave into blog section -->
+  <div class="wave-divider fade-in">
+    <svg viewBox="0 0 1200 64" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="none">
+      <path d="M0,32 C150,60 350,8 600,36 C850,62 1050,12 1200,36 L1200,64 L0,64 Z" fill="#edf5ea"/>
+    </svg>
   </div>
 
-  <div class="section-heading fade-in">
-    <h2>Farms &amp; CSAs</h2>
-    <a href="/farms">View all {farms.length} &rarr;</a>
-  </div>
-  <div class="grid fade-in">
-    {farms.slice(0, 3).map((farm) => (
-      <a class="card" href={`/farms/${farm.id}`}>
-        <span class="icon">{farmIcon(farm.data.products)}</span>
-        <h3>{farm.data.name}</h3>
-        <p class="town">{farm.data.town}</p>
-        <p>{farm.data.summary}</p>
-      </a>
-    ))}
+  <!-- [3] Blog section — green band -->
+  <div class="section-band section-band--green fade-in">
+    <div class="section-heading">
+      <h2>Latest from the blog</h2>
+      <a href="/blog">All posts &rarr;</a>
+    </div>
+    <div class="grid">
+      {posts.slice(0, 3).map((post) => (
+        <a class="card card--blog" href={`/blog/${post.id}`}>
+          <span class="icon">📰</span>
+          <h3>{post.data.title}</h3>
+          <p>{post.data.description}</p>
+        </a>
+      ))}
+    </div>
   </div>
 
-  <div class="section-heading fade-in">
-    <h2>Farmers Markets</h2>
-    <a href="/markets">View all {markets.length} &rarr;</a>
+  <!-- [2] Wave into cream section -->
+  <div class="wave-divider">
+    <svg viewBox="0 0 1200 64" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="none">
+      <path d="M0,28 C200,56 400,4 650,32 C900,58 1050,14 1200,30 L1200,64 L0,64 Z" fill="#fbfaf5"/>
+    </svg>
   </div>
-  <div class="grid fade-in">
-    {markets.map((market) => (
-      <a class="card" href="/markets">
-        <span class="icon">🧺</span>
-        <h3>{market.data.name}</h3>
-        <p class="town">{market.data.town}</p>
-        <p>{market.data.summary}</p>
-      </a>
-    ))}
+
+  <!-- [3] Farms section — cream band -->
+  <div class="section-band section-band--cream fade-in">
+    <div class="section-heading">
+      <h2>Farms &amp; CSAs</h2>
+      <a href="/farms">View all {farms.length} &rarr;</a>
+    </div>
+    <div class="grid">
+      {farms.slice(0, 3).map((farm) => (
+        <a class="card card--farm" href={`/farms/${farm.id}`}>
+          <span class="icon">{farmIcon(farm.data.products)}</span>
+          <h3>{farm.data.name}</h3>
+          <p class="town">{farm.data.town}</p>
+          <p>{farm.data.summary}</p>
+        </a>
+      ))}
+    </div>
   </div>
+
+  <!-- [2] Wave into green section -->
+  <div class="wave-divider">
+    <svg viewBox="0 0 1200 64" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="none">
+      <path d="M0,36 C180,8 380,56 620,28 C860,2 1050,50 1200,26 L1200,64 L0,64 Z" fill="#edf5ea"/>
+    </svg>
+  </div>
+
+  <!-- [3] Markets section — green band -->
+  <div class="section-band section-band--green fade-in">
+    <div class="section-heading">
+      <h2>Farmers Markets</h2>
+      <a href="/markets">View all {markets.length} &rarr;</a>
+    </div>
+    <div class="grid">
+      {markets.map((market) => (
+        <a class="card card--market" href="/markets">
+          <span class="icon">🧺</span>
+          <h3>{market.data.name}</h3>
+          <p class="town">{market.data.town}</p>
+          <p>{market.data.summary}</p>
+        </a>
+      ))}
+    </div>
+  </div>
+
 </Layout>

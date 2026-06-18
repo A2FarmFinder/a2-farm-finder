@@ -53,7 +53,6 @@ const { title, description = 'Find farms, CSAs, and farmers markets around Ann A
     </footer>
 
     <script>
-      // Scroll fade-in using IntersectionObserver
       const observer = new IntersectionObserver(
         (entries) => {
           entries.forEach((entry) => {
@@ -63,7 +62,7 @@ const { title, description = 'Find farms, CSAs, and farmers markets around Ann A
             }
           });
         },
-        { threshold: 0.1, rootMargin: '0px 0px -40px 0px' }
+        { threshold: 0.08, rootMargin: '0px 0px -30px 0px' }
       );
       document.querySelectorAll('.fade-in').forEach((el) => observer.observe(el));
     </script>
@@ -82,9 +81,7 @@ const { title, description = 'Find farms, CSAs, and farmers markets around Ann A
         --border: #e6e2d4;
         font-family: 'Figtree', system-ui, sans-serif;
       }
-      * {
-        box-sizing: border-box;
-      }
+      * { box-sizing: border-box; }
       body {
         margin: 0;
         line-height: 1.65;
@@ -96,9 +93,9 @@ const { title, description = 'Find farms, CSAs, and farmers markets around Ann A
         line-height: 1.2;
         letter-spacing: -0.01em;
       }
-      a {
-        color: var(--green-dark);
-      }
+      a { color: var(--green-dark); }
+
+      /* ── Header ── */
       .site-header {
         display: flex;
         align-items: center;
@@ -111,8 +108,7 @@ const { title, description = 'Find farms, CSAs, and farmers markets around Ann A
         position: sticky;
         top: 0;
         z-index: 10;
-        box-shadow: 0 2px 12px rgba(0, 0, 0, 0.15);
-        backdrop-filter: blur(8px);
+        box-shadow: 0 2px 12px rgba(0,0,0,0.18);
       }
       .site-header .brand {
         font-family: 'Fraunces', Georgia, serif;
@@ -124,40 +120,31 @@ const { title, description = 'Find farms, CSAs, and farmers markets around Ann A
         align-items: center;
         gap: 0.4rem;
       }
-      .brand-mark {
-        font-size: 1.2em;
-      }
-      .site-header nav {
-        display: flex;
-        flex-wrap: wrap;
-        gap: 0.25rem;
-      }
+      .brand-mark { font-size: 1.2em; }
+      .site-header nav { display: flex; flex-wrap: wrap; gap: 0.25rem; }
       .site-header nav a {
         color: #f1f5ef;
         text-decoration: none;
         font-weight: 500;
         padding: 0.4rem 0.75rem;
         border-radius: 999px;
-        transition: background 0.2s ease, color 0.2s ease;
+        transition: background 0.2s ease;
       }
-      .site-header nav a:hover {
-        background: rgba(255, 255, 255, 0.15);
-        color: #fff;
-      }
+      .site-header nav a:hover { background: rgba(255,255,255,0.15); }
+
+      /* ── Layout ── */
       main {
         max-width: 1024px;
         margin: 0 auto;
         padding: 2rem 1.5rem 3rem;
       }
-      .site-footer {
-        background: var(--green-dark);
-        color: #dfeadf;
-        margin-top: 2rem;
-      }
+
+      /* ── Footer ── */
+      .site-footer { background: var(--green-dark); color: #dfeadf; margin-top: 0; }
       .footer-inner {
         max-width: 1024px;
         margin: 0 auto;
-        padding: 2rem 1.5rem;
+        padding: 2.5rem 1.5rem;
         text-align: center;
       }
       .footer-brand {
@@ -171,73 +158,57 @@ const { title, description = 'Find farms, CSAs, and farmers markets around Ann A
         justify-content: center;
         gap: 0.4rem;
       }
-      .footer-links a, .site-footer a {
-        color: #fff;
-      }
-      .footer-links {
-        margin-top: 0.75rem;
-        font-size: 0.9rem;
-      }
+      .footer-links a, .site-footer a { color: #fff; }
+      .footer-links { margin-top: 0.75rem; font-size: 0.9rem; }
 
-      /* Grid + cards */
-      .grid {
-        display: grid;
-        grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-        gap: 1.25rem;
-        margin-top: 1.5rem;
-      }
+      /* ── [5] Card colored header strips ── */
+      .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 1.25rem; margin-top: 1.5rem; }
       .card {
         border: 1px solid var(--border);
         border-radius: 16px;
-        padding: 1.25rem 1.5rem;
+        padding: 0 1.5rem 1.5rem;
         background: #fff;
-        box-shadow: 0 1px 4px rgba(47, 82, 51, 0.06);
+        box-shadow: 0 1px 4px rgba(47,82,51,0.06);
         transition: transform 0.22s ease, box-shadow 0.22s ease, border-color 0.22s ease;
         position: relative;
         overflow: hidden;
       }
-      /* Green accent line that slides in on hover */
+      /* Colored header strip at top of each card */
+      .card::before {
+        content: '';
+        display: block;
+        height: 6px;
+        margin: 0 -1.5rem 1.25rem;
+        background: var(--green-pale);
+        border-radius: 16px 16px 0 0;
+      }
+      .card--farm::before   { background: linear-gradient(90deg, var(--green-mid), #6aaa6e); }
+      .card--market::before { background: linear-gradient(90deg, var(--gold), #f0c070); }
+      .card--blog::before   { background: linear-gradient(90deg, #7a9e7e, #a0bf9a); }
+      .card--recipe::before { background: linear-gradient(90deg, #c97b4b, var(--gold)); }
+      /* Bottom accent line on hover */
       .card::after {
         content: '';
         position: absolute;
-        bottom: 0;
-        left: 0;
-        width: 100%;
-        height: 3px;
+        bottom: 0; left: 0;
+        width: 100%; height: 3px;
         background: linear-gradient(90deg, var(--green-mid), var(--gold));
         transform: scaleX(0);
         transform-origin: left;
         transition: transform 0.25s ease;
         border-radius: 0 0 16px 16px;
       }
-      a.card {
-        display: block;
-        text-decoration: none;
-        color: inherit;
-      }
+      a.card { display: block; text-decoration: none; color: inherit; }
       a.card:hover, .card.hoverable:hover {
         transform: translateY(-4px) scale(1.01);
-        box-shadow: 0 12px 32px rgba(47, 82, 51, 0.14);
+        box-shadow: 0 12px 32px rgba(47,82,51,0.14);
         border-color: var(--green-mid);
       }
-      a.card:hover::after, .card.hoverable:hover::after {
-        transform: scaleX(1);
-      }
-      .card h3 {
-        margin-top: 0;
-        margin-bottom: 0.4rem;
-        font-size: 1.2rem;
-      }
-      .card .town {
-        color: var(--muted);
-        font-size: 0.9rem;
-        margin: 0 0 0.5rem;
-      }
-      .card .icon {
-        font-size: 1.6rem;
-        margin-bottom: 0.5rem;
-        display: inline-block;
-      }
+      a.card:hover::after, .card.hoverable:hover::after { transform: scaleX(1); }
+      .card h3 { margin-top: 0; margin-bottom: 0.4rem; font-size: 1.2rem; }
+      .card .town { color: var(--muted); font-size: 0.9rem; margin: 0 0 0.5rem; }
+      .card .icon { font-size: 1.6rem; margin-bottom: 0.5rem; display: inline-block; }
+
       .tag {
         display: inline-block;
         background: var(--green-pale);
@@ -248,10 +219,7 @@ const { title, description = 'Find farms, CSAs, and farmers markets around Ann A
         font-weight: 500;
         margin: 0 0.3rem 0.3rem 0;
       }
-      .tag.gold {
-        background: #fbe9d2;
-        color: var(--gold-dark);
-      }
+      .tag.gold { background: #fbe9d2; color: var(--gold-dark); }
       .card.featured {
         border-color: var(--gold);
         background: linear-gradient(180deg, #fffaf0, #ffffff);
@@ -259,8 +227,7 @@ const { title, description = 'Find farms, CSAs, and farmers markets around Ann A
       }
       .sponsored-badge {
         position: absolute;
-        top: 0.9rem;
-        right: 1rem;
+        top: 0.9rem; right: 1rem;
         background: var(--gold);
         color: var(--green-dark);
         font-size: 0.7rem;
@@ -271,56 +238,52 @@ const { title, description = 'Find farms, CSAs, and farmers markets around Ann A
         border-radius: 999px;
       }
 
-      /* Hero */
+      /* ── Hero ── */
       .hero {
-        background:
-          linear-gradient(135deg, rgba(30, 58, 32, 0.97) 0%, rgba(47, 82, 51, 0.93) 50%, rgba(74, 124, 78, 0.88) 100%);
+        background: linear-gradient(145deg, #1a3320 0%, #2f5233 45%, #3d6b42 100%);
         color: #fff;
         border-radius: 20px;
-        padding: 4rem 2.5rem;
-        margin-bottom: 2rem;
+        padding: 4rem 2.5rem 0;
+        margin-bottom: 0;
         position: relative;
         overflow: hidden;
-        min-height: 380px;
+        min-height: 420px;
         display: flex;
         flex-direction: column;
         justify-content: center;
       }
-      /* Subtle dot-grid texture */
       .hero::before {
         content: '';
         position: absolute;
         inset: 0;
-        background-image: radial-gradient(circle, rgba(255,255,255,0.07) 1px, transparent 1px);
+        background-image: radial-gradient(circle, rgba(255,255,255,0.06) 1px, transparent 1px);
         background-size: 28px 28px;
         pointer-events: none;
       }
-      /* Glowing orb accent */
       .hero::after {
         content: '';
         position: absolute;
-        top: -80px;
-        right: -80px;
-        width: 360px;
-        height: 360px;
-        background: radial-gradient(circle, rgba(224, 164, 88, 0.18) 0%, transparent 70%);
+        top: -100px; right: -100px;
+        width: 420px; height: 420px;
+        background: radial-gradient(circle, rgba(224,164,88,0.15) 0%, transparent 65%);
         pointer-events: none;
+      }
+      .hero-content {
+        position: relative;
+        z-index: 1;
+        padding-bottom: 2rem;
       }
       .hero h1 {
         margin: 0 0 1rem;
         font-size: clamp(2rem, 5vw, 3.2rem);
         color: #fff;
         max-width: 22rem;
-        position: relative;
-        z-index: 1;
-        text-shadow: 0 2px 12px rgba(0,0,0,0.15);
+        text-shadow: 0 2px 16px rgba(0,0,0,0.2);
       }
       .hero p {
         max-width: 36rem;
         font-size: 1.1rem;
-        color: #d8edd6;
-        position: relative;
-        z-index: 1;
+        color: #d0e8ce;
         margin: 0;
       }
       .hero .hero-actions {
@@ -328,12 +291,22 @@ const { title, description = 'Find farms, CSAs, and farmers markets around Ann A
         display: flex;
         gap: 0.75rem;
         flex-wrap: wrap;
+      }
+
+      /* ── [1] Hero landscape SVG ── */
+      .hero-landscape {
         position: relative;
         z-index: 1;
+        margin: 0 -2.5rem;
+        line-height: 0;
+        margin-top: auto;
       }
+      .hero-landscape svg { display: block; width: 100%; }
+
+      /* ── Buttons ── */
       .btn {
         display: inline-block;
-        padding: 0.7rem 1.4rem;
+        padding: 0.75rem 1.5rem;
         border-radius: 999px;
         font-weight: 600;
         text-decoration: none;
@@ -343,41 +316,67 @@ const { title, description = 'Find farms, CSAs, and farmers markets around Ann A
       .btn-primary {
         background: var(--gold);
         color: var(--green-dark);
-        box-shadow: 0 2px 12px rgba(224, 164, 88, 0.35);
+        box-shadow: 0 2px 12px rgba(224,164,88,0.4);
       }
-      .btn-primary:hover {
-        background: #eab46a;
-        box-shadow: 0 6px 20px rgba(224, 164, 88, 0.5);
-      }
+      .btn-primary:hover { background: #eab46a; box-shadow: 0 6px 20px rgba(224,164,88,0.55); }
       .btn-secondary {
-        background: rgba(255, 255, 255, 0.1);
+        background: rgba(255,255,255,0.1);
         color: #fff;
-        border: 1px solid rgba(255, 255, 255, 0.35);
+        border: 1px solid rgba(255,255,255,0.4);
         backdrop-filter: blur(4px);
       }
-      .btn-secondary:hover {
-        background: rgba(255, 255, 255, 0.18);
+      .btn-secondary:hover { background: rgba(255,255,255,0.2); }
+      .btn:hover { transform: translateY(-2px); }
+
+      /* ── [4] Stats bar ── */
+      .stats-bar {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-wrap: wrap;
+        gap: 0 2rem;
+        background: var(--green-dark);
+        color: #fff;
+        padding: 1rem 1.5rem;
+        margin: 0 0 0;
+        border-radius: 0 0 16px 16px;
       }
-      .btn:hover {
-        transform: translateY(-2px);
-        box-shadow: 0 6px 18px rgba(0, 0, 0, 0.18);
+      .stat {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        padding: 0.4rem 0;
       }
-      .hero-illustration {
-        position: absolute;
-        right: -2rem;
-        bottom: -2rem;
-        width: 220px;
-        opacity: 0.9;
-        pointer-events: none;
+      .stat-num {
+        font-family: 'Fraunces', Georgia, serif;
+        font-size: 1.6rem;
+        font-weight: 700;
+        color: var(--gold);
+        line-height: 1;
+      }
+      .stat-label {
+        font-size: 0.75rem;
+        color: #b8d4b8;
+        text-transform: uppercase;
+        letter-spacing: 0.06em;
+        font-weight: 500;
+        white-space: nowrap;
+      }
+      .stats-divider {
+        color: rgba(255,255,255,0.2);
+        font-size: 1.5rem;
+        line-height: 1;
+        display: flex;
+        align-items: center;
       }
 
-      /* Seasonal strip */
+      /* ── Seasonal strip ── */
       .seasonal-strip {
         background: linear-gradient(90deg, var(--green-pale), #f0f7ee);
         border: 1px solid #c8dfc4;
         border-radius: 14px;
         padding: 1rem 1.5rem;
-        margin-bottom: 2rem;
+        margin-top: 1.5rem;
         display: flex;
         align-items: center;
         gap: 1rem;
@@ -392,11 +391,7 @@ const { title, description = 'Find farms, CSAs, and farmers markets around Ann A
         align-items: center;
         gap: 0.4rem;
       }
-      .seasonal-strip .strip-items {
-        display: flex;
-        flex-wrap: wrap;
-        gap: 0.4rem;
-      }
+      .seasonal-strip .strip-items { display: flex; flex-wrap: wrap; gap: 0.4rem; }
       .seasonal-strip .strip-pill {
         background: #fff;
         border: 1px solid #c0d9bb;
@@ -405,57 +400,56 @@ const { title, description = 'Find farms, CSAs, and farmers markets around Ann A
         padding: 0.2rem 0.75rem;
         font-size: 0.82rem;
         font-weight: 500;
+        text-decoration: none;
         transition: background 0.15s ease, border-color 0.15s ease;
       }
-      .seasonal-strip .strip-pill:hover {
-        background: var(--green-pale);
-        border-color: var(--green-mid);
+      .seasonal-strip .strip-pill:hover { background: var(--green-pale); border-color: var(--green-mid); }
+
+      /* ── [2] Wave dividers ── */
+      .wave-divider {
+        margin: 0 -1.5rem;
+        line-height: 0;
+        overflow: hidden;
+      }
+      .wave-divider svg { display: block; width: 100%; }
+
+      /* ── [3] Alternating section bands ── */
+      .section-band {
+        margin: 0 -1.5rem;
+        padding: 2.5rem 1.5rem 3rem;
+      }
+      .section-band--green {
+        background: linear-gradient(180deg, #edf5ea 0%, #e4f0e0 100%);
+      }
+      .section-band--cream {
+        background: var(--cream);
       }
 
-      /* Section heading with accent rule */
+      /* ── Section heading ── */
       .section-heading {
         display: flex;
         align-items: baseline;
         justify-content: space-between;
-        margin-top: 2.5rem;
+        margin-top: 0;
         margin-bottom: 0;
         flex-wrap: wrap;
         gap: 0.5rem;
       }
-      .section-heading h2 {
-        margin: 0;
-        font-size: 1.6rem;
-      }
-      .section-heading a {
-        font-weight: 600;
-        text-decoration: none;
-        white-space: nowrap;
-      }
-      .section-heading a:hover {
-        text-decoration: underline;
-      }
+      .section-heading h2 { margin: 0; font-size: 1.6rem; }
+      .section-heading a { font-weight: 600; text-decoration: none; white-space: nowrap; }
+      .section-heading a:hover { text-decoration: underline; }
 
-      /* Page intro */
-      .page-intro h1 {
-        font-size: clamp(1.8rem, 4vw, 2.6rem);
-        margin-bottom: 0.5rem;
-      }
-      .page-intro p {
-        color: var(--muted);
-        font-size: 1.05rem;
-        max-width: 42rem;
-      }
+      /* ── Page intro ── */
+      .page-intro h1 { font-size: clamp(1.8rem, 4vw, 2.6rem); margin-bottom: 0.5rem; }
+      .page-intro p { color: var(--muted); font-size: 1.05rem; max-width: 42rem; }
 
-      /* Scroll fade-in */
+      /* ── Scroll fade-in ── */
       .fade-in {
         opacity: 0;
-        transform: translateY(24px);
-        transition: opacity 0.55s ease, transform 0.55s ease;
+        transform: translateY(22px);
+        transition: opacity 0.6s ease, transform 0.6s ease;
       }
-      .fade-in.visible {
-        opacity: 1;
-        transform: translateY(0);
-      }
+      .fade-in.visible { opacity: 1; transform: translateY(0); }
     </style>
   </body>
 </html>
