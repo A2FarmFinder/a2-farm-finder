@@ -6,6 +6,7 @@ produce:
   - Herbs
   - Garlic
 season: "Spring through Fall"
+category: "Preserves & Pantry"
 prepTime: "10 minutes (plus 1 hour chill time)"
 servings: "Makes about 8 tablespoons"
 ---

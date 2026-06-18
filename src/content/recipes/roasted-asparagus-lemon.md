@@ -6,6 +6,7 @@ produce:
   - Asparagus
   - Garlic
 season: "Late Spring / Early Summer (May–June)"
+category: "Sides"
 prepTime: "10 minutes active, 12 minutes roasting"
 servings: "Serves 3–4"
 ---

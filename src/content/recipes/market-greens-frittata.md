@@ -9,6 +9,7 @@ produce:
   - Herbs
   - Scallions
 season: "Spring through Fall"
+category: "Breakfast & Brunch"
 prepTime: "25 minutes"
 servings: "Serves 4–6"
 ---

@@ -7,6 +7,7 @@ produce:
   - Spinach
   - Herbs
 season: "Early Summer (June)"
+category: "Salads"
 prepTime: "15 minutes"
 servings: "Serves 4"
 ---
