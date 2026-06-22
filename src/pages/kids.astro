@@ -1,0 +1,954 @@
+---
+import Layout from '../layouts/Layout.astro';
+import { getCollection } from 'astro:content';
+
+const recipes = (await getCollection('recipes')).sort(
+  (a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf()
+);
+const featuredRecipe = recipes[0];
+
+const month = new Date().getMonth();
+const monthName = ['January','February','March','April','May','June','July','August','September','October','November','December'][month];
+
+const scavengerItems: Record<number, Array<{emoji: string, name: string, fact: string}>> = {
+  0:  [{ emoji:'🥕',name:'Carrots',fact:'Carrots can be orange, purple, red, or yellow!'},{emoji:'🥔',name:'Potatoes',fact:'There are over 4,000 types of potatoes!'},{emoji:'🍎',name:'Winter Apples',fact:'Some apples can be stored for months!'},{emoji:'🍯',name:'Local Honey',fact:'A bee visits 100 flowers to fill its honey stomach!'},{emoji:'🥚',name:'Farm Eggs',fact:'Farm eggs have bright orange yolks!'},{emoji:'🧅',name:'Onions',fact:'Onions make you cry to protect themselves!'}],
+  1:  [{ emoji:'🥕',name:'Carrots',fact:'Carrots grow underground but their tops are leafy and green!'},{emoji:'🫛',name:'Dried Beans',fact:'Beans were one of the first plants ever farmed by humans!'},{emoji:'🍯',name:'Honey',fact:'Honey never spoils — they found 3,000-year-old honey in Egypt!'},{emoji:'🥚',name:'Eggs',fact:'Hens need 24-26 hours to make one egg!'},{emoji:'🧅',name:'Onions',fact:'There are over 900 species of onions in the world!'}],
+  2:  [{ emoji:'🌿',name:'Fresh Herbs',fact:'Herbs have been used as medicine for thousands of years!'},{emoji:'🥬',name:'Greenhouse Lettuce',fact:'Lettuce grows so fast you can see it grow in time-lapse!'},{emoji:'🍁',name:'Maple Syrup',fact:'It takes 40 gallons of maple sap to make 1 gallon of syrup!'},{emoji:'🥚',name:'Eggs',fact:'A chicken\'s egg color depends on the color of its earlobes!'},{emoji:'🌱',name:'Spinach',fact:'Spinach came from ancient Persia over 2,000 years ago!'}],
+  3:  [{ emoji:'🌱',name:'Asparagus',fact:'Asparagus can grow 7 inches in a single day!'},{emoji:'🌿',name:'Herbs',fact:'Basil is related to mint and comes from Asia!'},{emoji:'🥬',name:'Spinach',fact:'Spinach is packed with iron — great for energy!'},{emoji:'🌸',name:'Rhubarb',fact:'Rhubarb looks like red celery but tastes very tart!'},{emoji:'🥚',name:'Eggs',fact:'The world\'s largest egg was laid by an ostrich — 5.5 lbs!'},{emoji:'🌱',name:'Radishes',fact:'Radishes grow from seed to harvest in only 25 days!'}],
+  4:  [{ emoji:'🌱',name:'Asparagus',fact:'Asparagus plants can live and produce for 25 years!'},{emoji:'🫛',name:'Snap Peas',fact:'Peas were one of the first vegetables ever grown!'},{emoji:'🥬',name:'Lettuce',fact:'Lettuce is 96% water — it\'s a very thirst-quenching snack!'},{emoji:'🌿',name:'Herbs',fact:'Some herbs like rosemary can live for 30 years!'},{emoji:'🌸',name:'Rhubarb',fact:'Only eat the stalks — rhubarb leaves are toxic!'},{emoji:'🌱',name:'Radishes',fact:'The word radish comes from the Latin word for "root"!'}],
+  5:  [{ emoji:'🍓',name:'Strawberries',fact:'Strawberries are the only fruit with seeds on the outside!'},{emoji:'🌱',name:'Asparagus',fact:'Asparagus is in the same family as lilies!'},{emoji:'🫛',name:'Peas',fact:'Inside each pea pod are 5-8 tiny round peas!'},{emoji:'🥬',name:'Kale',fact:'Kale has more vitamin C than an orange!'},{emoji:'🌿',name:'Herbs',fact:'One tablespoon of fresh basil has almost no calories!'},{emoji:'🌱',name:'Radishes',fact:'In Mexico, people carve radishes into sculptures for a festival!'}],
+  6:  [{ emoji:'🫐',name:'Blueberries',fact:'Blueberries are one of the only naturally blue foods!'},{emoji:'🥒',name:'Zucchini',fact:'Zucchini can grow to 3 feet long if left on the plant!'},{emoji:'🌽',name:'Sweet Corn',fact:'Each ear of corn has an even number of rows — always!'},{emoji:'🍅',name:'Tomatoes',fact:'Tomatoes are technically a fruit — they have seeds inside!'},{emoji:'🌿',name:'Basil',fact:'Basil is sacred in many cultures around the world!'},{emoji:'🥦',name:'Green Beans',fact:'Green beans are called string beans because they used to have strings!'}],
+  7:  [{ emoji:'🍅',name:'Tomatoes',fact:'There are over 10,000 varieties of tomatoes in the world!'},{emoji:'🌽',name:'Sweet Corn',fact:'Corn is a grass — it\'s related to wheat and rice!'},{emoji:'🍑',name:'Peaches',fact:'Peaches are related to roses — they\'re in the same plant family!'},{emoji:'🫑',name:'Peppers',fact:'Bell peppers have more vitamin C than oranges!'},{emoji:'🍈',name:'Melons',fact:'Watermelons are 92% water — perfect for hot summer days!'},{emoji:'🍆',name:'Eggplant',fact:'Eggplant is actually a berry, just like tomatoes!'}],
+  8:  [{ emoji:'🍎',name:'Apples',fact:'Apples float in water because 25% of their volume is air!'},{emoji:'🎃',name:'Winter Squash',fact:'Pumpkins are a type of squash and 90% water!'},{emoji:'🍠',name:'Sweet Potatoes',fact:'Sweet potatoes are not related to regular potatoes!'},{emoji:'🧄',name:'Garlic',fact:'Garlic has been used as medicine for over 5,000 years!'},{emoji:'🥬',name:'Kale',fact:'Kale tastes sweeter after a frost — cold makes it sweeter!'},{emoji:'🌶️',name:'Hot Peppers',fact:'The seeds of a pepper are NOT the spiciest part — it\'s the white ribs!'}],
+  9:  [{ emoji:'🎃',name:'Pumpkins',fact:'Pumpkins are 90% water and are grown on every continent except Antarctica!'},{emoji:'🍎',name:'Apples',fact:'It takes 4-5 years for an apple tree to produce its first fruit!'},{emoji:'🥕',name:'Carrots',fact:'Ancient carrots were purple, not orange!'},{emoji:'🥬',name:'Kale',fact:'Kale was the most popular green in Europe until cabbage took over!'},{emoji:'🌰',name:'Squash',fact:'Squash is one of the oldest crops — farmed for 10,000 years!'},{emoji:'🫚',name:'Sunflower Seeds',fact:'A single sunflower head is actually up to 2,000 tiny flowers!'}],
+  10: [{ emoji:'🎃',name:'Pumpkins',fact:'The largest pumpkin ever grown weighed over 2,700 pounds!'},{emoji:'🥕',name:'Root Vegetables',fact:'Roots store the plant\'s energy underground like a battery!'},{emoji:'🍎',name:'Storage Apples',fact:'Some apple varieties stay crisp for up to a year in cold storage!'},{emoji:'🥬',name:'Kale',fact:'Dinosaurs ate plants just like kale millions of years ago!'},{emoji:'🍯',name:'Honey',fact:'Bees must visit 2 million flowers to make one pound of honey!'},{emoji:'🧅',name:'Onions',fact:'Onions were used as currency in the Middle Ages!'}],
+  11: [{ emoji:'🎃',name:'Winter Squash',fact:'Squash seeds can be roasted and eaten as a snack!'},{emoji:'🥕',name:'Carrots',fact:'Carrots help your eyes see better — they\'re full of vitamin A!'},{emoji:'🍯',name:'Honey',fact:'Honeybees can recognize human faces!'},{emoji:'🥚',name:'Eggs',fact:'There are more chickens on Earth than any other bird!'},{emoji:'🌿',name:'Greenhouse Herbs',fact:'Some herbs like rosemary can grow for 30 years!'},{emoji:'🧅',name:'Storage Onions',fact:'Onions can be stored for 6-8 months if kept in a cool dark place!'}],
+};
+
+const hunt = scavengerItems[month] || scavengerItems[5];
+---
+
+<Layout title="Kids Corner" description="Fun and interactive learning for kids about local farms, seasonal food, and where food comes from — perfect for families visiting Washtenaw County farmers markets.">
+
+  <!-- Hero -->
+  <div class="kids-hero">
+    <div class="kids-hero-bg">
+      <div class="sun">☀️</div>
+      <div class="cloud c1">☁️</div>
+      <div class="cloud c2">☁️</div>
+      <div class="cloud c3">☁️</div>
+    </div>
+    <div class="kids-hero-content">
+      <div class="kids-title-badge">🌱 A2 Farm Finder</div>
+      <h1 class="kids-h1">Kids Corner!</h1>
+      <p class="kids-subtitle">Learn where your food comes from, play games, and become a farm expert!</p>
+      <div class="hero-nav">
+        <a href="#hunt" class="hero-nav-btn">🔍 Scavenger Hunt</a>
+        <a href="#quiz" class="hero-nav-btn">🌱 How Does It Grow?</a>
+        <a href="#match" class="hero-nav-btn">🐄 Farm Match</a>
+        <a href="#recipe" class="hero-nav-btn">🍳 Kids Recipe</a>
+      </div>
+    </div>
+    <div class="hero-veggies" aria-hidden="true">
+      <span class="veg v1">🍅</span>
+      <span class="veg v2">🥕</span>
+      <span class="veg v3">🌽</span>
+      <span class="veg v4">🍓</span>
+      <span class="veg v5">🥦</span>
+      <span class="veg v6">🍎</span>
+    </div>
+  </div>
+
+  <!-- ── SCAVENGER HUNT ── -->
+  <section id="hunt" class="kids-section hunt-section">
+    <div class="section-header">
+      <div class="section-icon">🔍</div>
+      <div>
+        <h2 class="kids-section-title">{monthName} Farmers Market Scavenger Hunt!</h2>
+        <p class="kids-section-sub">Can you find all of these at the market? Check them off as you go!</p>
+      </div>
+    </div>
+
+    <div class="hunt-progress-wrap">
+      <div class="hunt-progress-label">
+        <span id="hunt-found">0</span> of {hunt.length} found!
+        <span id="hunt-star" style="display:none">⭐ Amazing!</span>
+      </div>
+      <div class="hunt-progress-bar">
+        <div class="hunt-progress-fill" id="hunt-fill" style="width:0%"></div>
+      </div>
+    </div>
+
+    <div class="hunt-grid">
+      {hunt.map((item, i) => (
+        <button class="hunt-item" data-index={i} data-fact={item.fact} aria-label={`Mark ${item.name} as found`}>
+          <span class="hunt-emoji">{item.emoji}</span>
+          <span class="hunt-name">{item.name}</span>
+          <span class="hunt-check">✓</span>
+        </button>
+      ))}
+    </div>
+
+    <div id="hunt-fact-box" class="fact-box" style="display:none">
+      <span class="fact-icon">💡</span>
+      <span id="hunt-fact-text"></span>
+    </div>
+
+    <div id="hunt-celebration" class="celebration-banner" style="display:none">
+      🎉 You found everything! You're a farmers market EXPERT! 🎉
+    </div>
+
+    <button class="reset-btn" id="hunt-reset">Start Over 🔄</button>
+  </section>
+
+  <!-- ── QUIZ ── -->
+  <section id="quiz" class="kids-section quiz-section">
+    <div class="section-header">
+      <div class="section-icon">🌱</div>
+      <div>
+        <h2 class="kids-section-title">How Does It Grow?</h2>
+        <p class="kids-section-sub">Do you know where your favorite foods come from? Let's find out!</p>
+      </div>
+    </div>
+
+    <div id="quiz-container">
+      <div class="quiz-progress">
+        <div class="quiz-progress-bar">
+          <div id="quiz-fill" class="quiz-progress-fill" style="width:0%"></div>
+        </div>
+        <div class="quiz-counter">Question <span id="q-num">1</span> of 10</div>
+      </div>
+
+      <div id="quiz-card" class="quiz-card">
+        <div id="quiz-emoji" class="quiz-big-emoji">🥕</div>
+        <div id="quiz-question" class="quiz-question">How does a <strong id="quiz-item">Carrot</strong> grow?</div>
+        <div class="quiz-options" id="quiz-options">
+          <button class="quiz-opt" data-answer="underground">🌍 Underground<br><small>Hidden in the soil</small></button>
+          <button class="quiz-opt" data-answer="plant">🌿 On a plant or vine<br><small>Grows above ground</small></button>
+          <button class="quiz-opt" data-answer="tree">🌳 On a tree or bush<br><small>Up in the branches</small></button>
+        </div>
+        <div id="quiz-feedback" class="quiz-feedback" style="display:none">
+          <div id="quiz-feedback-icon" class="feedback-icon"></div>
+          <div id="quiz-feedback-text" class="feedback-text"></div>
+          <div id="quiz-fun-fact" class="quiz-fun-fact"></div>
+          <button id="quiz-next" class="next-btn">Next Question ➡️</button>
+        </div>
+      </div>
+
+      <div id="quiz-result" class="quiz-result" style="display:none">
+        <div class="result-emoji" id="result-emoji">🌟</div>
+        <h3 class="result-title" id="result-title">Amazing!</h3>
+        <div class="result-score">You got <span id="result-score">0</span> out of 10!</div>
+        <p class="result-message" id="result-message"></p>
+        <button class="reset-btn" id="quiz-reset">Play Again 🔄</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── MATCHING GAME ── -->
+  <section id="match" class="kids-section match-section">
+    <div class="section-header">
+      <div class="section-icon">🐄</div>
+      <div>
+        <h2 class="kids-section-title">Farm Friends Match!</h2>
+        <p class="kids-section-sub">Tap an animal, then tap what it gives us! Match all 4 pairs to win!</p>
+      </div>
+    </div>
+
+    <div class="match-score-row">
+      <div class="match-score">Matches: <span id="match-count">0</span> / 4</div>
+      <div class="match-tries">Tries: <span id="match-tries">0</span></div>
+    </div>
+
+    <div class="match-grid" id="match-grid">
+      <!-- Filled by JS -->
+    </div>
+
+    <div id="match-celebration" class="celebration-banner" style="display:none">
+      🎊 Perfect! You matched all the farm friends! 🎊
+    </div>
+
+    <button class="reset-btn" id="match-reset">Shuffle & Play Again 🔄</button>
+  </section>
+
+  <!-- ── RECIPE OF THE MONTH ── -->
+  <section id="recipe" class="kids-section recipe-section">
+    <div class="section-header">
+      <div class="section-icon">🍳</div>
+      <div>
+        <h2 class="kids-section-title">Recipe of the Month</h2>
+        <p class="kids-section-sub">Try making this with a grown-up using fresh ingredients from the farmers market!</p>
+      </div>
+    </div>
+    {featuredRecipe && (
+      <a href={`/recipes/${featuredRecipe.id}`} class="kids-recipe-card">
+        <div class="kids-recipe-emoji">🍴</div>
+        <div class="kids-recipe-info">
+          <h3 class="kids-recipe-title">{featuredRecipe.data.title}</h3>
+          <p class="kids-recipe-desc">{featuredRecipe.data.description}</p>
+          <div class="kids-recipe-tags">
+            {featuredRecipe.data.produce.map((p: string) => (
+              <span class="kids-tag">{p}</span>
+            ))}
+          </div>
+          <span class="kids-recipe-cta">See the full recipe →</span>
+        </div>
+      </a>
+    )}
+    <div class="all-recipes-link">
+      <a href="/recipes" class="hero-nav-btn">🍳 See all seasonal recipes</a>
+    </div>
+  </section>
+
+  <!-- Confetti container -->
+  <div id="confetti-container" aria-hidden="true"></div>
+
+</Layout>
+
+<style>
+  /* ── Kids color palette ── */
+  :root {
+    --kids-yellow: #F9C946;
+    --kids-orange: #F07F3C;
+    --kids-red: #E8445A;
+    --kids-blue: #4AABE8;
+    --kids-purple: #9B59B6;
+    --kids-green: #5CB85C;
+    --kids-bg: #FFFDF0;
+  }
+
+  /* ── Hero ── */
+  .kids-hero {
+    background: linear-gradient(160deg, #1e6b24 0%, #2f5233 40%, #3d7a42 100%);
+    border-radius: 20px;
+    padding: 2.5rem 2rem 2rem;
+    margin-bottom: 2rem;
+    position: relative;
+    overflow: hidden;
+    min-height: 360px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+  .kids-hero-bg {
+    position: absolute; inset: 0; pointer-events: none;
+  }
+  .sun {
+    position: absolute; top: 1rem; right: 2rem;
+    font-size: 3.5rem;
+    animation: spin-slow 20s linear infinite;
+    filter: drop-shadow(0 0 20px rgba(249,201,70,0.6));
+  }
+  .cloud {
+    position: absolute; font-size: 2rem; opacity: 0.7;
+    animation: drift 8s ease-in-out infinite;
+  }
+  .c1 { top: 1rem; left: 10%; animation-delay: 0s; }
+  .c2 { top: 3rem; left: 35%; animation-delay: 2s; }
+  .c3 { top: 0.5rem; left: 60%; animation-delay: 4s; }
+
+  @keyframes spin-slow { to { transform: rotate(360deg); } }
+  @keyframes drift {
+    0%, 100% { transform: translateX(0); }
+    50% { transform: translateX(12px); }
+  }
+
+  .kids-hero-content { position: relative; z-index: 2; }
+  .kids-title-badge {
+    display: inline-block;
+    background: rgba(255,255,255,0.15);
+    color: #fff;
+    border-radius: 999px;
+    padding: 0.3rem 1rem;
+    font-size: 0.85rem;
+    font-weight: 600;
+    margin-bottom: 0.75rem;
+    backdrop-filter: blur(4px);
+  }
+  .kids-h1 {
+    font-family: 'Fraunces', Georgia, serif;
+    color: #fff;
+    font-size: clamp(2.4rem, 7vw, 4rem);
+    margin: 0 0 0.5rem;
+    text-shadow: 0 3px 16px rgba(0,0,0,0.25);
+    letter-spacing: -0.02em;
+  }
+  .kids-subtitle {
+    color: #d4efd6;
+    font-size: clamp(1rem, 3vw, 1.2rem);
+    max-width: 30rem;
+    margin: 0 0 1.5rem;
+    line-height: 1.5;
+  }
+  .hero-nav {
+    display: flex; flex-wrap: wrap; gap: 0.5rem;
+  }
+  .hero-nav-btn {
+    display: inline-block;
+    background: var(--kids-yellow);
+    color: #2f5233;
+    border-radius: 999px;
+    padding: 0.6rem 1.2rem;
+    font-weight: 700;
+    font-size: 0.9rem;
+    text-decoration: none;
+    transition: transform 0.15s ease, box-shadow 0.15s ease;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+  }
+  .hero-nav-btn:hover { transform: translateY(-2px); box-shadow: 0 6px 16px rgba(0,0,0,0.2); }
+
+  .hero-veggies {
+    position: absolute; right: 0; bottom: 0;
+    width: 200px; height: 200px;
+    pointer-events: none; z-index: 1;
+  }
+  .veg {
+    position: absolute;
+    font-size: 2.2rem;
+    animation: float-veg 3s ease-in-out infinite;
+    filter: drop-shadow(0 4px 6px rgba(0,0,0,0.2));
+  }
+  .v1 { right: 2rem; bottom: 4rem; animation-delay: 0s; }
+  .v2 { right: 5rem; bottom: 1rem; animation-delay: 0.4s; }
+  .v3 { right: 8rem; bottom: 3rem; animation-delay: 0.8s; }
+  .v4 { right: 11rem; bottom: 1.5rem; animation-delay: 1.2s; }
+  .v5 { right: 0.5rem; bottom: 1rem; animation-delay: 0.6s; }
+  .v6 { right: 6rem; bottom: 4.5rem; animation-delay: 1.6s; }
+  @keyframes float-veg {
+    0%, 100% { transform: translateY(0) rotate(-5deg); }
+    50% { transform: translateY(-10px) rotate(5deg); }
+  }
+
+  /* ── Sections ── */
+  .kids-section {
+    background: #fff;
+    border-radius: 20px;
+    padding: 2rem;
+    margin-bottom: 1.5rem;
+    box-shadow: 0 2px 16px rgba(47,82,51,0.08);
+    border: 2px solid #e6f0e3;
+  }
+  .hunt-section  { border-color: #c8e6c9; }
+  .quiz-section  { border-color: #bbdefb; }
+  .match-section { border-color: #ffe0b2; }
+  .recipe-section{ border-color: #f8bbd9; }
+
+  .section-header {
+    display: flex; align-items: flex-start; gap: 1rem;
+    margin-bottom: 1.5rem;
+  }
+  .section-icon {
+    font-size: 2.5rem;
+    background: var(--kids-bg);
+    border-radius: 14px;
+    width: 60px; height: 60px;
+    display: flex; align-items: center; justify-content: center;
+    flex-shrink: 0;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+  }
+  .kids-section-title {
+    font-family: 'Fraunces', Georgia, serif;
+    font-size: clamp(1.4rem, 4vw, 1.9rem);
+    color: #2f5233;
+    margin: 0 0 0.25rem;
+    line-height: 1.2;
+  }
+  .kids-section-sub {
+    color: #6b7a6b;
+    font-size: 1rem;
+    margin: 0;
+  }
+
+  /* ── Scavenger Hunt ── */
+  .hunt-progress-wrap { margin-bottom: 1.25rem; }
+  .hunt-progress-label {
+    font-weight: 700; font-size: 1.05rem;
+    color: #2f5233; margin-bottom: 0.4rem;
+    display: flex; align-items: center; gap: 0.5rem;
+  }
+  .hunt-progress-bar {
+    height: 14px; background: #e8f5e9;
+    border-radius: 999px; overflow: hidden;
+  }
+  .hunt-progress-fill {
+    height: 100%;
+    background: linear-gradient(90deg, #5CB85C, #F9C946);
+    border-radius: 999px;
+    transition: width 0.4s cubic-bezier(.34,1.56,.64,1);
+  }
+  .hunt-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+    gap: 0.75rem;
+    margin-bottom: 1rem;
+  }
+  .hunt-item {
+    background: #f8fdf8;
+    border: 2px solid #c8e6c9;
+    border-radius: 16px;
+    padding: 1rem 0.75rem;
+    cursor: pointer;
+    text-align: center;
+    transition: all 0.2s ease;
+    position: relative;
+    display: flex; flex-direction: column; align-items: center; gap: 0.4rem;
+    font-size: 1rem;
+    min-height: 100px;
+    -webkit-tap-highlight-color: transparent;
+  }
+  .hunt-item:hover { transform: translateY(-2px); box-shadow: 0 4px 12px rgba(0,0,0,0.1); border-color: #5CB85C; }
+  .hunt-item:active { transform: scale(0.97); }
+  .hunt-item.found {
+    background: #e8f5e9;
+    border-color: #5CB85C;
+    animation: pop 0.35s cubic-bezier(.34,1.56,.64,1);
+  }
+  .hunt-emoji { font-size: 2.2rem; line-height: 1; }
+  .hunt-name { font-weight: 600; font-size: 0.9rem; color: #2f5233; }
+  .hunt-check {
+    position: absolute; top: 6px; right: 10px;
+    font-size: 1.3rem; color: #5CB85C;
+    opacity: 0; transform: scale(0);
+    transition: all 0.25s cubic-bezier(.34,1.56,.64,1);
+  }
+  .hunt-item.found .hunt-check { opacity: 1; transform: scale(1); }
+
+  .fact-box {
+    background: #fffde7;
+    border: 2px solid #F9C946;
+    border-radius: 14px;
+    padding: 1rem 1.25rem;
+    margin: 0.75rem 0;
+    display: flex; align-items: flex-start; gap: 0.75rem;
+    animation: slideDown 0.3s ease;
+  }
+  .fact-icon { font-size: 1.5rem; flex-shrink: 0; }
+  .fact-box span:last-child { font-size: 0.95rem; color: #5a4a00; font-weight: 500; line-height: 1.5; }
+
+  /* ── Quiz ── */
+  .quiz-progress { margin-bottom: 1.25rem; }
+  .quiz-progress-bar {
+    height: 12px; background: #e3f2fd;
+    border-radius: 999px; overflow: hidden; margin-bottom: 0.4rem;
+  }
+  .quiz-progress-fill {
+    height: 100%;
+    background: linear-gradient(90deg, #4AABE8, #9B59B6);
+    border-radius: 999px;
+    transition: width 0.4s cubic-bezier(.34,1.56,.64,1);
+  }
+  .quiz-counter { font-weight: 600; font-size: 0.9rem; color: #6b7a6b; text-align: right; }
+
+  .quiz-card {
+    background: linear-gradient(135deg, #f0f8ff, #fff);
+    border: 2px solid #bbdefb;
+    border-radius: 20px;
+    padding: 2rem 1.5rem;
+    text-align: center;
+  }
+  .quiz-big-emoji {
+    font-size: 5rem; line-height: 1;
+    margin-bottom: 0.75rem;
+    animation: pop 0.4s cubic-bezier(.34,1.56,.64,1);
+    display: block;
+  }
+  .quiz-question {
+    font-size: 1.3rem; font-weight: 600;
+    color: #1a3a5c; margin-bottom: 1.5rem;
+    line-height: 1.4;
+  }
+  .quiz-options {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 0.75rem;
+  }
+  .quiz-opt {
+    background: #fff;
+    border: 2.5px solid #bbdefb;
+    border-radius: 16px;
+    padding: 1rem 0.5rem;
+    cursor: pointer;
+    font-size: 0.9rem;
+    font-weight: 600;
+    color: #1a3a5c;
+    line-height: 1.4;
+    transition: all 0.2s ease;
+    min-height: 80px;
+    display: flex; flex-direction: column; align-items: center; justify-content: center;
+    -webkit-tap-highlight-color: transparent;
+  }
+  .quiz-opt:hover { background: #e3f2fd; border-color: #4AABE8; transform: translateY(-2px); }
+  .quiz-opt:active { transform: scale(0.97); }
+  .quiz-opt small { font-weight: 400; font-size: 0.75rem; color: #6b7a6b; }
+  .quiz-opt.correct { background: #e8f5e9; border-color: #5CB85C; color: #1b5e20; animation: pop 0.35s cubic-bezier(.34,1.56,.64,1); }
+  .quiz-opt.wrong { background: #ffebee; border-color: #E8445A; color: #b71c1c; animation: shake 0.4s ease; }
+  .quiz-opt:disabled { cursor: default; transform: none; }
+
+  .quiz-feedback {
+    margin-top: 1.25rem;
+    background: #fffde7;
+    border: 2px solid #F9C946;
+    border-radius: 16px;
+    padding: 1.25rem;
+    animation: slideDown 0.3s ease;
+  }
+  .feedback-icon { font-size: 2.5rem; margin-bottom: 0.4rem; }
+  .feedback-text { font-size: 1.2rem; font-weight: 700; color: #2f5233; margin-bottom: 0.5rem; }
+  .quiz-fun-fact { font-size: 0.95rem; color: #5a4a00; margin-bottom: 1rem; line-height: 1.5; }
+  .next-btn {
+    background: #4AABE8; color: #fff;
+    border: none; border-radius: 999px;
+    padding: 0.75rem 1.75rem;
+    font-size: 1rem; font-weight: 700;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    box-shadow: 0 3px 10px rgba(74,171,232,0.35);
+    -webkit-tap-highlight-color: transparent;
+  }
+  .next-btn:hover { background: #2196f3; transform: translateY(-1px); }
+
+  .quiz-result {
+    text-align: center;
+    padding: 2rem 1rem;
+    animation: fadeInUp 0.5s ease;
+  }
+  .result-emoji { font-size: 5rem; margin-bottom: 0.5rem; animation: pop 0.5s cubic-bezier(.34,1.56,.64,1); }
+  .result-title { font-family: 'Fraunces', Georgia, serif; font-size: 2rem; color: #2f5233; margin: 0 0 0.5rem; }
+  .result-score { font-size: 1.5rem; font-weight: 700; color: #4AABE8; margin-bottom: 0.75rem; }
+  .result-message { font-size: 1rem; color: #6b7a6b; margin-bottom: 1.5rem; }
+
+  /* ── Matching Game ── */
+  .match-score-row {
+    display: flex; justify-content: space-between; align-items: center;
+    margin-bottom: 1rem; font-weight: 700; font-size: 1rem; color: #2f5233;
+  }
+  .match-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 0.75rem;
+    margin-bottom: 1rem;
+  }
+  .match-card {
+    background: #fff;
+    border: 2.5px solid #ffe0b2;
+    border-radius: 16px;
+    padding: 1rem 0.5rem;
+    text-align: center;
+    cursor: pointer;
+    font-size: 2.2rem;
+    min-height: 100px;
+    display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 0.3rem;
+    transition: all 0.2s ease;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+    -webkit-tap-highlight-color: transparent;
+    user-select: none;
+  }
+  .match-card span.card-label {
+    font-size: 0.75rem; font-weight: 600; color: #5a3a00; display: block; line-height: 1.2;
+  }
+  .match-card:hover { transform: translateY(-3px); box-shadow: 0 8px 20px rgba(0,0,0,0.12); border-color: #F07F3C; }
+  .match-card:active { transform: scale(0.97); }
+  .match-card.selected { background: #fff8e1; border-color: var(--kids-yellow); transform: translateY(-4px) scale(1.05); box-shadow: 0 8px 24px rgba(249,201,70,0.4); }
+  .match-card.matched { background: #e8f5e9; border-color: #5CB85C; cursor: default; animation: pop 0.35s cubic-bezier(.34,1.56,.64,1); }
+  .match-card.matched:hover { transform: none; }
+  .match-card.wrong { animation: shake 0.4s ease; border-color: var(--kids-red); background: #ffebee; }
+  .match-card.animal { border-color: #bbdefb; background: #f0f8ff; }
+  .match-card.product { border-color: #dcedc8; background: #f9fbe7; }
+
+  /* ── Recipe ── */
+  .kids-recipe-card {
+    display: flex; gap: 1.5rem; align-items: center;
+    background: linear-gradient(135deg, #fff0f6, #fff);
+    border: 2px solid #f8bbd9;
+    border-radius: 18px;
+    padding: 1.5rem;
+    text-decoration: none; color: inherit;
+    transition: all 0.2s ease;
+    margin-bottom: 1rem;
+  }
+  .kids-recipe-card:hover { transform: translateY(-3px); box-shadow: 0 8px 24px rgba(232,68,90,0.12); }
+  .kids-recipe-emoji { font-size: 3.5rem; flex-shrink: 0; }
+  .kids-recipe-title { font-family: 'Fraunces', Georgia, serif; font-size: 1.3rem; color: #2f5233; margin: 0 0 0.4rem; }
+  .kids-recipe-desc { font-size: 0.95rem; color: #6b7a6b; margin: 0 0 0.75rem; line-height: 1.5; }
+  .kids-recipe-tags { display: flex; flex-wrap: wrap; gap: 0.3rem; margin-bottom: 0.75rem; }
+  .kids-tag {
+    background: #e8f5e9; color: #2f5233;
+    border-radius: 999px; padding: 0.15rem 0.6rem;
+    font-size: 0.78rem; font-weight: 600;
+  }
+  .kids-recipe-cta { font-weight: 700; color: var(--kids-red); font-size: 0.9rem; }
+  .all-recipes-link { text-align: center; margin-top: 0.5rem; }
+
+  /* ── Shared ── */
+  .celebration-banner {
+    background: linear-gradient(135deg, var(--kids-yellow), #ffca28);
+    color: #2f5233;
+    border-radius: 14px;
+    padding: 1rem 1.5rem;
+    text-align: center;
+    font-weight: 700;
+    font-size: 1.1rem;
+    margin: 0.75rem 0;
+    animation: pop 0.5s cubic-bezier(.34,1.56,.64,1);
+    box-shadow: 0 4px 16px rgba(249,201,70,0.4);
+  }
+  .reset-btn {
+    background: #f5f5f5; color: #6b7a6b;
+    border: 2px solid #e0e0e0;
+    border-radius: 999px;
+    padding: 0.6rem 1.4rem;
+    font-size: 0.9rem; font-weight: 600;
+    cursor: pointer;
+    transition: all 0.15s ease;
+    display: block; margin: 0.75rem auto 0;
+    -webkit-tap-highlight-color: transparent;
+  }
+  .reset-btn:hover { background: #eeeeee; border-color: #bdbdbd; }
+
+  /* ── Confetti ── */
+  #confetti-container {
+    position: fixed; top: 0; left: 0;
+    width: 100%; height: 100%;
+    pointer-events: none; z-index: 9999;
+    overflow: hidden;
+  }
+  .confetti-piece {
+    position: absolute; top: -10px;
+    width: 10px; height: 12px;
+    border-radius: 2px;
+    animation: confetti-fall linear forwards;
+  }
+  @keyframes confetti-fall {
+    to { transform: translateY(110vh) rotate(720deg); opacity: 0; }
+  }
+
+  /* ── Animations ── */
+  @keyframes pop {
+    0% { transform: scale(0.7); }
+    70% { transform: scale(1.1); }
+    100% { transform: scale(1); }
+  }
+  @keyframes shake {
+    0%, 100% { transform: translateX(0); }
+    20% { transform: translateX(-8px); }
+    40% { transform: translateX(8px); }
+    60% { transform: translateX(-5px); }
+    80% { transform: translateX(5px); }
+  }
+  @keyframes slideDown {
+    from { opacity: 0; transform: translateY(-10px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+  @keyframes fadeInUp {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  /* ── Mobile ── */
+  @media (max-width: 600px) {
+    .kids-hero { padding: 2rem 1.25rem 1.5rem; min-height: 300px; border-radius: 16px; }
+    .kids-h1 { font-size: 2.2rem; }
+    .hero-veggies { display: none; }
+    .kids-section { padding: 1.25rem; }
+    .section-icon { width: 50px; height: 50px; font-size: 2rem; }
+    .hunt-grid { grid-template-columns: repeat(2, 1fr); gap: 0.6rem; }
+    .hunt-item { min-height: 90px; padding: 0.75rem 0.5rem; }
+    .hunt-emoji { font-size: 1.8rem; }
+    .quiz-options { grid-template-columns: 1fr; gap: 0.6rem; }
+    .quiz-opt { min-height: 64px; font-size: 1rem; flex-direction: row; gap: 0.5rem; justify-content: flex-start; padding: 0.75rem 1rem; text-align: left; }
+    .quiz-big-emoji { font-size: 4rem; }
+    .match-grid { grid-template-columns: repeat(4, 1fr); gap: 0.5rem; }
+    .match-card { min-height: 80px; font-size: 1.8rem; padding: 0.5rem 0.25rem; border-radius: 12px; }
+    .kids-recipe-card { flex-direction: column; text-align: center; }
+  }
+  @media (max-width: 380px) {
+    .match-grid { grid-template-columns: repeat(4, 1fr); gap: 0.35rem; }
+    .match-card { font-size: 1.5rem; min-height: 70px; }
+    .match-card span.card-label { font-size: 0.65rem; }
+  }
+</style>
+
+<script define:vars={{ huntLength: hunt.length }}>
+// ══════════════════════════════════
+// SCAVENGER HUNT
+// ══════════════════════════════════
+(function() {
+  const STORAGE_KEY = 'a2ff_hunt_' + new Date().getMonth() + '_' + new Date().getFullYear();
+  let found = JSON.parse(localStorage.getItem(STORAGE_KEY) || '[]');
+
+  function updateHuntUI() {
+    const items = document.querySelectorAll('.hunt-item');
+    const fill = document.getElementById('hunt-fill');
+    const foundEl = document.getElementById('hunt-found');
+    const starEl = document.getElementById('hunt-star');
+    const celebration = document.getElementById('hunt-celebration');
+
+    items.forEach((item, i) => {
+      if (found.includes(i)) item.classList.add('found');
+    });
+
+    const pct = (found.length / huntLength) * 100;
+    if (fill) fill.style.width = pct + '%';
+    if (foundEl) foundEl.textContent = found.length;
+    if (starEl) starEl.style.display = found.length > 0 ? 'inline' : 'none';
+    if (celebration) celebration.style.display = found.length === huntLength ? 'block' : 'none';
+    if (found.length === huntLength) launchConfetti();
+  }
+
+  document.querySelectorAll('.hunt-item').forEach((item, i) => {
+    item.addEventListener('click', function() {
+      if (found.includes(i)) {
+        found = found.filter(f => f !== i);
+        item.classList.remove('found');
+        document.getElementById('hunt-fact-box').style.display = 'none';
+      } else {
+        found.push(i);
+        item.classList.add('found');
+        const fact = item.dataset.fact;
+        const factBox = document.getElementById('hunt-fact-box');
+        const factText = document.getElementById('hunt-fact-text');
+        factText.textContent = item.querySelector('.hunt-name').textContent + ': ' + fact;
+        factBox.style.display = 'flex';
+      }
+      localStorage.setItem(STORAGE_KEY, JSON.stringify(found));
+      updateHuntUI();
+    });
+  });
+
+  document.getElementById('hunt-reset')?.addEventListener('click', () => {
+    found = [];
+    localStorage.removeItem(STORAGE_KEY);
+    document.querySelectorAll('.hunt-item').forEach(i => i.classList.remove('found'));
+    document.getElementById('hunt-fact-box').style.display = 'none';
+    document.getElementById('hunt-celebration').style.display = 'none';
+    updateHuntUI();
+  });
+
+  updateHuntUI();
+})();
+
+// ══════════════════════════════════
+// QUIZ
+// ══════════════════════════════════
+(function() {
+  const questions = [
+    { emoji:'🥕', name:'Carrot',       answer:'underground', fact:'Carrots are roots that store energy for the plant underground. Ancient carrots were actually purple!' },
+    { emoji:'🍅', name:'Tomato',       answer:'plant',       fact:'Tomatoes are technically a fruit because they have seeds inside. There are over 10,000 varieties!' },
+    { emoji:'🍎', name:'Apple',        answer:'tree',        fact:'It takes 4-5 years for an apple tree to make its first fruit. Some trees live over 100 years!' },
+    { emoji:'🌽', name:'Corn',         answer:'plant',       fact:'Each ear of corn always has an even number of rows — scientists aren\'t totally sure why!' },
+    { emoji:'🎃', name:'Pumpkin',      answer:'plant',       fact:'Pumpkins grow on vines that can reach 30 feet long! The biggest pumpkin ever weighed 2,700 lbs!' },
+    { emoji:'🫐', name:'Blueberry',    answer:'tree',        fact:'Blueberries grow on bushes and are one of the only naturally blue foods in the world!' },
+    { emoji:'🍓', name:'Strawberry',   answer:'plant',       fact:'Strawberries are the only fruit with seeds on the OUTSIDE — about 200 seeds per berry!' },
+    { emoji:'🥔', name:'Potato',       answer:'underground', fact:'Potatoes are not roots — they\'re tubers, which are like underground storage tanks for the plant!' },
+    { emoji:'🍑', name:'Peach',        answer:'tree',        fact:'Peaches are related to roses! They\'re in the same plant family as roses, almonds, and cherries.' },
+    { emoji:'🥒', name:'Cucumber',     answer:'plant',       fact:'Cucumbers are 96% water — they\'re great for staying hydrated on a hot summer day!' },
+  ];
+
+  const answerLabels = {
+    underground: { text: '🌍 Underground', sub: 'Hidden in the soil' },
+    plant:       { text: '🌿 On a plant or vine', sub: 'Grows above ground' },
+    tree:        { text: '🌳 On a tree or bush', sub: 'Up in the branches' },
+  };
+
+  let current = 0, score = 0, answered = false;
+
+  function shuffle(arr) { return arr.sort(() => Math.random() - 0.5); }
+
+  function loadQuestion() {
+    const q = questions[current];
+    answered = false;
+    document.getElementById('quiz-emoji').textContent = q.emoji;
+    document.getElementById('quiz-item').textContent = q.name;
+    document.getElementById('quiz-fill').style.width = (current / questions.length * 100) + '%';
+    document.getElementById('q-num').textContent = current + 1;
+    document.getElementById('quiz-feedback').style.display = 'none';
+
+    const opts = document.querySelectorAll('.quiz-opt');
+    opts.forEach(opt => {
+      opt.classList.remove('correct', 'wrong');
+      opt.disabled = false;
+      const key = opt.dataset.answer;
+      opt.innerHTML = answerLabels[key].text + '<br><small>' + answerLabels[key].sub + '</small>';
+    });
+
+    // Animate the emoji
+    const emojiEl = document.getElementById('quiz-emoji');
+    emojiEl.style.animation = 'none';
+    requestAnimationFrame(() => { emojiEl.style.animation = 'pop 0.4s cubic-bezier(.34,1.56,.64,1)'; });
+  }
+
+  function showResult() {
+    document.getElementById('quiz-container').querySelector('.quiz-progress').style.display = 'none';
+    document.getElementById('quiz-card').style.display = 'none';
+    const result = document.getElementById('quiz-result');
+    result.style.display = 'block';
+    document.getElementById('result-score').textContent = score;
+
+    let emoji, title, message;
+    if (score === 10) {
+      emoji = '🏆'; title = 'PERFECT SCORE!';
+      message = 'You\'re a farming genius! You know exactly where all your food comes from!';
+      launchConfetti();
+    } else if (score >= 7) {
+      emoji = '🌟'; title = 'Amazing!';
+      message = 'You really know your fruits and veggies! Visit the farmers market to see them growing!';
+    } else if (score >= 4) {
+      emoji = '🌱'; title = 'Good Job!';
+      message = 'You\'re learning! Visit the farmers market to discover more about how food grows.';
+    } else {
+      emoji = '🥕'; title = 'Keep Learning!';
+      message = 'That\'s okay — now you know more! Ask a farmer at the market to teach you more!';
+    }
+    document.getElementById('result-emoji').textContent = emoji;
+    document.getElementById('result-title').textContent = title;
+    document.getElementById('result-message').textContent = message;
+  }
+
+  document.querySelectorAll('.quiz-opt').forEach(btn => {
+    btn.addEventListener('click', function() {
+      if (answered) return;
+      answered = true;
+      const q = questions[current];
+      const chosen = this.dataset.answer;
+      const isCorrect = chosen === q.answer;
+
+      document.querySelectorAll('.quiz-opt').forEach(b => {
+        b.disabled = true;
+        if (b.dataset.answer === q.answer) b.classList.add('correct');
+      });
+      if (!isCorrect) this.classList.add('wrong');
+      if (isCorrect) score++;
+
+      const fb = document.getElementById('quiz-feedback');
+      document.getElementById('quiz-feedback-icon').textContent = isCorrect ? '✅' : '❌';
+      document.getElementById('quiz-feedback-text').textContent = isCorrect ? 'That\'s right!' : 'Not quite — the answer is: ' + answerLabels[q.answer].text;
+      document.getElementById('quiz-fun-fact').textContent = '🌟 Fun fact: ' + q.fact;
+      fb.style.display = 'block';
+    });
+  });
+
+  document.getElementById('quiz-next')?.addEventListener('click', () => {
+    current++;
+    if (current < questions.length) loadQuestion();
+    else showResult();
+  });
+
+  document.getElementById('quiz-reset')?.addEventListener('click', () => {
+    current = 0; score = 0; answered = false;
+    document.getElementById('quiz-result').style.display = 'none';
+    document.getElementById('quiz-card').style.display = 'block';
+    document.querySelector('.quiz-progress').style.display = 'block';
+    loadQuestion();
+  });
+
+  loadQuestion();
+})();
+
+// ══════════════════════════════════
+// MATCHING GAME
+// ══════════════════════════════════
+(function() {
+  const pairs = [
+    { id: 'cow',     emoji: '🐄', label: 'Cow',     type: 'animal' },
+    { id: 'milk',    emoji: '🥛', label: 'Milk',    type: 'product', match: 'cow' },
+    { id: 'chicken', emoji: '🐔', label: 'Chicken', type: 'animal' },
+    { id: 'eggs',    emoji: '🥚', label: 'Eggs',    type: 'product', match: 'chicken' },
+    { id: 'bee',     emoji: '🐝', label: 'Bee',     type: 'animal' },
+    { id: 'honey',   emoji: '🍯', label: 'Honey',   type: 'product', match: 'bee' },
+    { id: 'goat',    emoji: '🐐', label: 'Goat',    type: 'animal' },
+    { id: 'cheese',  emoji: '🧀', label: 'Cheese',  type: 'product', match: 'goat' },
+  ];
+
+  // Also set up match map
+  const matchMap = { cow:'milk', milk:'cow', chicken:'eggs', eggs:'chicken', bee:'honey', honey:'bee', goat:'cheese', cheese:'goat' };
+
+  let selected = null, matches = 0, tries = 0;
+
+  function buildGrid() {
+    const grid = document.getElementById('match-grid');
+    grid.innerHTML = '';
+    selected = null; matches = 0; tries = 0;
+    document.getElementById('match-count').textContent = 0;
+    document.getElementById('match-tries').textContent = 0;
+    document.getElementById('match-celebration').style.display = 'none';
+
+    const shuffled = [...pairs].sort(() => Math.random() - 0.5);
+    shuffled.forEach(card => {
+      const el = document.createElement('button');
+      el.className = 'match-card ' + card.type;
+      el.dataset.id = card.id;
+      el.innerHTML = card.emoji + '<span class="card-label">' + card.label + '</span>';
+      el.addEventListener('click', onCardClick);
+      grid.appendChild(el);
+    });
+  }
+
+  function onCardClick() {
+    if (this.classList.contains('matched') || this === selected) return;
+
+    if (!selected) {
+      selected = this;
+      this.classList.add('selected');
+      return;
+    }
+
+    tries++;
+    document.getElementById('match-tries').textContent = tries;
+
+    const a = selected.dataset.id;
+    const b = this.dataset.id;
+
+    if (matchMap[a] === b) {
+      // Match!
+      [selected, this].forEach(el => {
+        el.classList.remove('selected');
+        el.classList.add('matched');
+        el.disabled = true;
+      });
+      matches++;
+      document.getElementById('match-count').textContent = matches;
+      selected = null;
+
+      if (matches === 4) {
+        document.getElementById('match-celebration').style.display = 'block';
+        launchConfetti();
+      }
+    } else {
+      // Wrong
+      const wrongCards = [selected, this];
+      this.classList.add('wrong');
+      selected.classList.add('wrong');
+      selected.classList.remove('selected');
+      selected = null;
+
+      setTimeout(() => {
+        wrongCards.forEach(el => el.classList.remove('wrong'));
+      }, 700);
+    }
+  }
+
+  document.getElementById('match-reset')?.addEventListener('click', buildGrid);
+  buildGrid();
+})();
+
+// ══════════════════════════════════
+// CONFETTI
+// ══════════════════════════════════
+function launchConfetti() {
+  const container = document.getElementById('confetti-container');
+  const colors = ['#F9C946','#F07F3C','#E8445A','#4AABE8','#9B59B6','#5CB85C','#fff'];
+  for (let i = 0; i < 80; i++) {
+    const piece = document.createElement('div');
+    piece.className = 'confetti-piece';
+    piece.style.left = Math.random() * 100 + 'vw';
+    piece.style.background = colors[Math.floor(Math.random() * colors.length)];
+    piece.style.width = (8 + Math.random() * 8) + 'px';
+    piece.style.height = (8 + Math.random() * 12) + 'px';
+    piece.style.borderRadius = Math.random() > 0.5 ? '50%' : '2px';
+    piece.style.animationDuration = (2 + Math.random() * 2) + 's';
+    piece.style.animationDelay = Math.random() * 0.5 + 's';
+    container.appendChild(piece);
+    setTimeout(() => piece.remove(), 4500);
+  }
+}
+</script>
