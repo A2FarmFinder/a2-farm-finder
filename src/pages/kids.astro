@@ -2,10 +2,14 @@
 import Layout from '../layouts/Layout.astro';
 import { getCollection } from 'astro:content';
 
-const recipes = (await getCollection('recipes')).sort(
+const allRecipes = (await getCollection('recipes')).sort(
   (a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf()
 );
-const featuredRecipe = recipes[0];
+
+// Prefer kid-friendly categories, fall back to most recent
+const kidCategories = ['Desserts', 'Breakfast & Brunch', 'Snacks & Appetizers'];
+const featuredRecipe =
+  allRecipes.find(r => kidCategories.includes(r.data.category)) ?? allRecipes[0];
 
 const month = new Date().getMonth();
 const monthName = ['January','February','March','April','May','June','July','August','September','October','November','December'][month];
