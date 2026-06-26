@@ -1,0 +1,291 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import { getCollection } from 'astro:content';
+
+const today = new Date();
+today.setHours(0, 0, 0, 0);
+
+const allEvents = (await getCollection('events')).sort(
+  (a, b) => a.data.date.valueOf() - b.data.date.valueOf()
+);
+
+const upcoming = allEvents.filter(e => {
+  const eventEnd = e.data.endDate ?? e.data.date;
+  return eventEnd >= today;
+});
+
+const past = allEvents.filter(e => {
+  const eventEnd = e.data.endDate ?? e.data.date;
+  return eventEnd < today;
+}).reverse();
+
+const featured = upcoming.filter(e => e.data.featured);
+const regular = upcoming.filter(e => !e.data.featured);
+
+const categoryColors: Record<string, string> = {
+  'Festival & Fair':        '#e0a458',
+  'Farm Event':             '#5CB85C',
+  'Farmers Market Special': '#4AABE8',
+  'U-Pick':                 '#F07F3C',
+  'CSA Event':              '#9B59B6',
+  'Class & Workshop':       '#E8445A',
+  'Community Event':        '#7a9e7e',
+};
+
+function formatDate(date: Date, endDate?: Date): string {
+  const opts: Intl.DateTimeFormatOptions = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
+  const start = date.toLocaleDateString('en-US', opts);
+  if (!endDate) return start;
+  return start + ' – ' + endDate.toLocaleDateString('en-US', opts);
+}
+
+function daysUntil(date: Date): number {
+  return Math.ceil((date.valueOf() - today.valueOf()) / (1000 * 60 * 60 * 24));
+}
+---
+
+<Layout title="Local Events" description="Upcoming farm events, festivals, markets, and community gatherings in Washtenaw County, Michigan.">
+  <div class="page-intro">
+    <h1>Local Events</h1>
+    <p>Farm festivals, special markets, u-pick events, and community gatherings across Washtenaw County. Updated regularly — bookmark this page so you never miss one.</p>
+  </div>
+
+  {upcoming.length === 0 && (
+    <div class="card" style="text-align:center; padding: 3rem; color: var(--muted);">
+      <div style="font-size: 3rem; margin-bottom: 1rem;">📅</div>
+      <h2 style="margin-top:0;">No upcoming events right now</h2>
+      <p>Check back soon — we update this page regularly as new events are announced.</p>
+    </div>
+  )}
+
+  <!-- Featured events -->
+  {featured.map(event => {
+    const days = daysUntil(event.data.date);
+    const color = categoryColors[event.data.category] ?? '#e0a458';
+    return (
+      <a href={`/events/${event.id}`} class="featured-event-card">
+        <div class="featured-badge">⭐ Featured Event</div>
+        {days <= 7 && days >= 0 && (
+          <div class="soon-badge" style={`background: ${color}`}>
+            {days === 0 ? 'TODAY!' : days === 1 ? 'TOMORROW!' : `In ${days} days`}
+          </div>
+        )}
+        <div class="featured-event-inner">
+          <div class="event-category-pill" style={`background: ${color}22; color: ${color}; border-color: ${color}44`}>
+            {event.data.category}
+          </div>
+          <h2 class="featured-event-name">{event.data.name}</h2>
+          <div class="event-meta">
+            <span>📅 {formatDate(event.data.date, event.data.endDate)}</span>
+            <span>🕘 {event.data.time}</span>
+            <span>📍 {event.data.location}, {event.data.town}</span>
+            {event.data.admission && <span>🎟 {event.data.admission}</span>}
+            {event.data.recurring && <span>🔄 {event.data.recurring}</span>}
+          </div>
+          <p class="featured-event-desc">{event.data.description}</p>
+          <span class="event-link-cta">See full details →</span>
+        </div>
+      </a>
+    );
+  })}
+
+  <!-- Regular upcoming events -->
+  {regular.length > 0 && (
+    <>
+      {featured.length > 0 && <h2 class="upcoming-heading">More Upcoming Events</h2>}
+      <div class="grid">
+        {regular.map(event => {
+          const days = daysUntil(event.data.date);
+          const color = categoryColors[event.data.category] ?? '#7a9e7e';
+          return (
+            <a href={`/events/${event.id}`} class="card card--event hoverable" style={`--event-color: ${color}`}>
+              <div class="event-category-pill" style={`background: ${color}22; color: ${color}; border-color: ${color}44`}>
+                {event.data.category}
+              </div>
+              {days <= 7 && days >= 0 && (
+                <div class="event-soon-chip" style={`background: ${color}`}>
+                  {days === 0 ? 'TODAY!' : days === 1 ? 'Tomorrow!' : `In ${days} days`}
+                </div>
+              )}
+              <h3>{event.data.name}</h3>
+              <div class="event-meta-small">
+                <div>📅 {formatDate(event.data.date, event.data.endDate)}</div>
+                <div>🕘 {event.data.time}</div>
+                <div>📍 {event.data.location}, {event.data.town}</div>
+                {event.data.admission && <div>🎟 {event.data.admission}</div>}
+              </div>
+              <p style="font-size:0.9rem; color: var(--muted); margin: 0.5rem 0 0;">{event.data.description.slice(0, 120)}...</p>
+            </a>
+          );
+        })}
+      </div>
+    </>
+  )}
+
+  <!-- Past events -->
+  {past.length > 0 && (
+    <details class="past-events-section">
+      <summary>Past Events ({past.length})</summary>
+      <div class="grid" style="margin-top: 1rem; opacity: 0.65;">
+        {past.map(event => (
+          <a href={`/events/${event.id}`} class="card hoverable">
+            <div class="event-category-pill" style="background: #f0f0f0; color: #999; border-color: #ddd;">
+              {event.data.category}
+            </div>
+            <h3 style="color: var(--muted);">{event.data.name}</h3>
+            <div class="event-meta-small" style="color: var(--muted);">
+              <div>📅 {formatDate(event.data.date, event.data.endDate)}</div>
+              <div>📍 {event.data.location}, {event.data.town}</div>
+            </div>
+          </a>
+        ))}
+      </div>
+    </details>
+  )}
+
+  <div class="submit-event-box">
+    <div class="submit-event-inner">
+      <div style="font-size: 2rem; margin-bottom: 0.5rem;">📣</div>
+      <h3 style="margin: 0 0 0.4rem;">Know about an event we missed?</h3>
+      <p style="margin: 0 0 1rem; color: var(--muted);">We want this to be the most complete local event listing in Washtenaw County. If you know of a farm festival, u-pick event, market, or community gathering we should add, let us know.</p>
+      <a href="mailto:a2farmfinder@gmail.com?subject=Event Suggestion" class="btn btn-primary">Submit an Event →</a>
+    </div>
+  </div>
+</Layout>
+
+<style>
+  .featured-event-card {
+    display: block;
+    text-decoration: none;
+    color: inherit;
+    background: linear-gradient(135deg, #fffdf0, #fff);
+    border: 2px solid var(--gold);
+    border-radius: 18px;
+    padding: 2rem;
+    margin-bottom: 1.5rem;
+    position: relative;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+    overflow: hidden;
+  }
+  .featured-event-card:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 12px 32px rgba(224,164,88,0.2);
+  }
+  .featured-badge {
+    display: inline-block;
+    background: var(--gold);
+    color: var(--green-dark);
+    font-size: 0.75rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    padding: 0.2rem 0.75rem;
+    border-radius: 999px;
+    margin-bottom: 1rem;
+  }
+  .soon-badge {
+    position: absolute;
+    top: 1.25rem;
+    right: 1.25rem;
+    color: #fff;
+    font-size: 0.75rem;
+    font-weight: 800;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    padding: 0.3rem 0.8rem;
+    border-radius: 999px;
+    animation: pulse 2s ease-in-out infinite;
+  }
+  @keyframes pulse {
+    0%, 100% { transform: scale(1); }
+    50% { transform: scale(1.06); }
+  }
+  .featured-event-name {
+    font-family: 'Fraunces', Georgia, serif;
+    font-size: clamp(1.4rem, 3vw, 2rem);
+    color: var(--green-dark);
+    margin: 0.5rem 0 1rem;
+    line-height: 1.2;
+  }
+  .event-meta {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.4rem 1.5rem;
+    font-size: 0.95rem;
+    color: var(--ink);
+    margin-bottom: 1rem;
+    font-weight: 500;
+  }
+  .featured-event-desc {
+    color: var(--muted);
+    font-size: 1rem;
+    line-height: 1.6;
+    margin: 0 0 1rem;
+    max-width: 48rem;
+  }
+  .event-link-cta {
+    font-weight: 700;
+    color: var(--green-dark);
+    font-size: 0.95rem;
+  }
+  .event-category-pill {
+    display: inline-block;
+    border: 1px solid;
+    border-radius: 999px;
+    padding: 0.2rem 0.75rem;
+    font-size: 0.78rem;
+    font-weight: 600;
+    margin-bottom: 0.5rem;
+  }
+  .event-soon-chip {
+    display: inline-block;
+    color: #fff;
+    font-size: 0.7rem;
+    font-weight: 800;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    padding: 0.15rem 0.6rem;
+    border-radius: 999px;
+    margin-bottom: 0.5rem;
+    margin-left: 0.4rem;
+    animation: pulse 2s ease-in-out infinite;
+  }
+  .event-meta-small {
+    display: flex;
+    flex-direction: column;
+    gap: 0.2rem;
+    font-size: 0.88rem;
+    color: var(--ink);
+    font-weight: 500;
+    margin: 0.4rem 0 0.5rem;
+  }
+  .card--event::before {
+    background: linear-gradient(90deg, var(--event-color), var(--gold));
+  }
+  .upcoming-heading {
+    margin: 2rem 0 0;
+    font-size: 1.4rem;
+  }
+  .past-events-section {
+    margin-top: 2.5rem;
+    border-top: 1px solid var(--border);
+    padding-top: 1rem;
+  }
+  .past-events-section summary {
+    font-weight: 600;
+    color: var(--muted);
+    cursor: pointer;
+    font-size: 0.95rem;
+    padding: 0.5rem 0;
+  }
+  .past-events-section summary:hover { color: var(--green-dark); }
+  .submit-event-box {
+    margin-top: 3rem;
+    background: var(--green-pale);
+    border: 1px solid #c8dfc4;
+    border-radius: 18px;
+    padding: 2rem;
+    text-align: center;
+  }
+  .submit-event-inner { max-width: 38rem; margin: 0 auto; }
+</style>

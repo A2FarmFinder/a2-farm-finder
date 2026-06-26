@@ -62,4 +62,31 @@ const recipes = defineCollection({
   }),
 });
 
-export const collections = { farms, markets, blog, recipes };
+const events = defineCollection({
+  loader: glob({ pattern: '**/*.md', base: './src/content/events' }),
+  schema: z.object({
+    name: z.string(),
+    date: z.coerce.date(),
+    endDate: z.coerce.date().optional(),
+    time: z.string(),
+    location: z.string(),
+    address: z.string(),
+    town: z.string(),
+    description: z.string(),
+    category: z.enum([
+      'Festival & Fair',
+      'Farm Event',
+      'Farmers Market Special',
+      'U-Pick',
+      'CSA Event',
+      'Class & Workshop',
+      'Community Event',
+    ]),
+    website: z.string().url().optional(),
+    admission: z.string().optional(),
+    recurring: z.string().optional(),
+    featured: z.boolean().default(false),
+  }),
+});
+
+export const collections = { farms, markets, blog, recipes, events };
