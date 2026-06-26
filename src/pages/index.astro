@@ -5,6 +5,10 @@ import { farmIcon } from '../lib/icons';
 
 const farms = await getCollection('farms');
 const markets = await getCollection('markets');
+const today = new Date(); today.setHours(0,0,0,0);
+const upcomingEvents = (await getCollection('events'))
+  .filter(e => (e.data.endDate ?? e.data.date) >= today)
+  .sort((a, b) => a.data.date.valueOf() - b.data.date.valueOf());
 const posts = (await getCollection('blog')).sort(
   (a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf()
 );
@@ -34,11 +38,12 @@ const monthName = monthNames[month];
   <!-- [1] Hero with farm landscape SVG -->
   <section class="hero">
     <div class="hero-content">
-      <h1>Find local farms, CSAs &amp; farmers markets near Ann Arbor</h1>
-      <p>A directory of farms, CSA programs, and farmers markets across Washtenaw County — Ann Arbor, Chelsea, Dexter, Saline, Manchester, and beyond.</p>
+      <h1>Find local farms, CSAs, farmers markets &amp; events near Ann Arbor</h1>
+      <p>A directory of farms, CSA programs, farmers markets, and local events across Washtenaw County — Ann Arbor, Chelsea, Dexter, Saline, Manchester, and beyond.</p>
       <div class="hero-actions">
         <a class="btn btn-primary" href="/farms">Browse farms &amp; CSAs</a>
         <a class="btn btn-secondary" href="/markets">Find a farmers market</a>
+        <a class="btn btn-secondary" href="/events">Find an event</a>
       </div>
     </div>
     <!-- Farm landscape illustration -->
@@ -195,5 +200,47 @@ const monthName = monthNames[month];
       ))}
     </div>
   </div>
+
+  <!-- Wave into events section -->
+  {upcomingEvents.length > 0 && (
+    <div class="wave-divider">
+      <svg viewBox="0 0 1200 64" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="none">
+        <path d="M0,32 C150,60 350,8 600,36 C850,62 1050,12 1200,36 L1200,64 L0,64 Z" fill="#fffdf0"/>
+      </svg>
+    </div>
+  )}
+
+  <!-- Upcoming Events section -->
+  {upcomingEvents.length > 0 && (
+    <div class="section-band fade-in" style="background: linear-gradient(180deg, #fffdf0, #fff8e8); margin: 0 -1.5rem; padding: 2.5rem 1.5rem 3rem; border-top: 2px solid #f5e6c0; border-bottom: 2px solid #f5e6c0;">
+      <div class="section-heading">
+        <h2>📅 Upcoming Local Events</h2>
+        <a href="/events">All events &rarr;</a>
+      </div>
+      <div class="grid">
+        {upcomingEvents.slice(0, 3).map((event) => {
+          const daysUntil = Math.ceil((event.data.date.valueOf() - today.valueOf()) / (1000 * 60 * 60 * 24));
+          return (
+            <a href={`/events/${event.id}`} class="card card--event hoverable" style="--event-color: #e0a458;">
+              <div style="display:flex; align-items:center; gap:0.5rem; margin-bottom:0.5rem; flex-wrap:wrap;">
+                <span style="background:#fbe9d2; color:#c8853a; border-radius:999px; padding:0.2rem 0.7rem; font-size:0.78rem; font-weight:600;">{event.data.category}</span>
+                {daysUntil <= 7 && daysUntil >= 0 && (
+                  <span style="background:#e0a458; color:#fff; border-radius:999px; padding:0.2rem 0.6rem; font-size:0.72rem; font-weight:800; text-transform:uppercase; letter-spacing:0.05em;">
+                    {daysUntil === 0 ? 'TODAY!' : daysUntil === 1 ? 'Tomorrow!' : `In ${daysUntil} days`}
+                  </span>
+                )}
+              </div>
+              <h3>{event.data.name}</h3>
+              <p class="town">📍 {event.data.location}, {event.data.town}</p>
+              <p style="font-size:0.88rem; color:var(--muted); margin:0 0 0.5rem;">
+                📅 {event.data.date.toLocaleDateString('en-US', { weekday:'short', month:'short', day:'numeric' })} &nbsp;·&nbsp; 🕘 {event.data.time}
+              </p>
+              {event.data.admission && <p style="font-size:0.85rem; margin:0; color:var(--green-dark); font-weight:600;">🎟 {event.data.admission}</p>}
+            </a>
+          );
+        })}
+      </div>
+    </div>
+  )}
 
 </Layout>
