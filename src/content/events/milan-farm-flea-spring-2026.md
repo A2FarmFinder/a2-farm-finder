@@ -1,34 +1,58 @@
 ---
-name: "Milan Farm and Flea Spring Market"
+name: "Milan Farm & Flea Spring Market"
 date: 2026-06-28
 time: "9am – 4pm"
 location: "Wilson Park"
-address: "Wilson Park, Milan, MI 48160"
+address: "89 Wabash Rd, Milan, MI 48160"
 town: Milan
 description: >
-  One of Washtenaw County's largest outdoor market events, held just twice a year.
-  This spring edition features over 50 vendors bringing farm-fresh produce, artisanal
-  handmade goods, and vintage finds all in one place. Live music and local food trucks
-  round out the day. A great family outing — come early for the best selection.
+  One of Washtenaw County's largest seasonal community markets, held twice a year
+  at Wilson Park in Milan. The spring edition features over 50 vendors with
+  farm-fresh produce, local honey, meats, handmade crafts, jewelry, antiques,
+  plants, and live farm animals — plus food trucks, live music, and full access
+  to Wilson Park's splash pad, playground, disc golf, and walking trails.
 category: "Festival & Fair"
-admission: "Free"
-recurring: "Twice yearly (Spring and Fall)"
+admission: "Free and open to the public"
+recurring: "Twice yearly — Spring (June) and Fall (September)"
 featured: true
 ---
 
-The Milan Farm and Flea is one of Washtenaw County's standout community market events, happening just twice a year — once in spring and once in fall. With over 50 vendors spread across Wilson Park, it combines the best of a farmers market, a craft fair, and a flea market into one big day outdoors.
+The Milan Farm & Flea is one of Washtenaw County's most popular seasonal community markets, drawing crowds twice a year to Wilson Park in Milan. With over 50 vendors, live entertainment, and family-friendly amenities all in one place, it's one of the best local market days of the year.
 
-**What to expect:**
-- Farm-fresh produce from local growers
-- Artisanal and handmade goods — food, crafts, art, and more
-- Vintage and antique finds
-- Live music throughout the day
-- Local food trucks on site
+## 2026 Market Dates
 
-This is the kind of event where you show up for one thing and leave with six. Bring cash, comfortable shoes, and a wagon or bags — you'll need them.
+- **Spring Market:** Saturday, June 28, 2026 — 9am to 4pm
+- **Fall Market:** Saturday, September 27, 2026 — 9am to 4pm
 
-**Location:** Wilson Park, Milan, MI 48160
+Both markets are free and open to the public.
 
-**Parking:** Free parking available at Wilson Park.
+## What to Expect
 
-**Tips:** Arrive early — 50+ vendors means a lot to see, and popular items go fast. The event runs rain or shine.
+**50+ Vendors** bringing:
+- Farm-fresh produce and seasonal vegetables
+- Local honey, jams, and preserves
+- Locally raised meats
+- Handmade crafts and jewelry
+- Antiques and vintage finds
+- Plants and seedlings
+- Live farm animals on display
+
+**Live music** throughout the day, plus **local food trucks** on site so you can make a full day of it.
+
+## Wilson Park Amenities
+
+The market takes full advantage of Wilson Park's facilities:
+- Splash pad (great for kids on a warm June day)
+- Playground
+- Disc golf course
+- Walking trails
+
+**Address:** 89 Wabash Rd, Milan, MI 48160
+
+**Parking:** Free at Wilson Park.
+
+## Stay Updated
+
+Follow the official **Milan Farm & Flea Facebook page** for vendor announcements, updates, and event details, or reach out by email at **milanfarmflea@gmail.com**.
+
+Don't miss the Fall Market on **September 27, 2026** — mark your calendar now.
