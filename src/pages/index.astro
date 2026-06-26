@@ -12,6 +12,9 @@ const upcomingEvents = (await getCollection('events'))
 const posts = (await getCollection('blog')).sort(
   (a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf()
 );
+const recipes = (await getCollection('recipes')).sort(
+  (a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf()
+);
 
 const month = new Date().getMonth();
 const monthNames = ['January','February','March','April','May','June','July','August','September','October','November','December'];
@@ -35,7 +38,7 @@ const monthName = monthNames[month];
 
 <Layout title="Home">
 
-  <!-- [1] Hero with farm landscape SVG -->
+  <!-- Hero -->
   <section class="hero">
     <div class="hero-content">
       <h1>Find local farms, CSAs, farmers markets &amp; events near Ann Arbor</h1>
@@ -46,19 +49,14 @@ const monthName = monthNames[month];
         <a class="btn btn-secondary" href="/events">Find an event</a>
       </div>
     </div>
-    <!-- Farm landscape illustration -->
     <div class="hero-landscape" aria-hidden="true">
       <svg viewBox="0 0 1200 160" preserveAspectRatio="xMidYMax slice" xmlns="http://www.w3.org/2000/svg">
-        <!-- Far hills -->
         <path d="M0,95 C180,60 380,82 580,68 C780,54 980,76 1200,70 L1200,160 L0,160 Z" fill="rgba(255,255,255,0.04)"/>
-        <!-- Mid hills -->
         <path d="M0,112 C200,88 420,106 620,96 C820,86 1020,100 1200,94 L1200,160 L0,160 Z" fill="rgba(255,255,255,0.07)"/>
-        <!-- Left tree cluster -->
         <ellipse cx="155" cy="108" rx="24" ry="30" fill="rgba(255,255,255,0.07)"/>
         <ellipse cx="182" cy="104" rx="19" ry="25" fill="rgba(255,255,255,0.09)"/>
         <ellipse cx="130" cy="113" rx="16" ry="21" fill="rgba(255,255,255,0.06)"/>
         <rect x="153" y="128" width="5" height="18" fill="rgba(255,255,255,0.06)"/>
-        <!-- Fence -->
         <rect x="280" y="122" width="3" height="16" rx="1" fill="rgba(255,255,255,0.12)"/>
         <rect x="296" y="122" width="3" height="16" rx="1" fill="rgba(255,255,255,0.12)"/>
         <rect x="312" y="122" width="3" height="16" rx="1" fill="rgba(255,255,255,0.12)"/>
@@ -67,32 +65,24 @@ const monthName = monthNames[month];
         <rect x="360" y="122" width="3" height="16" rx="1" fill="rgba(255,255,255,0.12)"/>
         <line x1="280" y1="126" x2="363" y2="126" stroke="rgba(255,255,255,0.12)" stroke-width="2"/>
         <line x1="280" y1="132" x2="363" y2="132" stroke="rgba(255,255,255,0.12)" stroke-width="2"/>
-        <!-- Barn -->
         <rect x="810" y="90" width="58" height="44" rx="2" fill="rgba(255,255,255,0.10)"/>
         <polygon points="804,90 874,90 839,68" fill="rgba(255,255,255,0.13)"/>
-        <!-- Barn door -->
         <rect x="829" y="108" width="15" height="26" rx="1" fill="rgba(0,0,0,0.1)"/>
-        <!-- Barn window -->
         <rect x="816" y="98" width="10" height="9" rx="1" fill="rgba(255,255,255,0.15)"/>
         <rect x="848" y="98" width="10" height="9" rx="1" fill="rgba(255,255,255,0.15)"/>
-        <!-- Silo -->
         <rect x="872" y="99" width="17" height="35" rx="3" fill="rgba(255,255,255,0.09)"/>
         <ellipse cx="880" cy="99" rx="8.5" ry="5" fill="rgba(255,255,255,0.12)"/>
-        <!-- Right trees -->
         <ellipse cx="940" cy="110" rx="18" ry="24" fill="rgba(255,255,255,0.07)"/>
         <ellipse cx="962" cy="106" rx="14" ry="19" fill="rgba(255,255,255,0.09)"/>
         <rect x="938" y="126" width="4" height="16" fill="rgba(255,255,255,0.06)"/>
-        <!-- Crop rows suggestion -->
         <path d="M430,138 C480,135 530,138 580,135" stroke="rgba(255,255,255,0.08)" stroke-width="2.5" fill="none" stroke-linecap="round"/>
         <path d="M430,145 C480,142 530,145 580,142" stroke="rgba(255,255,255,0.08)" stroke-width="2.5" fill="none" stroke-linecap="round"/>
-        <path d="M430,152 C480,149 530,152 580,149" stroke="rgba(255,255,255,0.07)" stroke-width="2" fill="none" stroke-linecap="round"/>
-        <!-- Foreground ground -->
         <path d="M0,140 C150,132 350,143 550,136 C750,129 950,140 1200,134 L1200,160 L0,160 Z" fill="rgba(0,0,0,0.12)"/>
       </svg>
     </div>
   </section>
 
-  <!-- [4] Stats bar -->
+  <!-- Stats bar -->
   <div class="stats-bar fade-in">
     <div class="stat">
       <span class="stat-num">{farms.length}</span>
@@ -127,38 +117,75 @@ const monthName = monthNames[month];
     </div>
   )}
 
-  <!-- [2] Wave into blog section -->
-  <div class="wave-divider fade-in">
+  <!-- ── 1. UPCOMING LOCAL EVENTS ── -->
+  {upcomingEvents.length > 0 && (
+    <>
+      <div class="wave-divider fade-in">
+        <svg viewBox="0 0 1200 64" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="none">
+          <path d="M0,32 C150,60 350,8 600,36 C850,62 1050,12 1200,36 L1200,64 L0,64 Z" fill="#fffdf0"/>
+        </svg>
+      </div>
+      <div class="section-band fade-in" style="background: linear-gradient(180deg,#fffdf0,#fff8e8); margin:0 -1.5rem; padding:2.5rem 1.5rem 3rem; border-bottom:1px solid #f0e0b0;">
+        <div class="section-heading">
+          <h2>📅 Upcoming Local Events</h2>
+          <a href="/events">All events &rarr;</a>
+        </div>
+        <div class="grid">
+          {upcomingEvents.slice(0, 3).map((event) => {
+            const daysUntil = Math.ceil((event.data.date.valueOf() - today.valueOf()) / (1000 * 60 * 60 * 24));
+            return (
+              <a href={`/events/${event.id}`} class="card card--event hoverable" style="--event-color: #e0a458;">
+                <div style="display:flex; align-items:center; gap:0.5rem; flex-wrap:wrap; margin-bottom:0.5rem;">
+                  <span style="background:#fbe9d2; color:#c8853a; border-radius:999px; padding:0.2rem 0.7rem; font-size:0.78rem; font-weight:600;">{event.data.category}</span>
+                  {daysUntil <= 7 && daysUntil >= 0 && (
+                    <span style="background:#e0a458; color:#fff; border-radius:999px; padding:0.2rem 0.6rem; font-size:0.72rem; font-weight:800; text-transform:uppercase; letter-spacing:0.05em;">
+                      {daysUntil === 0 ? 'TODAY!' : daysUntil === 1 ? 'Tomorrow!' : `In ${daysUntil} days`}
+                    </span>
+                  )}
+                </div>
+                <h3>{event.data.name}</h3>
+                <p class="town">📍 {event.data.location}, {event.data.town}</p>
+                <p style="font-size:0.88rem; color:var(--muted); margin:0 0 0.5rem;">
+                  📅 {event.data.date.toLocaleDateString('en-US',{weekday:'short',month:'short',day:'numeric'})} &nbsp;·&nbsp; 🕘 {event.data.time}
+                </p>
+                {event.data.admission && <p style="font-size:0.85rem; margin:0; color:var(--green-dark); font-weight:600;">🎟 {event.data.admission}</p>}
+              </a>
+            );
+          })}
+        </div>
+      </div>
+    </>
+  )}
+
+  <!-- ── 2. FARMERS MARKETS ── -->
+  <div class="wave-divider">
     <svg viewBox="0 0 1200 64" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="none">
-      <path d="M0,32 C150,60 350,8 600,36 C850,62 1050,12 1200,36 L1200,64 L0,64 Z" fill="#edf5ea"/>
+      <path d="M0,36 C180,8 380,56 620,28 C860,2 1050,50 1200,26 L1200,64 L0,64 Z" fill="#edf5ea"/>
     </svg>
   </div>
-
-  <!-- [3] Blog section — green band -->
   <div class="section-band section-band--green fade-in">
     <div class="section-heading">
-      <h2>Latest from the blog</h2>
-      <a href="/blog">All posts &rarr;</a>
+      <h2>Farmers Markets</h2>
+      <a href="/markets">View all {markets.length} &rarr;</a>
     </div>
     <div class="grid">
-      {posts.slice(0, 3).map((post) => (
-        <a class="card card--blog" href={`/blog/${post.id}`}>
-          <span class="icon">📰</span>
-          <h3>{post.data.title}</h3>
-          <p>{post.data.description}</p>
+      {markets.slice(0, 3).map((market) => (
+        <a class="card card--market" href="/markets">
+          <span class="icon">🧺</span>
+          <h3>{market.data.name}</h3>
+          <p class="town">{market.data.town}</p>
+          <p>{market.data.summary}</p>
         </a>
       ))}
     </div>
   </div>
 
-  <!-- [2] Wave into cream section -->
+  <!-- ── 3. FARMS & CSAs ── -->
   <div class="wave-divider">
     <svg viewBox="0 0 1200 64" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="none">
       <path d="M0,28 C200,56 400,4 650,32 C900,58 1050,14 1200,30 L1200,64 L0,64 Z" fill="#fbfaf5"/>
     </svg>
   </div>
-
-  <!-- [3] Farms section — cream band -->
   <div class="section-band section-band--cream fade-in">
     <div class="section-heading">
       <h2>Farms &amp; CSAs</h2>
@@ -176,71 +203,52 @@ const monthName = monthNames[month];
     </div>
   </div>
 
-  <!-- [2] Wave into green section -->
+  <!-- ── 4. LATEST FROM THE BLOG ── -->
   <div class="wave-divider">
     <svg viewBox="0 0 1200 64" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="none">
-      <path d="M0,36 C180,8 380,56 620,28 C860,2 1050,50 1200,26 L1200,64 L0,64 Z" fill="#edf5ea"/>
+      <path d="M0,32 C150,60 350,8 600,36 C850,62 1050,12 1200,36 L1200,64 L0,64 Z" fill="#edf5ea"/>
     </svg>
   </div>
-
-  <!-- [3] Markets section — green band -->
   <div class="section-band section-band--green fade-in">
     <div class="section-heading">
-      <h2>Farmers Markets</h2>
-      <a href="/markets">View all {markets.length} &rarr;</a>
+      <h2>Latest from the Blog</h2>
+      <a href="/blog">All posts &rarr;</a>
     </div>
     <div class="grid">
-      {markets.map((market) => (
-        <a class="card card--market" href="/markets">
-          <span class="icon">🧺</span>
-          <h3>{market.data.name}</h3>
-          <p class="town">{market.data.town}</p>
-          <p>{market.data.summary}</p>
+      {posts.slice(0, 3).map((post) => (
+        <a class="card card--blog" href={`/blog/${post.id}`}>
+          <span class="icon">📰</span>
+          <h3>{post.data.title}</h3>
+          <p>{post.data.description}</p>
         </a>
       ))}
     </div>
   </div>
 
-  <!-- Wave into events section -->
-  {upcomingEvents.length > 0 && (
-    <div class="wave-divider">
-      <svg viewBox="0 0 1200 64" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="none">
-        <path d="M0,32 C150,60 350,8 600,36 C850,62 1050,12 1200,36 L1200,64 L0,64 Z" fill="#fffdf0"/>
-      </svg>
+  <!-- ── 5. LATEST RECIPES ── -->
+  <div class="wave-divider">
+    <svg viewBox="0 0 1200 64" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="none">
+      <path d="M0,36 C180,8 380,56 620,28 C860,2 1050,50 1200,26 L1200,64 L0,64 Z" fill="#fbfaf5"/>
+    </svg>
+  </div>
+  <div class="section-band section-band--cream fade-in">
+    <div class="section-heading">
+      <h2>Latest Recipes</h2>
+      <a href="/recipes">All recipes &rarr;</a>
     </div>
-  )}
-
-  <!-- Upcoming Events section -->
-  {upcomingEvents.length > 0 && (
-    <div class="section-band fade-in" style="background: linear-gradient(180deg, #fffdf0, #fff8e8); margin: 0 -1.5rem; padding: 2.5rem 1.5rem 3rem; border-top: 2px solid #f5e6c0; border-bottom: 2px solid #f5e6c0;">
-      <div class="section-heading">
-        <h2>📅 Upcoming Local Events</h2>
-        <a href="/events">All events &rarr;</a>
-      </div>
-      <div class="grid">
-        {upcomingEvents.slice(0, 3).map((event) => {
-          const daysUntil = Math.ceil((event.data.date.valueOf() - today.valueOf()) / (1000 * 60 * 60 * 24));
-          return (
-            <a href={`/events/${event.id}`} class="card card--event hoverable" style="--event-color: #e0a458;">
-              <div style="display:flex; align-items:center; gap:0.5rem; margin-bottom:0.5rem; flex-wrap:wrap;">
-                <span style="background:#fbe9d2; color:#c8853a; border-radius:999px; padding:0.2rem 0.7rem; font-size:0.78rem; font-weight:600;">{event.data.category}</span>
-                {daysUntil <= 7 && daysUntil >= 0 && (
-                  <span style="background:#e0a458; color:#fff; border-radius:999px; padding:0.2rem 0.6rem; font-size:0.72rem; font-weight:800; text-transform:uppercase; letter-spacing:0.05em;">
-                    {daysUntil === 0 ? 'TODAY!' : daysUntil === 1 ? 'Tomorrow!' : `In ${daysUntil} days`}
-                  </span>
-                )}
-              </div>
-              <h3>{event.data.name}</h3>
-              <p class="town">📍 {event.data.location}, {event.data.town}</p>
-              <p style="font-size:0.88rem; color:var(--muted); margin:0 0 0.5rem;">
-                📅 {event.data.date.toLocaleDateString('en-US', { weekday:'short', month:'short', day:'numeric' })} &nbsp;·&nbsp; 🕘 {event.data.time}
-              </p>
-              {event.data.admission && <p style="font-size:0.85rem; margin:0; color:var(--green-dark); font-weight:600;">🎟 {event.data.admission}</p>}
-            </a>
-          );
-        })}
-      </div>
+    <div class="grid">
+      {recipes.slice(0, 3).map((recipe) => (
+        <a class="card card--recipe" href={`/recipes/${recipe.id}`}>
+          <span class="icon">🍳</span>
+          <h3>{recipe.data.title}</h3>
+          <p class="town">{recipe.data.season}</p>
+          <p>{recipe.data.description}</p>
+          <div style="margin-top:0.5rem; display:flex; flex-wrap:wrap; gap:0.3rem;">
+            {recipe.data.produce.map((p: string) => <span class="tag">{p}</span>)}
+          </div>
+        </a>
+      ))}
     </div>
-  )}
+  </div>
 
 </Layout>
