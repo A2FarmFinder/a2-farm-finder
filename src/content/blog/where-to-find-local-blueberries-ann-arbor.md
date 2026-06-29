@@ -20,9 +20,15 @@ In Washtenaw County, local blueberries typically appear at farmers markets betwe
 
 ## Where to Find Them
 
-**At the farmers markets:** All four [Washtenaw County farmers markets](/markets) — Ann Arbor, Chelsea, Saline, and Ypsilanti — will have blueberry vendors when the season arrives. The Ann Arbor Farmers Market typically has the widest selection. Arrive early on Saturdays — blueberries go fast.
+**At the farmers markets:** All four [Washtenaw County farmers markets](/markets) — Ann Arbor, Chelsea, Saline, and Ypsilanti — will have blueberry vendors when the season arrives. The Ann Arbor Farmers Market typically has the widest selection, and [Wasem Fruit Farm](/farms/wasem-fruit-farm) regularly sells there. Arrive early on Saturdays — blueberries go fast.
 
-**Farm stands and u-pick:** [Kapnick Orchards](/farms/kapnick-orchards) in Britton and [Wasem Fruit Farm](/farms/wasem-fruit-farm) in Milan both grow fruit crops and are good options for picking up larger quantities. Check their websites or call ahead to confirm blueberry availability and u-pick options before making the drive.
+**U-pick farms:**
+
+**Dexter Blueberry Farm** is a dedicated blueberry-only farm right in Dexter — 11024 Beach Rd, Dexter, MI 48130. U-pick only at $2.75/lb. Season runs July through approximately 4–6 weeks. Call ahead before visiting: 734-426-2900. Cash and credit/debit accepted. No pets.
+
+**[Wasem Fruit Farm](/farms/wasem-fruit-farm)** in Milan (6580 Judd Rd) offers u-pick blueberries and also sells at the Ann Arbor Farmers Market. Open Friday and Saturday 9am–4pm during the season. Call ahead to confirm blueberry availability: 734-482-2342.
+
+**[Kapnick Orchards](/farms/kapnick-orchards)** in Britton (4245 N Rogers Hwy) offers u-pick blueberries mid-July through September — one of the longer blueberry seasons in the area. They also have a farm market, bakery, and fresh donuts on site. Call ahead to confirm picking conditions before the drive.
 
 ## How Much to Buy
 
