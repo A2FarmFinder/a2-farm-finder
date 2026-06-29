@@ -24,7 +24,7 @@ In Washtenaw County, local blueberries typically appear at farmers markets betwe
 
 **U-pick farms:**
 
-**Dexter Blueberry Farm** is a dedicated blueberry-only farm right in Dexter — 11024 Beach Rd, Dexter, MI 48130. U-pick only at $2.75/lb. Season runs July through approximately 4–6 weeks. Call ahead before visiting: 734-426-2900. Cash and credit/debit accepted. No pets.
+**[Dexter Blueberry Farm](/farms/dexter-blueberry-farm)** is a dedicated blueberry-only farm right in Dexter — 11024 Beach Rd, Dexter, MI 48130. U-pick only at $2.75/lb. Season runs July through approximately 4–6 weeks. Call ahead before visiting: 734-426-2900. Cash and credit/debit accepted. No pets.
 
 **[Wasem Fruit Farm](/farms/wasem-fruit-farm)** in Milan (6580 Judd Rd) offers u-pick blueberries and also sells at the Ann Arbor Farmers Market. Open Friday and Saturday 9am–4pm during the season. Call ahead to confirm blueberry availability: 734-482-2342.
 
