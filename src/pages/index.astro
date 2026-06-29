@@ -34,6 +34,9 @@ const seasonalProduce: Record<number, string[]> = {
 };
 const produce = seasonalProduce[month] ?? [];
 const monthName = monthNames[month];
+const nextMonth = (month + 1) % 12;
+const nextMonthName = monthNames[nextMonth];
+const nextProduce = seasonalProduce[nextMonth] ?? [];
 ---
 
 <Layout title="Home">
@@ -108,12 +111,24 @@ const monthName = monthNames[month];
   <!-- Seasonal strip -->
   {produce.length > 0 && (
     <div class="seasonal-strip fade-in">
-      <span class="strip-label">🌿 In season this {monthName}:</span>
-      <div class="strip-items">
-        {produce.map((item) => (
-          <a href="/markets" class="strip-pill">{item}</a>
-        ))}
+      <div class="strip-row">
+        <span class="strip-label">🌿 In season this {monthName}:</span>
+        <div class="strip-items">
+          {produce.map((item) => (
+            <a href="/markets" class="strip-pill">{item}</a>
+          ))}
+        </div>
       </div>
+      {nextProduce.length > 0 && (
+        <div class="strip-row strip-row--next">
+          <span class="strip-label strip-label--next">🗓 Coming in {nextMonthName}:</span>
+          <div class="strip-items">
+            {nextProduce.map((item) => (
+              <a href="/markets" class="strip-pill strip-pill--next">{item}</a>
+            ))}
+          </div>
+        </div>
+      )}
     </div>
   )}
 

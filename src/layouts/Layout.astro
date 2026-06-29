@@ -380,9 +380,18 @@ const { title, description = 'Find farms, CSAs, and farmers markets around Ann A
         padding: 1rem 1.5rem;
         margin-top: 1.5rem;
         display: flex;
+        flex-direction: column;
+        gap: 0.6rem;
+      }
+      .strip-row {
+        display: flex;
         align-items: center;
         gap: 1rem;
         flex-wrap: wrap;
+      }
+      .strip-row--next {
+        padding-top: 0.6rem;
+        border-top: 1px solid #c8dfc4;
       }
       .seasonal-strip .strip-label {
         font-weight: 700;
@@ -392,6 +401,10 @@ const { title, description = 'Find farms, CSAs, and farmers markets around Ann A
         display: flex;
         align-items: center;
         gap: 0.4rem;
+      }
+      .seasonal-strip .strip-label--next {
+        color: var(--muted);
+        font-weight: 600;
       }
       .seasonal-strip .strip-items { display: flex; flex-wrap: wrap; gap: 0.4rem; }
       .seasonal-strip .strip-pill {
@@ -406,6 +419,12 @@ const { title, description = 'Find farms, CSAs, and farmers markets around Ann A
         transition: background 0.15s ease, border-color 0.15s ease;
       }
       .seasonal-strip .strip-pill:hover { background: var(--green-pale); border-color: var(--green-mid); }
+      .seasonal-strip .strip-pill--next {
+        background: transparent;
+        border-color: #d0d8d0;
+        color: var(--muted);
+      }
+      .seasonal-strip .strip-pill--next:hover { background: #f0f0f0; border-color: var(--muted); }
 
       /* ── [2] Wave dividers ── */
       .wave-divider {
