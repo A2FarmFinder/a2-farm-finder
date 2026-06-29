@@ -30,6 +30,8 @@ In Washtenaw County, local blueberries typically appear at farmers markets betwe
 
 **[Kapnick Orchards](/farms/kapnick-orchards)** in Britton (4245 N Rogers Hwy) offers u-pick blueberries mid-July through September — one of the longer blueberry seasons in the area. They also have a farm market, bakery, and fresh donuts on site. Call ahead to confirm picking conditions before the drive.
 
+**[Blueville Acres Blueberry Farm](/farms/blueville-acres-blueberry-farm)** is a no-spray, natural practice blueberry farm in Belleville (38093 Judd Rd) — just across the Wayne County line, a short drive from Ann Arbor and Ypsilanti. Their blueberry bushes date back to 1968. Season runs mid-July through mid-August. Weekday picking requires a reservation; weekend picking requires a ticket (1 per vehicle). Check their website at bluevilleacres.com or their Facebook page before visiting to confirm availability.
+
 ## How Much to Buy
 
 If you find good local blueberries, buy more than you think you need. They freeze exceptionally well — better than almost any other fruit. Spread them in a single layer on a sheet pan, freeze until solid (a few hours), then transfer to a zip bag. Frozen local blueberries are excellent in smoothies, pancakes, muffins, and sauces all winter long.
