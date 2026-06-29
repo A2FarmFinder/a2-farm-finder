@@ -15,6 +15,8 @@ const PRODUCT_ICONS: Record<string, string> = {
   Bakery: '🥐',
   Apples: '🍎',
   'U-Pick Fruit': '🍒',
+  'U-Pick': '🍒',
+  Blueberries: '🫐',
   Cherries: '🍒',
   Pumpkins: '🎃',
   'Produce Box': '📦',
