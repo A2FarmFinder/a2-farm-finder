@@ -1,0 +1,164 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import { getCollection } from 'astro:content';
+import { produceData, getProduceBySlug } from '../../data/produce';
+
+export async function getStaticPaths() {
+  return produceData.map(p => ({ params: { slug: p.slug } }));
+}
+
+const { slug } = Astro.params;
+const produce = getProduceBySlug(slug);
+if (!produce) throw new Error(`Produce not found: ${slug}`);
+
+const allFarms = await getCollection('farms');
+const featuredFarms = allFarms.filter(f => produce.farms.includes(f.id));
+---
+
+<Layout
+  title={`${produce.name} — Where to Find It Near Ann Arbor`}
+  description={`Find fresh local ${produce.name} at Washtenaw County farmers markets and farms. Season, storage tips, nutrition info, and where to buy.`}
+>
+  <p><a href="/">&larr; Back to home</a></p>
+
+  <div class="produce-hero">
+    <div class="produce-emoji">{produce.emoji}</div>
+    <div>
+      <h1>{produce.name}</h1>
+      <div class="produce-season-badge">📅 In season: {produce.season}</div>
+    </div>
+  </div>
+
+  <div class="produce-grid">
+
+    <!-- About -->
+    <div class="card produce-card">
+      <h2>About {produce.name}</h2>
+      <p>{produce.description}</p>
+    </div>
+
+    <!-- Nutrition -->
+    <div class="card produce-card">
+      <h2>Nutrition Highlights</h2>
+      <ul class="produce-list">
+        {produce.nutritionHighlights.map(n => <li>{n}</li>)}
+      </ul>
+    </div>
+
+    <!-- Tips -->
+    <div class="card produce-card">
+      <h2>Tips for Buying &amp; Storing</h2>
+      <ul class="produce-list">
+        {produce.tips.map(t => <li>{t}</li>)}
+      </ul>
+    </div>
+
+  </div>
+
+  <!-- Where to find it -->
+  <div class="where-section">
+    <h2 class="where-title">Where to Find {produce.name} Near Ann Arbor</h2>
+
+    {produce.availableAtAllMarkets && (
+      <div class="markets-callout">
+        <span class="markets-icon">🧺</span>
+        <div>
+          <strong>Available at Washtenaw County Farmers Markets</strong>
+          <p>When in season, {produce.name.toLowerCase()} can be found at all four local markets — Ann Arbor, Chelsea, Saline, Ypsilanti, and Dexter. Arrive early on Saturdays for the best selection.</p>
+          <a href="/markets" class="btn btn-primary" style="display:inline-block; margin-top:0.75rem;">View all markets &rarr;</a>
+        </div>
+      </div>
+    )}
+
+    {featuredFarms.length > 0 && (
+      <>
+        <h3 class="farms-subheading">Local Farms That Carry {produce.name}</h3>
+        <div class="grid">
+          {featuredFarms.map(farm => (
+            <a href={`/farms/${farm.id}`} class="card card--farm hoverable">
+              <h3>{farm.data.name}</h3>
+              <p class="town">{farm.data.town}</p>
+              <p>{farm.data.summary}</p>
+            </a>
+          ))}
+        </div>
+      </>
+    )}
+  </div>
+
+  <div style="margin-top:2rem; padding:1.25rem 1.5rem; background:var(--green-pale); border-radius:14px; border:1px solid #c8dfc4;">
+    <p style="margin:0; font-size:0.95rem;">
+      <strong>Looking for something else?</strong> Browse all <a href="/farms">local farms</a> or find a <a href="/markets">farmers market near you</a>.
+    </p>
+  </div>
+</Layout>
+
+<style>
+  .produce-hero {
+    display: flex;
+    align-items: center;
+    gap: 1.5rem;
+    margin-bottom: 2rem;
+    padding: 2rem;
+    background: linear-gradient(135deg, var(--green-pale), #f0f7ee);
+    border: 1px solid #c8dfc4;
+    border-radius: 18px;
+  }
+  .produce-emoji { font-size: 4rem; line-height: 1; flex-shrink: 0; }
+  .produce-hero h1 { margin: 0 0 0.5rem; font-size: clamp(1.8rem, 4vw, 2.4rem); }
+  .produce-season-badge {
+    display: inline-block;
+    background: var(--green-dark);
+    color: #fff;
+    border-radius: 999px;
+    padding: 0.3rem 0.9rem;
+    font-size: 0.85rem;
+    font-weight: 600;
+  }
+  .produce-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 1.25rem;
+    margin-bottom: 2rem;
+  }
+  .produce-card h2 {
+    font-size: 1.2rem;
+    margin-top: 0;
+    margin-bottom: 0.75rem;
+    color: var(--green-dark);
+  }
+  .produce-list {
+    margin: 0;
+    padding-left: 1.25rem;
+  }
+  .produce-list li {
+    margin-bottom: 0.5rem;
+    font-size: 0.95rem;
+    line-height: 1.5;
+  }
+  .where-section { margin-top: 1rem; }
+  .where-title {
+    font-size: 1.6rem;
+    margin-bottom: 1.25rem;
+    color: var(--green-dark);
+  }
+  .markets-callout {
+    display: flex;
+    gap: 1.25rem;
+    align-items: flex-start;
+    background: #fff;
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    padding: 1.5rem;
+    margin-bottom: 2rem;
+    box-shadow: 0 1px 4px rgba(47,82,51,0.06);
+  }
+  .markets-icon { font-size: 2.5rem; flex-shrink: 0; }
+  .markets-callout strong { font-size: 1.1rem; display: block; margin-bottom: 0.4rem; color: var(--green-dark); }
+  .markets-callout p { margin: 0; color: var(--muted); font-size: 0.95rem; }
+  .farms-subheading { font-size: 1.2rem; margin: 0 0 0.5rem; color: var(--ink); }
+  @media (max-width: 600px) {
+    .produce-hero { flex-direction: column; text-align: center; }
+    .produce-emoji { font-size: 3rem; }
+  }
+</style>

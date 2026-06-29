@@ -2,6 +2,13 @@
 import Layout from '../layouts/Layout.astro';
 import { getCollection } from 'astro:content';
 import { farmIcon } from '../lib/icons';
+import { slugify, produceData } from '../data/produce';
+
+function produceLink(item: string): string {
+  const slug = slugify(item);
+  const exists = produceData.some(p => p.slug === slug);
+  return exists ? `/produce/${slug}` : '/markets';
+}
 
 const farms = await getCollection('farms');
 const markets = await getCollection('markets');
@@ -115,7 +122,7 @@ const nextProduce = seasonalProduce[nextMonth] ?? [];
         <span class="strip-label">🌿 In season this {monthName}:</span>
         <div class="strip-items">
           {produce.map((item) => (
-            <a href="/markets" class="strip-pill">{item}</a>
+            <a href={produceLink(item)} class="strip-pill">{item}</a>
           ))}
         </div>
       </div>
@@ -124,7 +131,7 @@ const nextProduce = seasonalProduce[nextMonth] ?? [];
           <span class="strip-label strip-label--next">🗓 Coming in {nextMonthName}:</span>
           <div class="strip-items">
             {nextProduce.map((item) => (
-              <a href="/markets" class="strip-pill strip-pill--next">{item}</a>
+              <a href={produceLink(item)} class="strip-pill strip-pill--next">{item}</a>
             ))}
           </div>
         </div>
