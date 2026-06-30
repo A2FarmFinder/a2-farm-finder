@@ -1,7 +1,7 @@
 ---
 title: "Grilled Corn with Herb Butter"
 description: "Michigan sweet corn grilled in the husk and finished with homemade herb butter. Summer doesn't get better than this."
-pubDate: 2026-06-30
+pubDate: 2026-06-30T12:00:00
 produce:
   - Corn
   - Herbs

@@ -1,7 +1,7 @@
 ---
 title: "Quick Cucumber Dill Salad"
 description: "A crisp, tangy cucumber salad that comes together in 10 minutes. Great alongside grilled anything all summer long."
-pubDate: 2026-06-30
+pubDate: 2026-06-30T12:00:00
 produce:
   - Cucumbers
   - Herbs
