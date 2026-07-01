@@ -11,8 +11,9 @@ const kidCategories = ['Desserts', 'Breakfast & Brunch', 'Snacks & Appetizers'];
 const featuredRecipe =
   allRecipes.find(r => kidCategories.includes(r.data.category)) ?? allRecipes[0];
 
-const month = new Date().getMonth();
-const monthName = ['January','February','March','April','May','June','July','August','September','October','November','December'][month];
+// Month is resolved client-side to avoid baking in build-time month
+const month = 6; // fallback used only for SSG item count; JS overrides at runtime
+const monthName = 'July'; // updated client-side
 
 const scavengerItems: Record<number, Array<{emoji: string, name: string, fact: string}>> = {
   0:  [{ emoji:'🥕',name:'Carrots',fact:'Carrots can be orange, purple, red, or yellow!'},{emoji:'🥔',name:'Potatoes',fact:'There are over 4,000 types of potatoes!'},{emoji:'🍎',name:'Winter Apples',fact:'Some apples can be stored for months!'},{emoji:'🍯',name:'Local Honey',fact:'A bee visits 100 flowers to fill its honey stomach!'},{emoji:'🥚',name:'Farm Eggs',fact:'Farm eggs have bright orange yolks!'},{emoji:'🧅',name:'Onions',fact:'Onions make you cry to protect themselves!'}],
@@ -68,7 +69,7 @@ const hunt = scavengerItems[month] || scavengerItems[5];
     <div class="section-header">
       <div class="section-icon">🔍</div>
       <div>
-        <h2 class="kids-section-title">{monthName} Farmers Market Scavenger Hunt!</h2>
+        <h2 class="kids-section-title" id="hunt-title">{monthName} Farmers Market Scavenger Hunt!</h2>
         <p class="kids-section-sub">Can you find all of these at the market? Check them off as you go!</p>
       </div>
     </div>
@@ -83,7 +84,7 @@ const hunt = scavengerItems[month] || scavengerItems[5];
       </div>
     </div>
 
-    <div class="hunt-grid">
+    <div class="hunt-grid" id="hunt-grid">
       {hunt.map((item, i) => (
         <button class="hunt-item" data-index={i} data-fact={item.fact} aria-label={`Mark ${item.name} as found`}>
           <span class="hunt-emoji">{item.emoji}</span>
@@ -672,12 +673,38 @@ const hunt = scavengerItems[month] || scavengerItems[5];
   }
 </style>
 
-<script define:vars={{ huntLength: hunt.length }}>
+<script define:vars={{ scavengerItems: scavengerItems }}>
 // ══════════════════════════════════
-// SCAVENGER HUNT
+// SCAVENGER HUNT — client-side month detection
 // ══════════════════════════════════
 (function() {
-  const STORAGE_KEY = 'a2ff_hunt_' + new Date().getMonth() + '_' + new Date().getFullYear();
+  const monthNames = ['January','February','March','April','May','June','July','August','September','October','November','December'];
+  const month = new Date().getMonth();
+  const monthName = monthNames[month];
+  const hunt = scavengerItems[month] || scavengerItems[6];
+
+  // Update title
+  const titleEl = document.getElementById('hunt-title');
+  if (titleEl) titleEl.textContent = monthName + ' Farmers Market Scavenger Hunt!';
+
+  // Re-render grid with correct month's items
+  const grid = document.getElementById('hunt-grid');
+  if (grid) {
+    grid.innerHTML = hunt.map((item, i) =>
+      `<button class="hunt-item" data-index="${i}" data-fact="${item.fact.replace(/"/g,'&quot;')}" aria-label="Mark ${item.name} as found">
+        <span class="hunt-emoji">${item.emoji}</span>
+        <span class="hunt-name">${item.name}</span>
+        <span class="hunt-check">✓</span>
+      </button>`
+    ).join('');
+  }
+
+  // Update found count label
+  const foundCountEl = document.getElementById('hunt-found');
+  if (foundCountEl) foundCountEl.textContent = '0';
+
+  const huntLength = hunt.length;
+  const STORAGE_KEY = 'a2ff_hunt_' + month + '_' + new Date().getFullYear();
   let found = JSON.parse(localStorage.getItem(STORAGE_KEY) || '[]');
 
   function updateHuntUI() {
@@ -699,25 +726,28 @@ const hunt = scavengerItems[month] || scavengerItems[5];
     if (found.length === huntLength) launchConfetti();
   }
 
-  document.querySelectorAll('.hunt-item').forEach((item, i) => {
-    item.addEventListener('click', function() {
-      if (found.includes(i)) {
-        found = found.filter(f => f !== i);
-        item.classList.remove('found');
-        document.getElementById('hunt-fact-box').style.display = 'none';
-      } else {
-        found.push(i);
-        item.classList.add('found');
-        const fact = item.dataset.fact;
-        const factBox = document.getElementById('hunt-fact-box');
-        const factText = document.getElementById('hunt-fact-text');
-        factText.textContent = item.querySelector('.hunt-name').textContent + ': ' + fact;
-        factBox.style.display = 'flex';
-      }
-      localStorage.setItem(STORAGE_KEY, JSON.stringify(found));
-      updateHuntUI();
+  function bindHuntItems() {
+    document.querySelectorAll('.hunt-item').forEach((item, i) => {
+      item.addEventListener('click', function() {
+        if (found.includes(i)) {
+          found = found.filter(f => f !== i);
+          item.classList.remove('found');
+          document.getElementById('hunt-fact-box').style.display = 'none';
+        } else {
+          found.push(i);
+          item.classList.add('found');
+          const fact = item.dataset.fact;
+          const factBox = document.getElementById('hunt-fact-box');
+          const factText = document.getElementById('hunt-fact-text');
+          factText.textContent = item.querySelector('.hunt-name').textContent + ': ' + fact;
+          factBox.style.display = 'flex';
+        }
+        localStorage.setItem(STORAGE_KEY, JSON.stringify(found));
+        updateHuntUI();
+      });
     });
-  });
+  }
+  bindHuntItems();
 
   document.getElementById('hunt-reset')?.addEventListener('click', () => {
     found = [];
