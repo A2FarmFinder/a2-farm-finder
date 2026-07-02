@@ -60,16 +60,11 @@ function daysUntil(date: Date): number {
 
   <!-- Featured events -->
   {featured.map(event => {
-    const days = daysUntil(event.data.date);
     const color = categoryColors[event.data.category] ?? '#e0a458';
     return (
-      <a href={`/events/${event.id}`} class="featured-event-card">
+      <a href={`/events/${event.id}`} class="featured-event-card" data-event-date={event.data.date.toISOString()}>
         <div class="featured-badge">⭐ Featured Event</div>
-        {days <= 7 && days >= 0 && (
-          <div class="soon-badge" style={`background: ${color}`}>
-            {days === 0 ? 'TODAY!' : days === 1 ? 'TOMORROW!' : `In ${days} days`}
-          </div>
-        )}
+        <div class="soon-badge event-countdown-badge" style={`background: ${color}; display:none`}></div>
         <div class="featured-event-inner">
           <div class="event-category-pill" style={`background: ${color}22; color: ${color}; border-color: ${color}44`}>
             {event.data.category}
@@ -95,18 +90,13 @@ function daysUntil(date: Date): number {
       {featured.length > 0 && <h2 class="upcoming-heading">More Upcoming Events</h2>}
       <div class="grid">
         {regular.map(event => {
-          const days = daysUntil(event.data.date);
           const color = categoryColors[event.data.category] ?? '#7a9e7e';
           return (
-            <a href={`/events/${event.id}`} class="card card--event hoverable" style={`--event-color: ${color}`}>
+            <a href={`/events/${event.id}`} class="card card--event hoverable" style={`--event-color: ${color}`} data-event-date={event.data.date.toISOString()}>
               <div class="event-category-pill" style={`background: ${color}22; color: ${color}; border-color: ${color}44`}>
                 {event.data.category}
               </div>
-              {days <= 7 && days >= 0 && (
-                <div class="event-soon-chip" style={`background: ${color}`}>
-                  {days === 0 ? 'TODAY!' : days === 1 ? 'Tomorrow!' : `In ${days} days`}
-                </div>
-              )}
+              <div class="event-soon-chip event-countdown-badge" style={`background: ${color}; display:none`}></div>
               <h3>{event.data.name}</h3>
               <div class="event-meta-small">
                 <div>📅 {formatDate(event.data.date, event.data.endDate)}</div>
@@ -289,3 +279,19 @@ function daysUntil(date: Date): number {
   }
   .submit-event-inner { max-width: 38rem; margin: 0 auto; }
 </style>
+
+<script>
+(function() {
+  const today = new Date(); today.setHours(0,0,0,0);
+  document.querySelectorAll('[data-event-date]').forEach(card => {
+    const eventDate = new Date(card.dataset.eventDate);
+    eventDate.setHours(0,0,0,0);
+    const days = Math.ceil((eventDate - today) / (1000 * 60 * 60 * 24));
+    const badge = card.querySelector('.event-countdown-badge');
+    if (badge && days >= 0 && days <= 7) {
+      badge.textContent = days === 0 ? 'TODAY!' : days === 1 ? 'TOMORROW!' : 'In ' + days + ' days';
+      badge.style.display = 'inline-block';
+    }
+  });
+})();
+</script>

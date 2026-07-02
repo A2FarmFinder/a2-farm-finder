@@ -23,8 +23,7 @@ const recipes = (await getCollection('recipes')).sort(
   (a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf()
 );
 
-const month = new Date().getMonth();
-const monthNames = ['January','February','March','April','May','June','July','August','September','October','November','December'];
+// Seasonal produce — resolved client-side to avoid baking in build-time month
 const seasonalProduce: Record<number, string[]> = {
   0:  ['Storage Squash', 'Root Vegetables', 'Greenhouse Herbs', 'Storage Apples'],
   1:  ['Storage Carrots', 'Beets', 'Potatoes', 'Greenhouse Greens'],
@@ -39,11 +38,13 @@ const seasonalProduce: Record<number, string[]> = {
   10: ['Root Vegetables', 'Winter Squash', 'Storage Apples', 'Kale'],
   11: ['Storage Squash', 'Root Vegetables', 'Greenhouse Herbs'],
 };
-const produce = seasonalProduce[month] ?? [];
-const monthName = monthNames[month];
-const nextMonth = (month + 1) % 12;
-const nextMonthName = monthNames[nextMonth];
-const nextProduce = seasonalProduce[nextMonth] ?? [];
+// SSG fallback values (overridden client-side)
+const produce = seasonalProduce[6];
+const monthName = 'this month';
+const nextProduce = seasonalProduce[7];
+const nextMonthName = 'next month';
+// Pass slug lookup to client
+const produceSlugMap = Object.fromEntries(produceData.map(p => [p.name, p.slug]));
 ---
 
 <Layout title="Home">
@@ -115,29 +116,25 @@ const nextProduce = seasonalProduce[nextMonth] ?? [];
     </div>
   </div>
 
-  <!-- Seasonal strip -->
-  {produce.length > 0 && (
-    <div class="seasonal-strip fade-in">
-      <div class="strip-row">
-        <span class="strip-label">🌿 In season this {monthName}:</span>
-        <div class="strip-items">
-          {produce.map((item) => (
-            <a href={produceLink(item)} class="strip-pill">{item}</a>
-          ))}
-        </div>
+  <!-- Seasonal strip — labels and pills updated client-side -->
+  <div class="seasonal-strip fade-in" id="seasonal-strip">
+    <div class="strip-row">
+      <span class="strip-label" id="strip-label-current">🌿 In season this month:</span>
+      <div class="strip-items" id="strip-items-current">
+        {produce.map((item) => (
+          <a href={produceLink(item)} class="strip-pill">{item}</a>
+        ))}
       </div>
-      {nextProduce.length > 0 && (
-        <div class="strip-row strip-row--next">
-          <span class="strip-label strip-label--next">🗓 Coming in {nextMonthName}:</span>
-          <div class="strip-items">
-            {nextProduce.map((item) => (
-              <a href={produceLink(item)} class="strip-pill strip-pill--next">{item}</a>
-            ))}
-          </div>
-        </div>
-      )}
     </div>
-  )}
+    <div class="strip-row strip-row--next">
+      <span class="strip-label strip-label--next" id="strip-label-next">🗓 Coming next month:</span>
+      <div class="strip-items" id="strip-items-next">
+        {nextProduce.map((item) => (
+          <a href={produceLink(item)} class="strip-pill strip-pill--next">{item}</a>
+        ))}
+      </div>
+    </div>
+  </div>
 
   <!-- ── 1. UPCOMING LOCAL EVENTS ── -->
   {upcomingEvents.length > 0 && (
@@ -153,17 +150,11 @@ const nextProduce = seasonalProduce[nextMonth] ?? [];
           <a href="/events">All events &rarr;</a>
         </div>
         <div class="grid">
-          {upcomingEvents.slice(0, 3).map((event) => {
-            const daysUntil = Math.ceil((event.data.date.valueOf() - today.valueOf()) / (1000 * 60 * 60 * 24));
-            return (
-              <a href={`/events/${event.id}`} class="card card--event hoverable" style="--event-color: #e0a458;">
+          {upcomingEvents.slice(0, 3).map((event) => (
+              <a href={`/events/${event.id}`} class="card card--event hoverable" style="--event-color: #e0a458;" data-event-date={event.data.date.toISOString()}>
                 <div style="display:flex; align-items:center; gap:0.5rem; flex-wrap:wrap; margin-bottom:0.5rem;">
                   <span style="background:#fbe9d2; color:#c8853a; border-radius:999px; padding:0.2rem 0.7rem; font-size:0.78rem; font-weight:600;">{event.data.category}</span>
-                  {daysUntil <= 7 && daysUntil >= 0 && (
-                    <span style="background:#e0a458; color:#fff; border-radius:999px; padding:0.2rem 0.6rem; font-size:0.72rem; font-weight:800; text-transform:uppercase; letter-spacing:0.05em;">
-                      {daysUntil === 0 ? 'TODAY!' : daysUntil === 1 ? 'Tomorrow!' : `In ${daysUntil} days`}
-                    </span>
-                  )}
+                  <span class="event-countdown-badge" style="display:none; background:#e0a458; color:#fff; border-radius:999px; padding:0.2rem 0.6rem; font-size:0.72rem; font-weight:800; text-transform:uppercase; letter-spacing:0.05em;"></span>
                 </div>
                 <h3>{event.data.name}</h3>
                 <p class="town">📍 {event.data.location}, {event.data.town}</p>
@@ -172,8 +163,7 @@ const nextProduce = seasonalProduce[nextMonth] ?? [];
                 </p>
                 {event.data.admission && <p style="font-size:0.85rem; margin:0; color:var(--green-dark); font-weight:600;">🎟 {event.data.admission}</p>}
               </a>
-            );
-          })}
+          ))}
         </div>
       </div>
     </>
@@ -274,3 +264,46 @@ const nextProduce = seasonalProduce[nextMonth] ?? [];
   </div>
 
 </Layout>
+
+<script define:vars={{ seasonalProduce, produceSlugMap }}>
+(function() {
+  const monthNames = ['January','February','March','April','May','June','July','August','September','October','November','December'];
+  const month = new Date().getMonth();
+  const nextMonth = (month + 1) % 12;
+
+  // Update seasonal strip
+  const produce = seasonalProduce[month] || [];
+  const nextProduce = seasonalProduce[nextMonth] || [];
+
+  function pillsHTML(items, cls) {
+    return items.map(item => {
+      const slug = produceSlugMap[item];
+      const href = slug ? '/produce/' + slug : '/markets';
+      return '<a href="' + href + '" class="strip-pill' + (cls ? ' ' + cls : '') + '">' + item + '</a>';
+    }).join('');
+  }
+
+  const labelCurrent = document.getElementById('strip-label-current');
+  const itemsCurrent = document.getElementById('strip-items-current');
+  const labelNext = document.getElementById('strip-label-next');
+  const itemsNext = document.getElementById('strip-items-next');
+
+  if (labelCurrent) labelCurrent.textContent = '🌿 In season this ' + monthNames[month] + ':';
+  if (itemsCurrent) itemsCurrent.innerHTML = pillsHTML(produce, '');
+  if (labelNext) labelNext.textContent = '🗓 Coming in ' + monthNames[nextMonth] + ':';
+  if (itemsNext) itemsNext.innerHTML = pillsHTML(nextProduce, 'strip-pill--next');
+
+  // Update event countdown badges
+  const today = new Date(); today.setHours(0,0,0,0);
+  document.querySelectorAll('[data-event-date]').forEach(card => {
+    const eventDate = new Date(card.dataset.eventDate);
+    eventDate.setHours(0,0,0,0);
+    const days = Math.ceil((eventDate - today) / (1000 * 60 * 60 * 24));
+    const badge = card.querySelector('.event-countdown-badge');
+    if (badge && days >= 0 && days <= 7) {
+      badge.textContent = days === 0 ? 'TODAY!' : days === 1 ? 'Tomorrow!' : 'In ' + days + ' days';
+      badge.style.display = 'inline';
+    }
+  });
+})();
+</script>
