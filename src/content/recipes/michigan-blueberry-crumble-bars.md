@@ -58,4 +58,12 @@ Michigan is one of the top blueberry-producing states in the country, and July i
 
 ## Where to Find Local Blueberries
 
-Michigan blueberries are just arriving at Washtenaw County farmers markets in early July. Look for them at the [Ann Arbor Farmers Market](/markets/ann-arbor-farmers-market) on Saturday mornings, or visit [Kapnick Orchards](https://kapnickorchards.com) for u-pick. Ask vendors when you arrive — they'll tell you exactly what they have. Once they're in, they're everywhere through August.
+Michigan blueberries are just arriving at Washtenaw County farmers markets in early July. Look for them at the [Ann Arbor Farmers Market](/markets/ann-arbor-farmers-market), [Ypsilanti Farmers Market](/markets/ypsilanti-farmers-market), and [Saline Farmers Market](/markets/saline-farmers-market) on Saturday mornings — ask vendors when you arrive, they'll tell you exactly what they have.
+
+For u-pick and farm-direct blueberries, you have three great local options:
+
+- **[Dexter Blueberry Farm](/farms/dexter-blueberry-farm)** — 11024 Beach Rd, Dexter. U-pick blueberries starting in July, running approximately 6 weeks. Call ahead for current conditions before visiting.
+- **[Blueville Acres Blueberry Farm](/farms/blueville-acres-blueberry-farm)** — 38093 Judd Rd, Belleville. U-pick blueberries mid-July through mid-August.
+- **[Kapnick Orchards](/farms/kapnick-orchards)** — 4245 N Rogers Hwy, Britton. Farm market open year-round with blueberries when in season.
+
+Once local blueberries are in, they're everywhere through August — and this is the recipe to make when you have them fresh.
