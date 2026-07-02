@@ -20,18 +20,27 @@ Ypsi's parade is one of the longest-running in the region — 96 years and count
 
 ---
 
-## Farmers Markets Open This Weekend
+## Farmers Markets This Weekend
 
-Most of the regular Saturday markets are running as usual — here's where to shop:
+July 4th falls on a Saturday this year, and several of our 15 local markets run on Saturdays. A few confirmed options:
 
-- **Ann Arbor Farmers Market** — Saturday, 7am–3pm, 315 Detroit St
-- **Saline Farmers Market** — Saturday, 8am–1pm, downtown Saline
-- **Chelsea Farmers Market** — Saturday, 8am–1pm, downtown Chelsea
-- **Ypsilanti Farmers Market** — Saturday, 9am–2pm, Depot Town
+**Confirmed open July 4:**
+- **Ypsilanti Mini Market at B-Cubed Bakery** — Saturday July 4, 9am–1pm, 741 Emerick St, Ypsilanti. Special holiday format at the beloved B-Cubed Bakery location in Depot Town — right along the parade route.
+- **Agricole Farm Stop** — Open daily year-round, Saturday 8am–6pm, 118 N Main St, Chelsea. Not a traditional market but carries products from 50+ local farms — great one-stop option.
+- **White Lotus Farms** — Open year-round, Saturday 9am–2pm farm cart + café open Tue–Sat, 7217 W Liberty Rd, Ann Arbor.
+- **Washtenaw Food Hub** — Open year-round, Saturday 9am–5pm, 4175 Whitmore Lake Rd, Ann Arbor.
 
-**What to look for this weekend:** Zucchini, green beans, cucumbers, kale, herbs, scallions, and the very first early tomatoes. Blueberries are just beginning to arrive at some vendors — ask around when you get there. Farm eggs, fresh bread, and local honey are always in good supply.
+**Check before you go:**
+The Ann Arbor, Saline, Chelsea, and Dexter Saturday markets all normally run this time of year but have not confirmed July 4th hours as of this writing. Check their Facebook pages or websites before heading out — some markets adjust hours or take the holiday off.
 
-**Pro tip:** Go early. Saturday before a holiday weekend is one of the busiest market days of the year. Vendors often sell out of their best items by 9–10am.
+- [Ann Arbor Farmers Market](https://www.a2gov.org/parks-and-recreation/parks-and-places/ann-arbor-farmers-market/) — 315 Detroit St, normally Sat 7am–3pm
+- [Saline Farmers Market](https://www.facebook.com/salinefarmersmarket/) — downtown Saline, normally Sat 8am–noon
+- [Chelsea Farmers Market](https://chelseamich.com/directory-business_dir/listing/farmers-market/) — downtown Chelsea, normally Sat 8am–1pm
+- [Dexter Farmers Market](https://www.dextermi.gov/community/farmers_market.php) — 8140 Main St, Dexter, normally Sat 8am–1pm
+
+**What to look for this weekend:** Zucchini, green beans, cucumbers, kale, herbs, scallions, and the very first early tomatoes. Blueberries are just beginning to arrive — ask vendors when you get there. Farm eggs, fresh bread, and local honey are always in good supply.
+
+**Pro tip:** Go early. The holiday Saturday is one of the busiest market days of the year — vendors often sell out of the best items by 9–10am.
 
 ---
 
