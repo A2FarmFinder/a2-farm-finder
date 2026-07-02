@@ -8,7 +8,7 @@ products:
   - Eggs
   - CSA Shares
 csa: true
-website: https://www.brinesfarm.com
+website: https://www.facebook.com/BrinesFarm/
 address: "6384 Walsh Rd, Whitmore Lake, MI 48189"
 season: "Summer CSA: June–October; Winter CSA: November–March"
 summary: >
@@ -35,4 +35,4 @@ Brines Farm is a regenerative and agroforestry operation in Whitmore Lake, just 
 
 Brines Farm focuses on ecological farming methods including cover cropping, composting, and agroforestry — growing food while actively restoring the land.
 
-**Website:** [brinesfarm.com](https://www.brinesfarm.com)
+**Facebook:** [facebook.com/BrinesFarm](https://www.facebook.com/BrinesFarm/)

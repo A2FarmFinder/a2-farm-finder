@@ -8,7 +8,7 @@ products:
   - Flowers
   - CSA Shares
 csa: true
-website: https://www.handsownfarm.com
+website: https://www.facebook.com/handsown.farm/
 address: "Manchester, MI (west of M52)"
 season: "Contact farm for current CSA season and availability"
 summary: >
@@ -27,4 +27,4 @@ Their produce is available through a CSA program and at Busch's grocery
 stores. The farm also welcomes apprentices and volunteers — contact them
 directly for information on their CSA, current pricing, and availability.
 
-**Contact:** handsownfarm.com
+**Facebook:** [facebook.com/handsown.farm](https://www.facebook.com/handsown.farm/)

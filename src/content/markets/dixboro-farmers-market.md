@@ -4,7 +4,7 @@ town: Ann Arbor
 address: "5221 Church St, Ann Arbor, MI 48105"
 schedule: "Fridays 3pm–6pm"
 season: "May 23 – October 24"
-website: https://www.dixborofarmersmarket.org
+website: https://www.facebook.com/DixboroFarmersMarket/
 summary: >
   A neighborhood farmers market on the Dixboro Village Green in northeast Ann Arbor.
   Open Friday afternoons from late May through October with local produce, baked goods,
@@ -27,4 +27,4 @@ Fresh local produce, baked goods, farm eggs, flowers, and handcrafted items from
 
 Accepts cash, SNAP/Bridge/EBT, and Double Up Food Bucks.
 
-**Contact:** (734) 619-7967 | info@dixborofarmersmarket.org
+**Facebook:** [facebook.com/DixboroFarmersMarket](https://www.facebook.com/DixboroFarmersMarket/)

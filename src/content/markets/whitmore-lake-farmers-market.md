@@ -4,7 +4,7 @@ town: Whitmore Lake
 address: "9725 Main St, Whitmore Lake, MI 48189"
 schedule: "Sundays 10am–2pm"
 season: "June 1 – September 28"
-website: https://www.twp-northfield.org/farmers-market
+website: https://www.twp-northfield.org/community_visitors/farmers_market.php
 summary: >
   A Sunday morning market in the heart of Whitmore Lake, hosted by Northfield Township
   on Main Street. Runs from early June through late September with local produce,
@@ -23,4 +23,4 @@ The Whitmore Lake Farmers Market is hosted by Northfield Township on Sunday morn
 
 Fresh local produce, baked goods, homemade goods, and artisan products from area vendors.
 
-**Contact:** Northfield Township — [twp-northfield.org](https://www.twp-northfield.org/farmers-market)
+**Contact:** farmers_market@northfieldmi.gov | [twp-northfield.org](https://www.twp-northfield.org/community_visitors/farmers_market.php)
