@@ -48,4 +48,16 @@ July zucchini from the farmers market is a different animal than the waxy, overs
 
 ## Where to Find the Ingredients
 
-Zucchini and fresh herbs are abundant at Washtenaw County farmers markets all through July and August. Look for mixed herb bunches — most vendors sell them for a couple dollars and they'll last the week. Farmers markets to check: [Ann Arbor Farmers Market](/markets/ann-arbor-farmers-market), [Saline Farmers Market](/markets/saline-farmers-market), [Chelsea Farmers Market](/markets/chelsea-farmers-market).
+Zucchini and fresh herbs are abundant at Washtenaw County farmers markets all through July and August. Look for mixed herb bunches — most vendors sell them for a couple dollars and they'll last the week.
+
+**Farmers markets:**
+- [Ann Arbor Farmers Market](/markets/ann-arbor-farmers-market) — Saturdays 7am–3pm, Wednesdays 7am–3pm
+- [Saline Farmers Market](/markets/saline-farmers-market) — Saturdays 8am–noon
+- [Chelsea Farmers Market](/markets/chelsea-farmers-market) — Saturdays 8am–1pm, Wednesdays 10am–3pm
+
+**Farm stands & stores (no membership required):**
+- [Argus Farm Stop](/farms/argus-farm-stop) — two Ann Arbor locations, open daily 8am–8pm year-round. Carries produce from 50+ local farms.
+- [Green Things Farm Collective](/farms/green-things-farm) — 3825 Nixon Rd, Ann Arbor, farm stand open 7 days a week March through early December.
+- [Jacob's Fresh Farm](/farms/jacobs-fresh-farm) — 475 N Fletcher Rd, Dexter, farm stand open daily 8am–6pm.
+- [Old City Acres](/farms/old-city-acres) — 741 Emerick St, Ypsilanti (B Cubed Bakery lot), Thu–Sun.
+- [Dog Star Farm](/farms/dog-star-farm) — on-site farm stand in Ann Arbor, plus every Saturday at the Ypsilanti Farmers Market.

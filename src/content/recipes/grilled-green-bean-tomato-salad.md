@@ -55,4 +55,16 @@ Most people boil or steam green beans. Throwing them on the grill is a game-chan
 
 ## Where to Find the Ingredients
 
-Fresh green beans show up at Washtenaw County markets in early July and peak through August. Scallions and herbs are available all season long. [Ann Arbor Farmers Market](/markets/ann-arbor-farmers-market), [Ypsilanti Farmers Market](/markets/ypsilanti-farmers-market), and [Saline Farmers Market](/markets/saline-farmers-market) are all good bets this weekend.
+Fresh green beans show up at Washtenaw County markets in early July and peak through August. Scallions and herbs are available all season long, and early tomatoes are just beginning to arrive.
+
+**Farmers markets:**
+- [Ann Arbor Farmers Market](/markets/ann-arbor-farmers-market) — Saturdays 7am–3pm, Wednesdays 7am–3pm
+- [Ypsilanti Farmers Market](/markets/ypsilanti-farmers-market) — Saturdays 9am–1pm
+- [Saline Farmers Market](/markets/saline-farmers-market) — Saturdays 8am–noon
+
+**Farm stands & stores (no membership required):**
+- [Argus Farm Stop](/farms/argus-farm-stop) — two Ann Arbor locations, open daily 8am–8pm year-round. Carries produce from 50+ local farms.
+- [Green Things Farm Collective](/farms/green-things-farm) — 3825 Nixon Rd, Ann Arbor, farm stand open 7 days a week March through early December.
+- [Jacob's Fresh Farm](/farms/jacobs-fresh-farm) — 475 N Fletcher Rd, Dexter, farm stand open daily 8am–6pm.
+- [Old City Acres](/farms/old-city-acres) — 741 Emerick St, Ypsilanti (B Cubed Bakery lot), Thu–Sun.
+- [Dog Star Farm](/farms/dog-star-farm) — on-site farm stand in Ann Arbor, plus every Saturday at the Ypsilanti Farmers Market.
