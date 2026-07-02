@@ -18,13 +18,12 @@ function mapsUrl(address: string) {
     <p>Weekly farmers market schedules around Washtenaw County.</p>
   </div>
 
-  <!-- What's in season now -->
+  <!-- What's in season now — content updated client-side to reflect real current month -->
   <div class="card" style="margin-bottom: 2rem; border-left: 4px solid var(--gold);">
-    <h2 style="margin-top: 0;">🌿 What's at the Market in June</h2>
-    <p>June is one of the best months to visit — early summer crops are coming in fast. Look for:</p>
-    <p><strong>Vegetables:</strong> Asparagus (late June), spinach, lettuce, arugula, radishes, peas, scallions, kale, chard, herbs, and the first zucchini.</p>
-    <p><strong>Fruits:</strong> Strawberries are at peak season — don't miss them, they go fast.</p>
-    <p><strong>Also look for:</strong> Transplants and seedlings if you're still planting your garden, cut flowers, fresh eggs, honey, and baked goods year-round.</p>
+    <h2 style="margin-top: 0;" id="market-season-title">🌿 What's at the Market</h2>
+    <div id="market-season-content">
+      <p>Loading what's in season...</p>
+    </div>
     <p style="margin-bottom: 0;"><em>Tip: arrive early — the best vendors sell out by 10am on Saturdays.</em></p>
   </div>
 
@@ -62,3 +61,35 @@ function mapsUrl(address: string) {
     ))}
   </div>
 </Layout>
+
+<script>
+(function() {
+  const monthNames = ['January','February','March','April','May','June','July','August','September','October','November','December'];
+  const month = new Date().getMonth();
+  const monthName = monthNames[month];
+
+  const seasonal = {
+    0:  { veg: 'Stored root vegetables, greenhouse greens', fruit: 'Winter apples and pears from cold storage', also: 'Farm eggs, local honey, maple syrup, baked goods, and cheese year-round.' },
+    1:  { veg: 'Greenhouse lettuce, spinach, and herbs', fruit: 'Winter apples from cold storage', also: 'Farm eggs, honey, dried beans, and preserves.' },
+    2:  { veg: 'Greenhouse greens, spinach, early herbs', fruit: 'Maple syrup (peak season!)', also: 'Farm eggs, honey, seedlings starting to appear, baked goods.' },
+    3:  { veg: 'Asparagus, spinach, lettuce, rhubarb, radishes, early herbs', fruit: 'Rhubarb — the first fruit of spring', also: 'Plant seedlings, transplants, farm eggs, and honey.' },
+    4:  { veg: 'Asparagus, snap peas, lettuce, spinach, kale, chard, radishes, herbs, scallions', fruit: 'Strawberries arriving late May — grab them fast', also: 'Seedlings and transplants, cut flowers, farm eggs, honey.' },
+    5:  { veg: 'Asparagus (late June), spinach, lettuce, arugula, radishes, peas, scallions, kale, chard, herbs, and the first zucchini', fruit: 'Strawberries at peak season — don\'t miss them, they go fast', also: 'Transplants and seedlings, cut flowers, fresh eggs, honey, and baked goods year-round.' },
+    6:  { veg: 'Zucchini, green beans, cucumbers, kale, chard, herbs, scallions, and the first tomatoes', fruit: 'Blueberries arriving mid-July — one of the best Michigan crops', also: 'Cut flowers, sweet corn starting late July, farm eggs, honey, and baked goods.' },
+    7:  { veg: 'Tomatoes, sweet corn, peppers, eggplant, cucumbers, zucchini, green beans, herbs, and the first winter squash', fruit: 'Blueberries, peaches, and melons — peak summer abundance', also: 'Cut flowers, farm eggs, honey, and baked goods.' },
+    8:  { veg: 'Tomatoes, peppers, winter squash, sweet potatoes, garlic, kale, chard, and beans', fruit: 'Apples beginning, late peaches and melons', also: 'Dried flowers, farm eggs, honey, and canned goods.' },
+    9:  { veg: 'Winter squash, pumpkins, sweet potatoes, kale, Brussels sprouts, carrots, beets, and garlic', fruit: 'Apples — peak Michigan apple season with dozens of varieties', also: 'Cider, gourds, dried flowers, farm eggs, honey, and baked goods.' },
+    10: { veg: 'Root vegetables, kale, Brussels sprouts, cabbage, turnips, beets, and storage squash', fruit: 'Late apples and pears from cold storage', also: 'Cider, dried herbs, farm eggs, honey, and baked goods.' },
+    11: { veg: 'Storage root vegetables, greenhouse greens, and winter kale', fruit: 'Stored apples and pears', also: 'Farm eggs, local honey, maple syrup pre-orders, baked goods, and holiday wreaths.' },
+  };
+
+  const s = seasonal[month] || seasonal[6];
+
+  document.getElementById('market-season-title').textContent = '🌿 What\'s at the Market in ' + monthName;
+  document.getElementById('market-season-content').innerHTML =
+    '<p>' + monthName + ' is a great time to visit the farmers market. Look for:</p>' +
+    '<p><strong>Vegetables:</strong> ' + s.veg + '.</p>' +
+    '<p><strong>Fruits:</strong> ' + s.fruit + '.</p>' +
+    '<p><strong>Also look for:</strong> ' + s.also + '</p>';
+})();
+</script>
