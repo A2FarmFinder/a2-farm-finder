@@ -1,7 +1,7 @@
 ---
 title: "Where to Find Fresh Sweet Corn Near Ann Arbor"
 description: "Michigan sweet corn season is almost here. Here's when to expect it and where to buy it fresh from local farms around Washtenaw County."
-pubDate: 2026-07-03
+pubDate: 2026-07-06
 ---
 
 If you grew up in Michigan, you know the feeling: the first bite of truly fresh sweet corn, picked that morning, is a completely different food than anything from a grocery store bin. The good news is that season is right around the corner for Washtenaw County.
