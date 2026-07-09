@@ -1,7 +1,7 @@
 ---
 title: "Where to Buy Farm-Fresh Eggs Near Ann Arbor"
 description: "Tired of grocery store egg prices and pale yolks? Here's where to find real farm-fresh eggs from pastured hens around Washtenaw County."
-pubDate: 2026-07-07
+pubDate: 2026-07-09
 ---
 
 If you've only ever cracked a grocery store egg, farm-fresh eggs are a genuine surprise the first time: deep orange yolks that stand up tall in the pan, whites that don't spread thin, and a richer flavor overall. The difference comes down to hens that are out on pasture eating bugs, grass, and a varied diet instead of just commercial feed. The good news is Washtenaw County has no shortage of farms selling them.
