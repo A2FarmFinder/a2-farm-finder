@@ -1,7 +1,7 @@
 ---
 title: "Quick Refrigerator Dilly Beans"
 description: "No canning pot required — crisp green beans pickled with garlic and fresh dill in a tangy brine, ready to eat in 24 hours and keeping for weeks in the fridge."
-pubDate: 2026-07-07T12:00:00
+pubDate: 2026-07-10T12:00:00
 produce:
   - Green Beans
   - Herbs

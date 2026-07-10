@@ -1,7 +1,7 @@
 ---
 title: "Summer Tomato & Cucumber Gazpacho"
 description: "A no-cook chilled soup built on ripe early tomatoes, crisp cucumbers, and fresh basil — the perfect way to cool down on a hot Washtenaw County evening without turning on the stove."
-pubDate: 2026-07-07T12:00:00
+pubDate: 2026-07-10T12:00:00
 produce:
   - Tomatoes
   - Cucumbers
