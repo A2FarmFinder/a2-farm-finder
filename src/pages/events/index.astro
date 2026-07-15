@@ -2,8 +2,8 @@
 import Layout from '../../layouts/Layout.astro';
 import { getCollection } from 'astro:content';
 
-const today = new Date();
-today.setHours(0, 0, 0, 0);
+const now = new Date();
+const today = new Date(Date.UTC(now.getFullYear(), now.getMonth(), now.getDate()));
 
 const allEvents = (await getCollection('events')).sort(
   (a, b) => a.data.date.valueOf() - b.data.date.valueOf()
@@ -33,7 +33,7 @@ const categoryColors: Record<string, string> = {
 };
 
 function formatDate(date: Date, endDate?: Date): string {
-  const opts: Intl.DateTimeFormatOptions = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
+  const opts: Intl.DateTimeFormatOptions = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric', timeZone: 'UTC' };
   const start = date.toLocaleDateString('en-US', opts);
   if (!endDate) return start;
   return start + ' – ' + endDate.toLocaleDateString('en-US', opts);
@@ -282,10 +282,10 @@ function daysUntil(date: Date): number {
 
 <script>
 (function() {
-  const today = new Date(); today.setHours(0,0,0,0);
+  const now = new Date();
+  const today = Date.UTC(now.getFullYear(), now.getMonth(), now.getDate());
   document.querySelectorAll('[data-event-date]').forEach(card => {
-    const eventDate = new Date(card.dataset.eventDate);
-    eventDate.setHours(0,0,0,0);
+    const eventDate = new Date(card.dataset.eventDate).valueOf();
     const days = Math.ceil((eventDate - today) / (1000 * 60 * 60 * 24));
     const badge = card.querySelector('.event-countdown-badge');
     if (badge && days >= 0 && days <= 7) {

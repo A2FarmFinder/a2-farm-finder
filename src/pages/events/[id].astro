@@ -12,14 +12,8 @@ const event = await getEntry('events', id);
 if (!event) throw new Error(`Event not found: ${id}`);
 const { Content } = await render(event);
 
-const today = new Date();
-today.setHours(0, 0, 0, 0);
-const eventDate = new Date(event.data.date);
-const isPast = eventDate < today;
-const daysUntil = Math.ceil((eventDate.valueOf() - today.valueOf()) / (1000 * 60 * 60 * 24));
-
 function formatDate(date: Date, endDate?: Date): string {
-  const opts: Intl.DateTimeFormatOptions = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
+  const opts: Intl.DateTimeFormatOptions = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric', timeZone: 'UTC' };
   const start = date.toLocaleDateString('en-US', opts);
   if (!endDate) return start;
   return start + ' – ' + endDate.toLocaleDateString('en-US', opts);
@@ -33,15 +27,12 @@ function mapsUrl(address: string) {
 <Layout title={event.data.name} description={event.data.description}>
   <p><a href="/events">&larr; Back to events</a></p>
 
-  {isPast && (
-    <div class="past-notice">This event has already taken place. Check back for future dates.</div>
-  )}
-
-  {!isPast && daysUntil <= 7 && (
-    <div class="soon-notice">
-      {daysUntil === 0 ? '🎉 This event is TODAY!' : daysUntil === 1 ? '⏰ This event is TOMORROW!' : `⏰ This event is in ${daysUntil} days!`}
-    </div>
-  )}
+  <div
+    class="event-timing-notice"
+    data-event-date={event.data.date.toISOString()}
+    data-event-end-date={event.data.endDate?.toISOString() ?? event.data.date.toISOString()}
+    style="display:none"
+  ></div>
 
   <div class="event-hero">
     {event.data.featured && <div class="featured-badge">⭐ Featured Event</div>}
@@ -191,3 +182,28 @@ function mapsUrl(address: string) {
   .event-content :global(li) { margin-bottom: 0.3rem; }
   .event-content :global(strong) { color: var(--green-dark); }
 </style>
+
+<script>
+(function() {
+  const notice = document.querySelector<HTMLElement>('.event-timing-notice');
+  if (!notice) return;
+
+  const now = new Date();
+  const today = Date.UTC(now.getFullYear(), now.getMonth(), now.getDate());
+  const eventDate = new Date(notice.dataset.eventDate!).valueOf();
+  const eventEnd = new Date(notice.dataset.eventEndDate!).valueOf();
+
+  const isPast = eventEnd < today;
+  const daysUntil = Math.ceil((eventDate - today) / (1000 * 60 * 60 * 24));
+
+  if (isPast) {
+    notice.className = 'past-notice';
+    notice.textContent = 'This event has already taken place. Check back for future dates.';
+    notice.style.display = '';
+  } else if (daysUntil <= 7) {
+    notice.className = 'soon-notice';
+    notice.textContent = daysUntil <= 0 ? '🎉 This event is TODAY!' : daysUntil === 1 ? '⏰ This event is TOMORROW!' : `⏰ This event is in ${daysUntil} days!`;
+    notice.style.display = '';
+  }
+})();
+</script>
