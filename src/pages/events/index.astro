@@ -92,6 +92,7 @@ function daysUntil(date: Date): number {
   )}
 
   <!-- Featured events -->
+  {featured.length > 0 && todayEvents.length > 0 && <h2 class="upcoming-heading">⭐ Featured Events</h2>}
   {featured.map(event => {
     const color = categoryColors[event.data.category] ?? '#e0a458';
     return (
