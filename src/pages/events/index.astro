@@ -70,7 +70,7 @@ function daysUntil(date: Date): number {
         {todayEvents.map(event => {
           const color = categoryColors[event.data.category] ?? '#7a9e7e';
           return (
-            <a href={`/events/${event.id}`} class="today-event-card hoverable" style={`--event-color: ${color}`}>
+            <a href={`/events/${event.id}`} class="today-event-card hoverable">
               <div class="today-card-header">
                 <div class="event-category-pill" style={`background: ${color}22; color: ${color}; border-color: ${color}44`}>
                   {event.data.category}
@@ -286,17 +286,13 @@ function daysUntil(date: Date): number {
   .card--event::before {
     background: linear-gradient(90deg, var(--event-color), var(--gold));
   }
-  .upcoming-heading {
-    margin: 2rem 0 0;
-    font-size: 1.4rem;
+  .upcoming-heading, .today-heading {
+    margin: 2rem 0 1rem;
+    font-size: 1.5rem;
+    color: var(--green-dark);
   }
   .today-section {
     margin-bottom: 2rem;
-  }
-  .today-heading {
-    margin: 0 0 1rem;
-    font-size: 1.5rem;
-    color: var(--green-dark);
   }
   .today-grid {
     display: grid;
@@ -317,14 +313,6 @@ function daysUntil(date: Date): number {
   .today-event-card:hover {
     transform: translateY(-3px);
     box-shadow: 0 12px 32px rgba(92,184,92,0.25);
-  }
-  .today-event-card::before {
-    content: '';
-    position: absolute;
-    top: 0; left: 0; right: 0;
-    height: 4px;
-    border-radius: 16px 16px 0 0;
-    background: linear-gradient(90deg, var(--event-color), #5CB85C);
   }
   .today-card-header {
     display: flex;
