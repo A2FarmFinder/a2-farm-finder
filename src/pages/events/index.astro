@@ -71,9 +71,11 @@ function daysUntil(date: Date): number {
           const color = categoryColors[event.data.category] ?? '#7a9e7e';
           return (
             <a href={`/events/${event.id}`} class="today-event-card hoverable" style={`--event-color: ${color}`}>
-              <div class="today-badge">Today</div>
-              <div class="event-category-pill" style={`background: ${color}22; color: ${color}; border-color: ${color}44`}>
-                {event.data.category}
+              <div class="today-card-header">
+                <div class="event-category-pill" style={`background: ${color}22; color: ${color}; border-color: ${color}44`}>
+                  {event.data.category}
+                </div>
+                <div class="today-badge">Today</div>
               </div>
               <h3>{event.data.name}</h3>
               <div class="event-meta-small">
@@ -297,7 +299,7 @@ function daysUntil(date: Date): number {
   }
   .today-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
     gap: 1rem;
   }
   .today-event-card {
@@ -323,10 +325,18 @@ function daysUntil(date: Date): number {
     border-radius: 16px 16px 0 0;
     background: linear-gradient(90deg, var(--event-color), #5CB85C);
   }
+  .today-card-header {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: 0.5rem;
+    margin-bottom: 0.5rem;
+  }
+  .today-card-header .event-category-pill {
+    margin-bottom: 0;
+  }
   .today-badge {
-    position: absolute;
-    top: 1rem;
-    right: 1rem;
+    flex-shrink: 0;
     background: #5CB85C;
     color: #fff;
     font-size: 0.7rem;
@@ -338,7 +348,7 @@ function daysUntil(date: Date): number {
     animation: pulse 2s ease-in-out infinite;
   }
   .today-event-card h3 {
-    margin: 0.25rem 2.5rem 0.25rem 0;
+    margin: 0.25rem 0;
   }
   .past-events-section {
     margin-top: 2.5rem;
