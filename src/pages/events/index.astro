@@ -19,8 +19,12 @@ const past = allEvents.filter(e => {
   return eventEnd < today;
 }).reverse();
 
-const featured = upcoming.filter(e => e.data.featured);
-const regular = upcoming.filter(e => !e.data.featured);
+const isHappeningToday = (e: (typeof upcoming)[number]) =>
+  e.data.date <= today && (e.data.endDate ?? e.data.date) >= today;
+
+const todayEvents = upcoming.filter(isHappeningToday);
+const featured = upcoming.filter(e => e.data.featured && !isHappeningToday(e));
+const regular = upcoming.filter(e => !e.data.featured && !isHappeningToday(e));
 
 const categoryColors: Record<string, string> = {
   'Festival & Fair':        '#e0a458',
@@ -55,6 +59,33 @@ function daysUntil(date: Date): number {
       <div style="font-size: 3rem; margin-bottom: 1rem;">📅</div>
       <h2 style="margin-top:0;">No upcoming events right now</h2>
       <p>Check back soon — we update this page regularly as new events are announced.</p>
+    </div>
+  )}
+
+  <!-- Happening today -->
+  {todayEvents.length > 0 && (
+    <div class="today-section">
+      <h2 class="today-heading">🎉 Happening Today</h2>
+      <div class="today-grid">
+        {todayEvents.map(event => {
+          const color = categoryColors[event.data.category] ?? '#7a9e7e';
+          return (
+            <a href={`/events/${event.id}`} class="today-event-card hoverable" style={`--event-color: ${color}`}>
+              <div class="today-badge">Today</div>
+              <div class="event-category-pill" style={`background: ${color}22; color: ${color}; border-color: ${color}44`}>
+                {event.data.category}
+              </div>
+              <h3>{event.data.name}</h3>
+              <div class="event-meta-small">
+                <div>🕘 {event.data.time}</div>
+                <div>📍 {event.data.location}, {event.data.town}</div>
+                {event.data.admission && <div>🎟 {event.data.admission}</div>}
+              </div>
+              <p style="font-size:0.9rem; color: var(--muted); margin: 0.5rem 0 0;">{event.data.description.slice(0, 120)}...</p>
+            </a>
+          );
+        })}
+      </div>
     </div>
   )}
 
@@ -255,6 +286,59 @@ function daysUntil(date: Date): number {
   .upcoming-heading {
     margin: 2rem 0 0;
     font-size: 1.4rem;
+  }
+  .today-section {
+    margin-bottom: 2rem;
+  }
+  .today-heading {
+    margin: 0 0 1rem;
+    font-size: 1.5rem;
+    color: var(--green-dark);
+  }
+  .today-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+    gap: 1rem;
+  }
+  .today-event-card {
+    display: block;
+    text-decoration: none;
+    color: inherit;
+    position: relative;
+    background: linear-gradient(135deg, #eafbea, #fff);
+    border: 2px solid #5CB85C;
+    border-radius: 16px;
+    padding: 1.5rem;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+  }
+  .today-event-card:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 12px 32px rgba(92,184,92,0.25);
+  }
+  .today-event-card::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 4px;
+    border-radius: 16px 16px 0 0;
+    background: linear-gradient(90deg, var(--event-color), #5CB85C);
+  }
+  .today-badge {
+    position: absolute;
+    top: 1rem;
+    right: 1rem;
+    background: #5CB85C;
+    color: #fff;
+    font-size: 0.7rem;
+    font-weight: 800;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    padding: 0.25rem 0.7rem;
+    border-radius: 999px;
+    animation: pulse 2s ease-in-out infinite;
+  }
+  .today-event-card h3 {
+    margin: 0.25rem 2.5rem 0.25rem 0;
   }
   .past-events-section {
     margin-top: 2.5rem;
