@@ -3,9 +3,16 @@ import Layout from '../../layouts/Layout.astro';
 import { getCollection } from 'astro:content';
 import { farmIcon } from '../../lib/icons';
 
-const farms = (await getCollection('farms')).sort((a, b) =>
-  a.data.name.localeCompare(b.data.name)
-);
+const now = new Date();
+const isFeatured = (f: { data: { featured: boolean; featuredUntil?: Date } }) =>
+  f.data.featured && (!f.data.featuredUntil || f.data.featuredUntil >= now);
+
+const farms = (await getCollection('farms')).sort((a, b) => {
+  const af = isFeatured(a) ? 1 : 0;
+  const bf = isFeatured(b) ? 1 : 0;
+  if (af !== bf) return bf - af;
+  return a.data.name.localeCompare(b.data.name);
+});
 ---
 
 <Layout title="Farms & CSAs" description="Directory of farms and CSA programs around Ann Arbor, Chelsea, Dexter, Saline, and Manchester.">
@@ -16,7 +23,8 @@ const farms = (await getCollection('farms')).sort((a, b) =>
 
   <div class="grid">
     {farms.map((farm) => (
-      <a class="card" href={`/farms/${farm.id}`}>
+      <a class={`card ${isFeatured(farm) ? 'featured' : ''}`} href={`/farms/${farm.id}`}>
+        {isFeatured(farm) && <span class="sponsored-badge">Sponsored</span>}
         <span class="icon">{farmIcon(farm.data.products)}</span>
         <h3>{farm.data.name}</h3>
         <p class="town">{farm.data.town}</p>
