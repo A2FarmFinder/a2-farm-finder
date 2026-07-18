@@ -1,0 +1,41 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import { getCollection, getEntry, render } from 'astro:content';
+
+export async function getStaticPaths() {
+  const markets = await getCollection('markets');
+  return markets.map((market) => ({
+    params: { id: market.id },
+  }));
+}
+
+const { id } = Astro.params;
+const market = await getEntry('markets', id);
+if (!market) {
+  throw new Error(`Market not found: ${id}`);
+}
+const { Content } = await render(market);
+---
+
+<Layout title={market.data.name} description={market.data.summary}>
+  <p><a href="/markets">&larr; Back to all markets</a></p>
+
+  <div class="page-intro">
+    <span class="icon" style="font-size: 2.5rem;">🧺</span>
+    <h1>{market.data.name}</h1>
+    <p class="town" style="margin-top: -0.25rem;">{market.data.town}</p>
+  </div>
+
+  <div class="card" style="margin-top: 1.5rem;">
+    <Content />
+
+    <ul>
+      <li><strong>Address:</strong> {market.data.address}</li>
+      <li><strong>Schedule:</strong> {market.data.schedule}</li>
+      <li><strong>Season:</strong> {market.data.season}</li>
+      {market.data.website && (
+        <li><strong>Website:</strong> <a href={market.data.website} target="_blank" rel="noopener noreferrer">{market.data.website}</a></li>
+      )}
+    </ul>
+  </div>
+</Layout>
