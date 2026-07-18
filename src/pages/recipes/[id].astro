@@ -18,7 +18,7 @@ const { Content } = await render(recipe);
   <div class="page-intro">
     <h1>{recipe.data.title}</h1>
     <p style="display: flex; gap: 1rem; flex-wrap: wrap; align-items: center;">
-      <span>{recipe.data.pubDate.toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' })}</span>
+      <span>{recipe.data.pubDate.toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric', timeZone: 'UTC' })}</span>
       {recipe.data.prepTime && <span>⏱ {recipe.data.prepTime}</span>}
       {recipe.data.servings && <span>🍽 {recipe.data.servings}</span>}
     </p>

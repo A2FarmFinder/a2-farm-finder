@@ -49,7 +49,7 @@ const byCategory = categories
               ))}
             </div>
             <p style="font-size: 0.85rem; color: var(--muted); margin: 0.75rem 0 0;">
-              {recipe.data.pubDate.toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' })}
+              {recipe.data.pubDate.toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric', timeZone: 'UTC' })}
               {recipe.data.prepTime && <span> &middot; {recipe.data.prepTime}</span>}
               {recipe.data.servings && <span> &middot; {recipe.data.servings}</span>}
             </p>
