@@ -1,7 +1,7 @@
 ---
 title: "Where to Buy Fresh-Cut Flowers Near Ann Arbor"
 description: "Skip the grocery store bouquet. Here's where to find locally grown cut flowers, bouquet subscriptions, and u-pick blooms around Washtenaw County this summer."
-pubDate: 2026-07-16
+pubDate: 2026-07-20
 ---
 
 Mid-July is peak flower season in Washtenaw County — zinnias, dahlias, sunflowers, and snapdragons are all hitting their stride at once. If you've only ever bought flowers from a grocery store cooler, a local bouquet is a different experience entirely: they're cut days (not weeks) before you get them, they actually smell like something, and the money stays with a farm down the road instead of a shipping container.
