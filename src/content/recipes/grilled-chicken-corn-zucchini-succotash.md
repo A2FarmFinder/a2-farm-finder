@@ -6,6 +6,7 @@ produce:
   - Corn
   - Zucchini
   - Green Beans
+season: "Michigan sweet corn, zucchini, and green beans, July through August"
 category: "Mains"
 prepTime: "20 minutes prep, 20 minutes cook"
 servings: "4"
